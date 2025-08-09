@@ -2,14 +2,12 @@ import React from 'react'
 import { cn } from '@/helpers/utils'
 
 export interface TooltipArrowProps {
-  placement: 'top' | 'bottom' | 'left' | 'right'
   className?: string
   size?: number
   style?: React.CSSProperties
 }
 
 function TooltipArrow({ 
-  placement, 
   className, 
   size = 8,
   style 

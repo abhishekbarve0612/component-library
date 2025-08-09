@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant?: ButtonVariant
   size?: ButtonSize
+  ref?: React.RefObject<HTMLButtonElement>
 }
 
 const Button = ({
@@ -13,10 +14,11 @@ const Button = ({
   className = '',
   variant = 'default',
   size = 'default',
+  ref,
   ...props
 }: ButtonProps) => {
   return (
-    <button className={buttonVariants({ variant, size, className })} {...props}>
+    <button ref={ref} className={buttonVariants({ variant, size, className })} {...props}>
       {children}
     </button>
   )

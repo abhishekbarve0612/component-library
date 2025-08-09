@@ -4,7 +4,8 @@ import { useGSAP } from '@gsap/react'
 import { IoClose } from 'react-icons/io5'
 import { TooltipContext } from './context'
 import { calculateTooltipPosition, calculateArrowPosition, type Placement } from './positioning'
-import { showTooltipAnimation, hideTooltipAnimation } from './animations'
+import { showTooltipAnimation } from './animations'
+import { useTooltipContentInteractions, useTooltipCloseButton } from './useTooltipInteractions'
 import Button from '../button'
 import TooltipContent from './Content'
 import TooltipHeader from './Header'
@@ -43,17 +44,45 @@ export function Tooltip({
   const [visible, setVisible] = useState(false)
   const [coords, setCoords] = useState<{ top: number; left: number }>({ top: -9999, left: -9999 })
   const [actualPlacement, setActualPlacement] = useState<Placement>(placement)
-  const [arrowPosition, setArrowPosition] = useState<any>({})
+  const [arrowPosition, setArrowPosition] = useState<{ top?: number; left?: number; transform?: string }>({})
   const tooltipRef = useRef<HTMLDivElement>(null)
-  const arrowRef = useRef<HTMLDivElement>(null)
   const showTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const triggerEl = useRef<HTMLElement | null>(null)
   const tooltipId = useRef(`tooltip-${Math.random().toString(36).slice(2, 9)}`)
   const isAnimating = useRef(false)
 
+  // Tooltip show/hide logic
+  const showTooltip = () => {
+    if (isAnimating.current) return
+    if (showTimer.current) clearTimeout(showTimer.current)
+    if (hideTimer.current) clearTimeout(hideTimer.current)
+    
+    showTimer.current = setTimeout(() => {
+      setVisible(true)
+    }, delay)
+  }
+
+  const hideTooltip = () => {
+    if (isAnimating.current) return
+    if (showTimer.current) clearTimeout(showTimer.current)
+    if (hideTimer.current) clearTimeout(hideTimer.current)
+    
+    if (interactive) {
+      hideTimer.current = setTimeout(() => setVisible(false), 300)
+    } else {
+      setVisible(false)
+    }
+  }
+
+  const toggleTooltip = () => {
+    if (visible) hideTooltip()
+    else showTooltip()
+  }
+
+  // Set up trigger element and interactions
   useEffect(() => {
-    let el: HTMLElement | null = null;
+    let el: HTMLElement | null = null
 
     if (targetRef?.current) {
       el = targetRef.current
@@ -82,40 +111,17 @@ export function Tooltip({
     }
     el.setAttribute('aria-describedby', tooltipId.current)
 
-    const showTooltip = () => {
-      if (isAnimating.current) return
-      if (showTimer.current) clearTimeout(showTimer.current)
-      if (hideTimer.current) clearTimeout(hideTimer.current)
-      
-      showTimer.current = setTimeout(() => {
-        setVisible(true)
-      }, delay)
-    }
-
-    const hideTooltip = () => {
-      if (isAnimating.current) return
-      if (showTimer.current) clearTimeout(showTimer.current)
-      if (hideTimer.current) clearTimeout(hideTimer.current)
-      
-      if (interactive) {
-        hideTimer.current = setTimeout(() => setVisible(false), 300)
-      } else {
-        setVisible(false)
-      }
-    }
-
-    const handleClick = () => {
-      if (trigger === 'click') {
-        visible ? hideTooltip() : showTooltip()
-      }
-    }
-
+    // Manual event handlers (since we can't use the hook with dynamically found elements)
     const handleMouseEnter = () => {
       if (trigger === 'hover') showTooltip()
     }
 
     const handleMouseLeave = () => {
       if (trigger === 'hover') hideTooltip()
+    }
+
+    const handleClick = () => {
+      if (trigger === 'click') toggleTooltip()
     }
 
     const handleFocus = () => {
@@ -127,11 +133,13 @@ export function Tooltip({
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setVisible(false)
+      if (e.key === 'Escape') {
+        setVisible(false)
+      }
       if (e.key === 'Enter' || e.key === ' ') {
         if (trigger === 'click') {
           e.preventDefault()
-          visible ? hideTooltip() : showTooltip()
+          toggleTooltip()
         }
       }
     }
@@ -149,15 +157,15 @@ export function Tooltip({
       el.addEventListener('focus', handleFocus)
       el.addEventListener('blur', handleBlur)
     }
-    
+
     el.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      el.removeAttribute('aria-describedby')
+      el?.removeAttribute('aria-describedby')
       if (showTimer.current) clearTimeout(showTimer.current)
       if (hideTimer.current) clearTimeout(hideTimer.current)
       
-      // Remove event listeners based on trigger type
+      // Remove event listeners
       if (trigger === 'hover') {
         el.removeEventListener('mouseenter', handleMouseEnter)
         el.removeEventListener('mouseleave', handleMouseLeave)
@@ -173,8 +181,7 @@ export function Tooltip({
       
       el.removeEventListener('keydown', handleKeyDown)
     }
-     
-  }, [id, targetRef, delay, placement, offset, trigger, interactive, visible])
+  }, [id, targetRef, trigger, toggleTooltip, showTooltip, hideTooltip])
 
   // Handle outside click to close tooltip
   useEffect(() => {
@@ -201,7 +208,7 @@ export function Tooltip({
       clearTimeout(timer)
       document.removeEventListener('mousedown', handleOutsideClick)
     }
-  }, [visible, closeOnOutsideClick, interactive])
+  }, [visible, closeOnOutsideClick])
 
   const positionTooltip = () => {
     if (!triggerEl.current || !tooltipRef.current) return
@@ -252,45 +259,39 @@ export function Tooltip({
     }
   }, [visible, actualPlacement])
 
-  // Handle tooltip hide with animation
-  const handleHideTooltip = () => {
-    if (!tooltipRef.current) {
-      setVisible(false)
-      return
-    }
-    
-    isAnimating.current = true
-    const animation = hideTooltipAnimation(tooltipRef.current, actualPlacement)
-    animation.then(() => {
-      setVisible(false)
-      isAnimating.current = false
-    })
-  }
+  const tooltipInteractions = useTooltipContentInteractions({
+    interactive,
+    trigger,
+    onMouseEnter: () => {
+      if (hideTimer.current) {
+        clearTimeout(hideTimer.current)
+      }
+    },
+    onMouseLeave: () => {
+      if (trigger === 'hover') {
+        hideTimer.current = setTimeout(() => setVisible(false), 200)
+      }
+    },
+  })
 
-  // Interactive tooltip mouse events
-  const handleTooltipMouseEnter = () => {
-    if (interactive && hideTimer.current) {
-      clearTimeout(hideTimer.current)
-    }
-  }
-
-  const handleTooltipMouseLeave = () => {
-    if (interactive && trigger === 'hover') {
-      hideTimer.current = setTimeout(() => setVisible(false), 200)
-    }
-  }
+  // Configure interactions for close button
+  const closeButtonInteractions = useTooltipCloseButton({
+    onClose: () => setVisible(false),
+  })
 
   if (!visible) return null
 
   return ReactDOM.createPortal(
     <TooltipContext.Provider value={{ visible, setVisible }}>
       <div
-        ref={tooltipRef}
+        ref={(node) => {
+          // Set both refs
+          tooltipRef.current = node
+          tooltipInteractions.ref.current = node
+        }}
         id={tooltipId.current}
         role='tooltip'
         aria-live='polite'
-        onMouseEnter={handleTooltipMouseEnter}
-        onMouseLeave={handleTooltipMouseLeave}
         style={{
           position: 'fixed',
           top: coords.top,
@@ -304,14 +305,11 @@ export function Tooltip({
         <div className='relative'>
           {showCloseButton && (
             <button
+              ref={closeButtonInteractions.ref as React.RefObject<HTMLButtonElement>}
               type='button' 
-              className='absolute -top-1 -right-1 h-6 w-6 p-0 rounded-full bg-white hover:bg-gray-100 shadow-md border border-gray-200 z-20 flex items-center justify-center cursor-pointer' 
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setVisible(false)
-              }}
+              className='absolute -top-1 -right-1 h-6 w-6 p-0 rounded-full bg-white hover:bg-gray-100 shadow-md border border-gray-200 z-20 flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500' 
               aria-label='Close tooltip'
+              tabIndex={0}
             >
               <IoClose className='h-3 w-3 text-gray-600' />
             </button>
@@ -320,7 +318,6 @@ export function Tooltip({
         </div>
         {showArrow && (
           <TooltipArrow
-            placement={actualPlacement}
             style={arrowPosition}
             className='text-white'
           />

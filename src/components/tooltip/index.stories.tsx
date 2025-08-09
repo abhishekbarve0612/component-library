@@ -493,8 +493,6 @@ export const AnimationShowcase: Story = {
     },
   },
   render: () => {
-    const [animationDemo, setAnimationDemo] = useState(false)
-    
     return (
       <div className="p-8 space-y-6">
         <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-md">
@@ -514,7 +512,7 @@ export const AnimationShowcase: Story = {
             </div>
             <div className="flex items-center space-x-2">
               <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
-              <span>Smooth positioning</span>
+              <span>Clean interaction system</span>
             </div>
           </div>
         </div>
@@ -557,16 +555,14 @@ export const AnimationShowcase: Story = {
           </div>
         </div>
         
-        {animationDemo && (
-          <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
-            <div className="flex items-center space-x-2">
-              <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-              <span className="font-medium text-green-800">
-                Animations showcase active!
-              </span>
-            </div>
+        <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
+          <div className="flex items-center space-x-2">
+            <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="font-medium text-green-800">
+              <strong>Enhanced:</strong> Hybrid approach - manual event handling for trigger elements, interaction utility for controlled components!
+            </span>
           </div>
-        )}
+        </div>
       </div>
     )
   },
