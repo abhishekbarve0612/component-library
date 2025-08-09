@@ -1,5 +1,5 @@
-import { cn } from '@/helpers/utils';
-import { FaCheck } from 'react-icons/fa6';
+import { cn } from '@/helpers/utils'
+import { FaCheck } from 'react-icons/fa6'
 
 interface CheckboxProps extends React.HTMLAttributes<HTMLButtonElement> {
   checked: boolean

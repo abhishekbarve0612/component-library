@@ -2,27 +2,12 @@
 
 @layer components {
   .input {
-    @apply flex w-full rounded-md border border-slate-300 bg-white/70 backdrop-blur-sm p-2 text-sm transition-all outline-none
-    focus:border-slate-700 focus:bg-white focus:shadow-sm placeholder:text-slate-500
+    @apply flex w-full rounded-md border border-slate-300 bg-white/70 p-2 text-sm backdrop-blur-sm transition-all outline-none placeholder:text-slate-500 
+    focus:border-slate-700 focus:bg-white focus:shadow-sm 
     disabled:cursor-not-allowed disabled:opacity-50;
   }
-}
 
-.inputContainer {
-  position: relative;
-  width: 100%;
-}
-
-.inputWithIcon {
-  padding-left: 2.5rem;
-}
-
-.inputIcon {
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #a8a29e;
-  width: 1rem;
-  height: 1rem;
+  .input-icon {
+    @apply absolute top-1/2 z-10 -translate-y-1/2 border-none bg-transparent p-0 text-gray-400;
+  }
 }

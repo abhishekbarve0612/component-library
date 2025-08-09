@@ -5,7 +5,7 @@ export const buttonVariants = tv({
   variants: {
     variant: {
       default: 'button-default',
-      primary: 'button-primary', 
+      primary: 'button-primary',
       secondary: 'button-secondary',
       ghost: 'button-ghost',
       link: 'button-link',
@@ -13,7 +13,7 @@ export const buttonVariants = tv({
     size: {
       default: 'button-default',
       sm: 'button-sm',
-      md: 'button-md', 
+      md: 'button-md',
       lg: 'button-lg',
       xl: 'button-xl',
     },
