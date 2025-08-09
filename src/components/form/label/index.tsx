@@ -1,17 +1,16 @@
-import clsx from 'clsx'
-import styles from './label.module.css'
+import { cn } from '@/helpers/utils';
 
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }
 
 function Label({ children, className, ...props }: LabelProps) {
   return (
-    <label className={clsx(styles.label, className)} {...props}>
+    <label className={cn("block text-sm font-medium text-gray-700 dark:text-gray-300", className)} {...props}>
       {children}
     </label>
-  )
+  );
 }
 
-export default Label
+export default Label;

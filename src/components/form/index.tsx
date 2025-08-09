@@ -1,34 +1,32 @@
-import clsx from 'clsx'
-import Input from './input'
-import Label from './label'
-import Select from './select'
-import Textarea from './textarea'
-import Checkbox from './checkbox'
-import styles from './form.module.css'
+import { cn } from '@/helpers/utils';
+import Input from './input';
+import Label from './label';
+import Select from './select';
+import Textarea from './textarea';
+import Checkbox from './checkbox';
 
-export { default as Input } from './input'
-export { default as Label } from './label'
-export { default as Select } from './select'
-export { default as Textarea } from './textarea'
-export { default as Checkbox } from './checkbox'
+export { default as Input } from './input';
+export { default as Label } from './label';
+export { default as Select } from './select';
+export { default as Textarea } from './textarea';
+export { default as Checkbox } from './checkbox';
 
-interface Props extends React.HTMLAttributes<HTMLFormElement> {
-  label: string
-  description?: string
-  children: React.ReactNode
-  className?: string
+interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
+  label: string;
+  description?: string;
+  children: React.ReactNode;
+  className?: string;
   errors?: {
-    message: string
-  }[]
+    message: string;
+  }[];
 }
 
-function Form({ children, label, description, errors, ...props }: Props) {
-  console.log('logging form props', props)
+function Form({ children, label, description, errors, ...props }: FormProps) {
   return (
     <form
       aria-label={label}
       aria-describedby="form-description"
-      className={clsx(styles.form, props.className)}
+      className={cn("space-y-4", props.className)}
       {...props}
     >
       {description && (
@@ -38,20 +36,20 @@ function Form({ children, label, description, errors, ...props }: Props) {
       )}
       {children}
       {errors && (
-        <div role="alert" className={styles.errorMessage}>
+        <div role="alert" className="text-red-600 text-sm space-y-1">
           {errors.map((error) => (
             <p key={error.message}>{error.message}</p>
           ))}
         </div>
       )}
     </form>
-  )
+  );
 }
 
-Form.Input = Input
-Form.Label = Label
-Form.Select = Select
-Form.Textarea = Textarea
-Form.Checkbox = Checkbox
+Form.Input = Input;
+Form.Label = Label;
+Form.Select = Select;
+Form.Textarea = Textarea;
+Form.Checkbox = Checkbox;
 
-export default Form
+export default Form;

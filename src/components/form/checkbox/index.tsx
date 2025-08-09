@@ -1,6 +1,5 @@
-import clsx from 'clsx'
-import { FaCheck } from 'react-icons/fa6'
-import styles from './checkbox.module.css'
+import { cn } from '@/helpers/utils';
+import { FaCheck } from 'react-icons/fa6';
 
 interface CheckboxProps extends React.HTMLAttributes<HTMLButtonElement> {
   checked: boolean
