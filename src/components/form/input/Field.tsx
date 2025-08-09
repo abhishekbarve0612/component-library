@@ -12,21 +12,24 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 function Field({ className, type = 'text', ...props }: InputProps) {
   const { id } = useInputContext()
   const [error, setError] = useState<string | null>(null)
+  const errorId = `${id}-error`
+  const descriptionId = `${id}-description`
+  
+  // Build aria-describedby string with error and description IDs
+  const ariaDescribedBy = [errorId, descriptionId].filter(Boolean).join(' ')
+  
   return (
     <>
       <input
         id={id}
         className={cn('input user-invalid:border-red-500 user-invalid:text-red-500', className)}
         type={type}
-        aria-describedby={id}
-        aria-label={id}
+        aria-describedby={ariaDescribedBy}
         aria-required={props.required}
         aria-disabled={props.disabled}
         aria-readonly={props.readOnly}
         aria-invalid={!!error}
-        aria-placeholder={props.placeholder}
         onInvalid={(e: React.FormEvent<HTMLInputElement>) => {
-          console.log('invalid', (e.target as HTMLInputElement))
           setError((e.target as HTMLInputElement).validationMessage)
         }}
         {...props}

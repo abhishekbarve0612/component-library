@@ -1,14 +1,47 @@
 @reference '@style';
 
 @layer components {
+  /* Base input styling - no padding by default, padding added by group */
   .input {
-    @apply flex w-full rounded-md border border-slate-300 bg-white/70 p-2 text-sm backdrop-blur-sm transition-all outline-none placeholder:text-slate-500 
-    focus:border-slate-700 focus:bg-white focus:shadow-sm 
-    disabled:cursor-not-allowed disabled:opacity-50
-    placeholder:text-slate-500 placeholder:text-sm;
+    @apply w-full border-0 bg-transparent text-sm outline-none placeholder:text-slate-500 
+    disabled:cursor-not-allowed disabled:opacity-50;
   }
 
+  /* Input group container - acts like a single input with integrated icons */
+  .input-group {
+    @apply flex w-full items-center rounded-md border border-slate-300 bg-white/70 backdrop-blur-sm transition-all
+    focus-within:border-slate-700 focus-within:bg-white focus-within:shadow-sm
+    has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50;
+    padding: 0.5rem; /* Base padding for the container */
+  }
+
+  /* Left icons container */
+  .input-group-left-icons {
+    @apply flex items-center gap-1 mr-2;
+  }
+
+  /* Input field takes remaining space */
+  .input-group-field {
+    @apply flex-1 min-w-0;
+  }
+
+  /* Right icons container */  
+  .input-group-right-icons {
+    @apply flex items-center gap-1 ml-2;
+  }
+
+  /* Icon styling - integrated within input boundaries */
   .input-icon {
-    @apply absolute top-1/2 z-10 -translate-y-1/2 border-none bg-transparent p-0 text-gray-400;
+    @apply flex items-center justify-center w-4 h-4 border-none bg-transparent p-0 text-gray-400 
+    hover:text-gray-600 transition-colors cursor-pointer;
+  }
+
+  .input-icon:disabled {
+    @apply pointer-events-none opacity-50 cursor-default;
+  }
+
+  /* When only field is present (no icons) */
+  .input-group:not(:has(.input-group-left-icons)):not(:has(.input-group-right-icons)) .input-group-field {
+    @apply mx-0;
   }
 }
