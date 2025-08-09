@@ -14,9 +14,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@storybook/test": "^8.6.14",
     "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "path": "^0.12.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

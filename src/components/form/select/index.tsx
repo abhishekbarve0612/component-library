@@ -1,143 +1,150 @@
-'use client'
-
 import React, { useState, useRef, useEffect } from 'react'
-import styles from './select.module.css'
-import { FaCircleChevronDown } from 'react-icons/fa6'
+import { cn } from '@/helpers/utils'
+import SelectItem from './Item'
+import SelectTrigger from './Trigger'
+import SelectValue from './Value'
+import SelectContent from './Content'
+import SelectContext from './context'
 
 interface SelectProps {
   value: string
   onValueChange: (value: string) => void
   children: React.ReactNode
+  className?: string
+  disabled?: boolean
 }
 
-function Select({ value, onValueChange, children, ...props }: SelectProps) {
+function Select({ value, onValueChange, children, className, disabled = false, ...props }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [highlightedIndex, setHighlightedIndex] = useState(-1)
+  const [options, setOptions] = useState<string[]>([])
   const selectRef = useRef<HTMLDivElement>(null)
 
+  // Close on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
         setIsOpen(false)
+        setHighlightedIndex(-1)
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      setIsOpen(!isOpen)
-    } else if (event.key === 'Escape') {
-      setIsOpen(false)
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
     }
-  }
+  }, [isOpen])
+
+  // Reset highlighted index when opening/closing
+  useEffect(() => {
+    if (isOpen) {
+      // Set initial highlighted index to current value or first option
+      const currentIndex = options.findIndex(option => option === value)
+      setHighlightedIndex(currentIndex >= 0 ? currentIndex : 0)
+    } else {
+      setHighlightedIndex(-1)
+    }
+  }, [isOpen, options, value])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (disabled) return
+
+      // Only handle keys when select is focused or open
+      const isSelectFocused = selectRef.current?.contains(document.activeElement)
+      if (!isSelectFocused && !isOpen) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault()
+          if (!isOpen) {
+            setIsOpen(true)
+          } else {
+            setHighlightedIndex(prev => 
+              prev < options.length - 1 ? prev + 1 : 0
+            )
+          }
+          break
+
+        case 'ArrowUp':
+          event.preventDefault()
+          if (!isOpen) {
+            setIsOpen(true)
+          } else {
+            setHighlightedIndex(prev => 
+              prev > 0 ? prev - 1 : options.length - 1
+            )
+          }
+          break
+
+        case 'Enter':
+        case ' ':
+          event.preventDefault()
+          if (!isOpen) {
+            setIsOpen(true)
+          } else if (highlightedIndex >= 0 && options[highlightedIndex]) {
+            onValueChange(options[highlightedIndex])
+            setIsOpen(false)
+          }
+          break
+
+        case 'Escape':
+          event.preventDefault()
+          setIsOpen(false)
+          // Return focus to trigger
+          selectRef.current?.querySelector<HTMLButtonElement>('[role="combobox"]')?.focus()
+          break
+
+        case 'Home':
+          if (isOpen) {
+            event.preventDefault()
+            setHighlightedIndex(0)
+          }
+          break
+
+        case 'End':
+          if (isOpen) {
+            event.preventDefault()
+            setHighlightedIndex(options.length - 1)
+          }
+          break
+
+        case 'Tab':
+          // Allow tab to close dropdown and move focus
+          if (isOpen) {
+            setIsOpen(false)
+          }
+          break
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [disabled, isOpen, options, highlightedIndex, onValueChange])
+
+  // Prevent opening when disabled
+  const contextValue = React.useMemo(() => ({
+    value,
+    setValue: disabled ? () => {} : onValueChange,
+    isOpen: disabled ? false : isOpen,
+    setIsOpen: disabled ? () => {} : setIsOpen,
+    highlightedIndex,
+    setHighlightedIndex: disabled ? () => {} : setHighlightedIndex,
+    options,
+    setOptions,
+  }), [value, onValueChange, isOpen, disabled, highlightedIndex, options])
 
   return (
-    <div className={styles.select} ref={selectRef} {...props}>
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            isOpen,
-            setIsOpen,
-            value,
-            onValueChange,
-            onKeyDown: handleKeyDown,
-          })
-        }
-        return child
-      })}
-    </div>
-  )
-}
-
-interface SelectTriggerProps {
-  children: React.ReactNode
-  className?: string
-  isOpen?: boolean
-  setIsOpen?: (open: boolean) => void
-  onKeyDown?: (event: React.KeyboardEvent) => void
-}
-
-export function SelectTrigger({
-  children,
-  className = '',
-  isOpen,
-  setIsOpen,
-  onKeyDown,
-}: SelectTriggerProps) {
-  return (
-    <button
-      className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ''} ${className}`}
-      onClick={() => setIsOpen?.(!isOpen)}
-      onKeyDown={onKeyDown}
-      type="button"
-    >
-      {children}
-      <FaCircleChevronDown className={styles.triggerIcon} />
-    </button>
-  )
-}
-
-interface SelectValueProps {
-  placeholder?: string
-  value?: string
-}
-
-function SelectValue({ placeholder, value }: SelectValueProps) {
-  return <span>{value || placeholder}</span>
-}
-
-interface SelectContentProps {
-  children: React.ReactNode
-  isOpen?: boolean
-  setIsOpen?: (open: boolean) => void
-  onValueChange?: (value: string) => void
-}
-
-function SelectContent({ children, isOpen, setIsOpen, onValueChange }: SelectContentProps) {
-  if (!isOpen) return null
-
-  return (
-    <div className={styles.content}>
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            setIsOpen,
-            onValueChange,
-          })
-        }
-        return child
-      })}
-    </div>
-  )
-}
-
-interface SelectItemProps {
-  value: string
-  children: React.ReactNode
-  setIsOpen?: (open: boolean) => void
-  onValueChange?: (value: string) => void
-  selectedValue?: string
-}
-
-function SelectItem({ value, children, setIsOpen, onValueChange, selectedValue }: SelectItemProps) {
-  const handleClick = () => {
-    onValueChange?.(value)
-    setIsOpen?.(false)
-  }
-
-  const isSelected = selectedValue === value
-
-  return (
-    <button
-      className={`${styles.item} ${isSelected ? styles.itemSelected : ''}`}
-      onClick={handleClick}
-      type="button"
-    >
-      {children}
-    </button>
+    <SelectContext.Provider value={contextValue}>
+      <div 
+        className={cn('relative w-full', className)} 
+        ref={selectRef} 
+        {...props}
+      >
+        {children}
+      </div>
+    </SelectContext.Provider>
   )
 }
 
