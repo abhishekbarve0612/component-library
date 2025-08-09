@@ -1,24 +1,48 @@
 import React from 'react'
 import { cn } from '@/helpers/utils'
-import type { SelectItemProps } from './Item'
+import { useSelectContext } from './context'
 
 export interface SelectContentProps {
   children: React.ReactNode
-  isOpen?: boolean
-  setIsOpen?: (open: boolean) => void
-  onValueChange?: (value: string) => void
+  className?: string
 }
 
-function SelectContent({ children, isOpen, setIsOpen, onValueChange }: SelectContentProps) {
+function SelectContent({ children, className }: SelectContentProps) {
+  const { isOpen, setOptions } = useSelectContext()
+  const contentId = React.useId()
+  const listboxId = `${contentId}-listbox`
+  
+  // Extract option values and register them with context
+  React.useEffect(() => {
+    const optionValues: string[] = []
+    
+    React.Children.forEach(children, (child) => {
+      if (React.isValidElement(child) && child.props.value) {
+        optionValues.push(child.props.value)
+      }
+    })
+    
+    setOptions(optionValues)
+  }, [children, setOptions])
+  
   if (!isOpen) return null
 
   return (
-    <div className={cn('absolute z-10 w-full bg-white rounded-md shadow-md')}>
-      {React.Children.map(children, (child) => {
+    <div 
+      id={listboxId}
+      className={cn(
+        'absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto',
+        className
+      )}
+      role="listbox"
+      tabIndex={-1}
+    >
+      {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child as React.ReactElement<SelectItemProps>, {
-            setIsOpen,
-            onValueChange,
+          return React.cloneElement(child, {
+            ...child.props,
+            index,
+            optionId: `${contentId}-option-${index}`,
           })
         }
         return child
