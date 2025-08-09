@@ -1,6 +1,5 @@
-import { cn } from '@/helpers/utils'
 import type { ButtonSize, ButtonVariant } from './button.types'
-import { BUTTON_SIZES, BUTTON_VARIANTS } from './button.constants'
+import { buttonVariants } from './button.constants'
 import './button.css'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,17 +15,9 @@ const Button = ({
   size = 'default',
   ...props
 }: ButtonProps) => {
-  const variantClasses = BUTTON_VARIANTS[variant]
-  const sizeClasses = BUTTON_SIZES[size]
-
   return (
     <button
-      className={cn(
-        'inline-flex items-center justify-center button',
-        variantClasses,
-        sizeClasses,
-        className
-      )}
+      className={buttonVariants({ variant, size, className })}
       {...props}
     >
       {children}
@@ -34,7 +25,6 @@ const Button = ({
   )
 }
 
-Button.VARIANTS = BUTTON_VARIANTS
-Button.SIZES = BUTTON_SIZES
+Button.variants = buttonVariants
 
 export default Button
