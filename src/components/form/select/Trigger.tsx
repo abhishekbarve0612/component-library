@@ -11,7 +11,7 @@ interface SelectTriggerProps {
 }
 
 function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
-  const { isOpen, setIsOpen, options, highlightedIndex } = useSelectContext()
+  const { isOpen, setIsOpen, highlightedIndex } = useSelectContext()
   const chevronRef = React.useRef<SVGSVGElement>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
   
@@ -73,7 +73,7 @@ function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
       tabIndex={0}
     >
       {children}
-      <FaCircleChevronDown 
+      <FaCircleChevronDown
         ref={chevronRef}
         className="inline-block ml-auto w-4 h-4 text-gray-500"
         aria-hidden="true"
