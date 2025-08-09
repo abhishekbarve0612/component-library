@@ -16,7 +16,7 @@ function Field({ className, type = 'text', ...props }: InputProps) {
     <>
       <input
         id={id}
-        className={cn('input group-has[input:invalid]:border-red-500 group-has[input:invalid]:text-red-500', className)}
+        className={cn('input user-invalid:border-red-500 user-invalid:text-red-500', className)}
         type={type}
         aria-describedby={id}
         aria-label={id}
@@ -25,9 +25,10 @@ function Field({ className, type = 'text', ...props }: InputProps) {
         aria-readonly={props.readOnly}
         aria-invalid={!!error}
         aria-placeholder={props.placeholder}
-        onInvalid={(e: React.FormEvent<HTMLInputElement>) =>
+        onInvalid={(e: React.FormEvent<HTMLInputElement>) => {
+          console.log('invalid', (e.target as HTMLInputElement))
           setError((e.target as HTMLInputElement).validationMessage)
-        }
+        }}
         {...props}
       />
       <Error>{error}</Error>

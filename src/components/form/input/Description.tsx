@@ -7,7 +7,10 @@ interface DescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 function Description({ children, className, ...props }: DescriptionProps) {
   return (
-    <p className={cn('text-sm text-gray-500', className)} {...props}>
+    <p className={cn(
+      'text-sm text-gray-500',
+      'group-has-[input:user-invalid]:text-red-500',
+      className)} {...props}>
       {children}
     </p>
   )

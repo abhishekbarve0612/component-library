@@ -72,3 +72,17 @@ export const WithLeftAndRightIcons: Story = {
     ),
   },
 }
+
+export const EmailInput: Story = {
+  args: {
+    id: 'email',
+    children: (
+      <>
+        <Index.Label>Email</Index.Label>
+        <Index.Group>
+          <Index.Field type="email" name="email" required />
+        </Index.Group>
+      </>
+    ),
+  },
+}
