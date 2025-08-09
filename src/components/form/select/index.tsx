@@ -93,7 +93,7 @@ function Select({ value, onValueChange, children, className, disabled = false, .
           event.preventDefault()
           setIsOpen(false)
           // Return focus to trigger
-          selectRef.current?.querySelector('[role="combobox"]')?.focus()
+          selectRef.current?.querySelector<HTMLButtonElement>('[role="combobox"]')?.focus()
           break
 
         case 'Home':

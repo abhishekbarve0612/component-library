@@ -19,9 +19,9 @@ function SelectContent({ children, className }: SelectContentProps) {
   React.useEffect(() => {
     const optionValues: string[] = []
     
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child) && child.props.value) {
-        optionValues.push(child.props.value)
+    React.Children.forEach(children, (child: unknown) => {
+      if (React.isValidElement(child) && child?.props) {
+        optionValues.push(child?.props?.value)
       }
     })
     
