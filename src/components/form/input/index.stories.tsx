@@ -80,8 +80,11 @@ export const EmailInput: Story = {
       <>
         <Index.Label>Email</Index.Label>
         <Index.Group>
-          <Index.Field type="email" name="email" required />
+          <Index.Field type="email" name="email" required placeholder="example@example.com" />
         </Index.Group>
+        <Index.Description>
+          Email should be valid
+        </Index.Description>
       </>
     ),
   },
