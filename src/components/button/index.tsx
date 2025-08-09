@@ -1,5 +1,5 @@
 import type { ButtonSize, ButtonVariant } from './button.types'
-import { buttonVariants } from './button.constants'
+import { SIZES, VARIANTS, buttonVariants } from './button.constants'
 import './button.css'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -22,6 +22,7 @@ const Button = ({
   )
 }
 
-Button.variants = buttonVariants
+Button.variants = VARIANTS
+Button.sizes = SIZES
 
 export default Button
