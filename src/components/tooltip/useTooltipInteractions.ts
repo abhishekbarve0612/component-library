@@ -57,7 +57,6 @@ interface UseTooltipContentInteractionsProps {
 
 export function useTooltipContentInteractions({
   interactive,
-  trigger,
   onMouseEnter,
   onMouseLeave,
 }: UseTooltipContentInteractionsProps) {

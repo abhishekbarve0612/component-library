@@ -92,7 +92,7 @@ export function calculateArrowPosition(
             tooltipRect.width - arrowSize
           )
         ),
-        transform: 'translateY(-50%) rotate(180deg)'
+        transform: 'translate(-50%, -50%) rotate(180deg)'
       }
     case 'bottom':
       return {
@@ -104,7 +104,7 @@ export function calculateArrowPosition(
             tooltipRect.width - arrowSize
           )
         ),
-        transform: 'translateY(0%)'
+        transform: 'translate(-50%, 0%)'
       }
     case 'left':
       return {
@@ -116,7 +116,7 @@ export function calculateArrowPosition(
           )
         ),
         left: tooltipRect.width,
-        transform: 'translateX(-50%) rotate(-90deg)'
+        transform: 'translate(-50%, -50%) rotate(-90deg)'
       }
     case 'right':
       return {
@@ -128,7 +128,7 @@ export function calculateArrowPosition(
           )
         ),
         left: -arrowSize,
-        transform: 'translateX(-50%) rotate(90deg)'
+        transform: 'translate(-50%, -50%) rotate(90deg)'
       }
     default:
       return {}
