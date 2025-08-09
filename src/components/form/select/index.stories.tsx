@@ -301,3 +301,102 @@ export const KeyboardNavigation: Story = {
     )
   },
 }
+
+export const AnimationShowcase: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of all GSAP animations: dropdown scale, chevron rotation, focus pulse, hover slide, and selection feedback.',
+      },
+    },
+  },
+  render: () => {
+    const [value, setValue] = useState('')
+    
+    return (
+      <div className="space-y-6">
+        <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-md">
+          <h3 className="font-medium mb-3">Animation Features:</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span>Dropdown scale in/out</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span>Chevron smooth rotation</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+              <span>Focus pulse feedback</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
+              <span>Hover slide animation</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+              <span>Selection scale feedback</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
+              <span>Keyboard highlight</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 className="font-medium mb-2">Animated Colors Select</h4>
+            <Select value={value} onValueChange={setValue}>
+              <Select.Trigger>
+                <Select.Value placeholder="Choose a color..." />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value="red">🔴 Red</Select.Item>
+                <Select.Item value="blue">🔵 Blue</Select.Item>
+                <Select.Item value="green">🟢 Green</Select.Item>
+                <Select.Item value="yellow">🟡 Yellow</Select.Item>
+                <Select.Item value="purple">🟣 Purple</Select.Item>
+                <Select.Item value="orange">🟠 Orange</Select.Item>
+              </Select.Content>
+            </Select>
+          </div>
+          
+          <div>
+            <h4 className="font-medium mb-2">Animated Numbers Select</h4>
+            <Select value={value} onValueChange={setValue}>
+              <Select.Trigger>
+                <Select.Value placeholder="Pick a number..." />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value="1">1️⃣ One</Select.Item>
+                <Select.Item value="2">2️⃣ Two</Select.Item>
+                <Select.Item value="3">3️⃣ Three</Select.Item>
+                <Select.Item value="4">4️⃣ Four</Select.Item>
+                <Select.Item value="5">5️⃣ Five</Select.Item>
+              </Select.Content>
+            </Select>
+          </div>
+        </div>
+        
+        {value && (
+          <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
+            <div className="flex items-center space-x-2">
+              <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="font-medium text-green-800">
+                Selected: <span className="font-bold">{value}</span>
+              </span>
+            </div>
+          </div>
+        )}
+        
+        <div className="p-4 bg-amber-50 rounded-md border border-amber-200">
+          <p className="text-sm text-amber-800">
+            <strong>Try:</strong> Click to open, hover over items to see slide animation, use keyboard navigation, and watch the selection feedback!
+          </p>
+        </div>
+      </div>
+    )
+  },
+}

@@ -1,4 +1,6 @@
 import React from 'react'
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
 
@@ -17,13 +19,54 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
   
   const handleClick = () => {
     if (disabled) return
-    setValue(value)
-    setIsOpen(false)
+    
+    // Selection feedback animation
+    if (itemRef.current) {
+      gsap.fromTo(itemRef.current,
+        { scale: 1 },
+        { 
+          scale: 0.95, 
+          duration: 0.1, 
+          ease: 'power2.out',
+          yoyo: true,
+          repeat: 1,
+          onComplete: () => {
+            setValue(value)
+            setIsOpen(false)
+          }
+        }
+      )
+    } else {
+      setValue(value)
+      setIsOpen(false)
+    }
   }
 
   const handleMouseEnter = () => {
-    if (!disabled) {
+    if (!disabled && !isHighlighted) {
       setHighlightedIndex(index)
+      
+      // Subtle hover animation
+      if (itemRef.current) {
+        gsap.fromTo(itemRef.current,
+          { x: 0 },
+          { 
+            x: 4, 
+            duration: 0.2, 
+            ease: 'power2.out'
+          }
+        )
+      }
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!disabled && itemRef.current) {
+      gsap.to(itemRef.current, {
+        x: 0,
+        duration: 0.2,
+        ease: 'power2.out'
+      })
     }
   }
 
@@ -40,16 +83,30 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
     }
   }, [isHighlighted])
 
+  // Highlight animation for keyboard navigation
+  useGSAP(() => {
+    if (!itemRef.current) return
+
+    if (isHighlighted && !isSelected) {
+      gsap.fromTo(itemRef.current,
+        { backgroundColor: 'transparent' },
+        { 
+          backgroundColor: '#f3f4f6',
+          duration: 0.15,
+          ease: 'power2.out'
+        }
+      )
+    }
+  }, [isHighlighted, isSelected])
+
   return (
     <button
       ref={itemRef}
       id={optionId}
       className={cn(
-        'w-full px-3 py-2 text-sm text-left transition-colors focus:outline-none',
+        'w-full px-3 py-2 text-sm text-left transition-colors focus:outline-none relative',
         {
           'bg-blue-50 text-blue-600': isSelected,
-          'bg-gray-100': isHighlighted && !isSelected,
-          'hover:bg-gray-100': !disabled && !isHighlighted,
           'opacity-50 cursor-not-allowed': disabled,
           'cursor-pointer': !disabled,
         },
@@ -57,6 +114,7 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
       )}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       disabled={disabled}
       type="button"
       role="option"
