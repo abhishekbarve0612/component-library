@@ -153,29 +153,35 @@ export const Default: Story = {
   },
 }
 
-// Minimal variant with tooltips
+// Minimal variant with tooltips on hover
 export const Minimal: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'minimal',
   },
   render: (args) => (
-    <Toolbar {...args}>
-      <Toolbar.Item id="bold" label="Bold" icon={<FaBold />} />
-      <Toolbar.Item id="italic" label="Italic" icon={<FaItalic />} />
-      <Toolbar.Item id="underline" label="Underline" icon={<FaUnderline />} />
-    </Toolbar>
+    <div className="p-8">
+      <p className="mb-4 text-sm text-slate-600">Minimal variant shows tooltips on hover</p>
+      <Toolbar {...args}>
+        <Toolbar.Item id="bold" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
+        <Toolbar.Item id="italic" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
+        <Toolbar.Item id="underline" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+      </Toolbar>
+    </div>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const toolbar = canvas.getByRole('toolbar')
 
-    // In minimal variant, labels should be screen-reader only
+    // Check toolbar exists
+    await expect(toolbar).toBeInTheDocument()
+
+    // In minimal variant, labels should not be visible in the buttons
     const boldButton = canvas.getByRole('button', { name: /bold/i })
     await expect(boldButton).toBeInTheDocument()
-
-    // Check that buttons are present in minimal mode
-    await expect(boldButton).toBeInTheDocument()
+    
+    // Hover over button to trigger tooltip (manual test)
+    await userEvent.hover(boldButton)
   },
 }
 
@@ -339,6 +345,31 @@ export const WithActiveItems: Story = {
     await expect(italicButton).toHaveAttribute('aria-pressed', 'true')
     await expect(underlineButton).toHaveAttribute('aria-pressed', 'false')
   },
+}
+
+// Variant comparison - shows both compact (with labels) and minimal (with tooltips)
+export const VariantComparison: Story = {
+  render: () => (
+    <div className="space-y-8 p-8">
+      <div>
+        <h3 className="mb-2 text-sm font-medium text-slate-700">Compact Variant (shows labels)</h3>
+        <Toolbar variant="compact">
+          <Toolbar.Item id="bold" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
+          <Toolbar.Item id="italic" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
+          <Toolbar.Item id="underline" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+        </Toolbar>
+      </div>
+      
+      <div>
+        <h3 className="mb-2 text-sm font-medium text-slate-700">Minimal Variant (hover for tooltips)</h3>
+        <Toolbar variant="minimal">
+          <Toolbar.Item id="bold-min" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
+          <Toolbar.Item id="italic-min" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
+          <Toolbar.Item id="underline-min" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+        </Toolbar>
+      </div>
+    </div>
+  ),
 }
 
 // Interactive playground

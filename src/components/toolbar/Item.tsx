@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Tooltip from '../tooltip'
 import Button from '../button'
 import { useToolbarContext } from './context'
@@ -11,14 +11,23 @@ export interface ToolbarItemProps {
   disabled?: boolean
   index?: number
   onSelect?: (id: string) => void
+  ref?: React.Ref<HTMLButtonElement>
 }
 
-const Item = React.forwardRef<HTMLButtonElement, ToolbarItemProps>(
-  ({ id, label, icon, disabled = false, index = 0, onSelect }, ref) => {
-    const { variant, focusedIndex, activeIndex, activeItems } = useToolbarContext()
-    
-    // Check if this item is in the active items list (for formatting state)
+function Item({ id, label, icon, disabled = false, index = 0, onSelect, ref }: ToolbarItemProps) {
+    const { variant, focusedIndex, activeItems } = useToolbarContext()
+    const internalRef = useRef<HTMLButtonElement>(null)
+
     const isItemActive = activeItems.includes(id)
+
+    const mergedRef = (node: HTMLButtonElement | null) => {
+      internalRef.current = node
+      if (typeof ref === 'function') {
+        ref(node)
+      } else if (ref && 'current' in ref) {
+        ref.current = node
+      }
+    }
 
     const handleClick = () => {
       if (disabled) return
@@ -28,7 +37,7 @@ const Item = React.forwardRef<HTMLButtonElement, ToolbarItemProps>(
     return (
       <>
         <Button
-          ref={ref}
+          ref={mergedRef}
           id={id}
           variant="ghost"
           size="sm"
@@ -49,18 +58,23 @@ const Item = React.forwardRef<HTMLButtonElement, ToolbarItemProps>(
         >
           <span className="flex items-center justify-center">{icon}</span>
           {variant !== 'minimal' && (
-            <span className="hidden text-sm font-medium whitespace-nowrap sm:inline">{label}</span>
+            <span className="text-sm font-medium whitespace-nowrap">{label}</span>
           )}
         </Button>
         {variant === 'minimal' && (
-          <Tooltip id={`${id}-tooltip`}>
+          <Tooltip
+            id={`${id}-tooltip`}
+            targetRef={internalRef as React.RefObject<HTMLElement>}
+            trigger="hover"
+            placement="top"
+            delay={500}
+          >
             <Tooltip.Content>{label}</Tooltip.Content>
           </Tooltip>
         )}
       </>
     )
-  }
-)
+}
 
 Item.displayName = 'Toolbar.Item'
 
