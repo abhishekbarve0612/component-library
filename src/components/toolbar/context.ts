@@ -6,6 +6,7 @@ export interface ToolbarContextType {
   variant: ToolbarVariant
   focusedIndex: number
   activeIndex: number
+  activeItems: string[]
 }
 
 const ToolbarContext = createContext<ToolbarContextType | null>(null)

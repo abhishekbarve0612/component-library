@@ -15,8 +15,29 @@ export const FORMATS = {
   ORDERED_LIST: 'ordered-list',
   UNORDERED_LIST: 'unordered-list',
 } as const
+
 export type Format = (typeof FORMATS)[keyof typeof FORMATS]
 
+// Map formats to execCommand commands
+export const COMMANDS: Record<Format, string> = {
+  bold: 'bold',
+  italic: 'italic',
+  underline: 'underline',
+  strikethrough: 'strikeThrough',
+  link: 'createLink',
+  image: 'insertImage',
+  list: 'insertUnorderedList',
+  code: 'formatBlock',
+  quote: 'formatBlock',
+  'code-block': 'formatBlock',
+  heading: 'formatBlock',
+  paragraph: 'formatBlock',
+  'list-item': 'insertUnorderedList',
+  'ordered-list': 'insertOrderedList',
+  'unordered-list': 'insertUnorderedList',
+}
+
+// Map formats to HTML tags (for state detection)
 export const TAGS: Record<Format, string> = {
   bold: 'strong',
   italic: 'em',
@@ -33,4 +54,11 @@ export const TAGS: Record<Format, string> = {
   'list-item': 'li',
   'ordered-list': 'ol',
   'unordered-list': 'ul',
+}
+
+// Keyboard shortcuts
+export const SHORTCUTS: Record<string, Format> = {
+  'b': 'bold',
+  'i': 'italic',
+  'u': 'underline',
 }

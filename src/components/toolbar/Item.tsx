@@ -15,7 +15,10 @@ export interface ToolbarItemProps {
 
 const Item = React.forwardRef<HTMLButtonElement, ToolbarItemProps>(
   ({ id, label, icon, disabled = false, index = 0, onSelect }, ref) => {
-    const { variant, focusedIndex, activeIndex } = useToolbarContext()
+    const { variant, focusedIndex, activeIndex, activeItems } = useToolbarContext()
+    
+    // Check if this item is in the active items list (for formatting state)
+    const isItemActive = activeItems.includes(id)
 
     const handleClick = () => {
       if (disabled) return
@@ -30,16 +33,16 @@ const Item = React.forwardRef<HTMLButtonElement, ToolbarItemProps>(
           variant="ghost"
           size="sm"
           disabled={disabled}
-          active={activeIndex === index}
+          active={isItemActive}
           onClick={handleClick}
-          aria-pressed={activeIndex === index}
+          aria-pressed={isItemActive}
           tabIndex={focusedIndex === index ? 0 : -1}
           className={cn(
             'flex items-center justify-center rounded-md transition-colors',
             'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100',
             'focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 focus-visible:outline-none',
             'disabled:pointer-events-none disabled:opacity-50',
-            activeIndex === index &&
+            isItemActive &&
               'bg-slate-200 text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100',
             variant === 'minimal' ? 'h-9 w-9 p-0' : 'min-h-9 gap-2 px-3 py-2'
           )}

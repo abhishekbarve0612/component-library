@@ -44,6 +44,10 @@ const meta = {
       description: 'Visual variant - compact shows labels, minimal shows tooltips',
       defaultValue: 'compact',
     },
+    activeItems: {
+      control: 'object',
+      description: 'Array of item IDs that should appear active/pressed',
+    },
     onChange: {
       action: 'changed',
       description: 'Callback when a toolbar item is selected',
@@ -284,6 +288,56 @@ export const WithDisabledItems: Story = {
     // Navigate to next enabled item (redo, since copy/paste are disabled but still focusable for accessibility)
     await userEvent.keyboard('{ArrowRight}')
     await expect(copyButton).toHaveFocus()
+  },
+}
+
+// With active items (shows selected/pressed state)
+export const WithActiveItems: Story = {
+  args: {
+    orientation: 'horizontal',
+    variant: 'compact',
+    activeItems: ['bold', 'italic'], // These items will appear active
+  },
+  render: (args) => (
+    <Toolbar {...args}>
+      <Toolbar.Item 
+        id="bold" 
+        label="Bold" 
+        icon={<FaBold />} 
+        onSelect={() => alert('Bold clicked - should toggle active state')}
+      />
+      <Toolbar.Item 
+        id="italic" 
+        label="Italic" 
+        icon={<FaItalic />}
+        onSelect={() => alert('Italic clicked - should toggle active state')}
+      />
+      <Toolbar.Item 
+        id="underline" 
+        label="Underline" 
+        icon={<FaUnderline />}
+        onSelect={() => alert('Underline clicked - should toggle active state')}
+      />
+      <Toolbar.Divider />
+      <Toolbar.Item 
+        id="align-left" 
+        label="Align Left" 
+        icon={<FaAlignLeft />}
+        onSelect={() => alert('Align left clicked')}
+      />
+    </Toolbar>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    
+    // Check that active items have pressed state
+    const boldButton = canvas.getByRole('button', { name: /bold/i })
+    const italicButton = canvas.getByRole('button', { name: /italic/i })
+    const underlineButton = canvas.getByRole('button', { name: /underline/i })
+    
+    await expect(boldButton).toHaveAttribute('aria-pressed', 'true')
+    await expect(italicButton).toHaveAttribute('aria-pressed', 'true')
+    await expect(underlineButton).toHaveAttribute('aria-pressed', 'false')
   },
 }
 

@@ -9,6 +9,7 @@ interface ToolbarProps {
   orientation?: ToolbarOrientation
   variant?: ToolbarVariant
   onChange?: (id: string) => void
+  activeItems?: string[]
   children: React.ReactNode
   className?: string
 }
@@ -17,6 +18,7 @@ function Toolbar({
   orientation = 'horizontal',
   variant = 'compact',
   onChange,
+  activeItems = [],
   children,
   className,
 }: ToolbarProps) {
@@ -95,6 +97,7 @@ function Toolbar({
         variant,
         focusedIndex,
         activeIndex,
+        activeItems,
       }}
     >
       <div
