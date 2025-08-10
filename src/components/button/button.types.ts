@@ -1,2 +1,4 @@
-export type ButtonVariant = 'ghost' | 'default' | 'link' | 'primary' | 'secondary'
-export type ButtonSize = 'default' | 'sm' | 'md' | 'lg' | 'xl'
+import type { SIZES, VARIANTS } from "./button.constants"
+
+export type ButtonVariant = keyof typeof VARIANTS
+export type ButtonSize = keyof typeof SIZES

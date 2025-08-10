@@ -1,5 +1,21 @@
 import { tv } from 'tailwind-variants'
 
+export const SIZES = {
+  default: 'default',
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+  xl: 'xl',
+}
+
+export const VARIANTS = {
+  default: 'default',
+  primary: 'primary',
+  secondary: 'secondary',
+  ghost: 'ghost',
+  link: 'link',
+}
+
 export const buttonVariants = tv({
   base: 'inline-flex items-center justify-center button',
   variants: {
@@ -16,6 +32,9 @@ export const buttonVariants = tv({
       md: 'button-md',
       lg: 'button-lg',
       xl: 'button-xl',
+    },
+    active: {
+      true: 'button-active',
     },
   },
   defaultVariants: {
