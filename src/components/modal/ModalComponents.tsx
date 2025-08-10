@@ -1,26 +1,113 @@
-import type { ReactNode } from 'react'
+import { type ReactNode, useContext, createContext } from 'react'
+import { IoClose } from 'react-icons/io5'
 import { useModalManager } from './context'
+import { cn } from '@/helpers/utils'
+import Button from '../button'
 
-export function ModalHeader({ children }: { children: ReactNode }) {
-  return <div className="border-b border-gray-200 p-4 font-bold">{children}</div>
+const ModalIdContext = createContext<string | null>(null)
+
+export function ModalProvider({ id, children }: { id: string; children: ReactNode }) {
+  return <ModalIdContext.Provider value={id}>{children}</ModalIdContext.Provider>
 }
 
-export function ModalBody({ children }: { children: ReactNode }) {
-  return <div className="flex-1 p-4">{children}</div>
+interface ModalHeaderProps {
+  children: ReactNode
+  className?: string
+  withCloseButton?: boolean
 }
 
-export function ModalFooter({ children }: { children: ReactNode }) {
-  return <div className="flex justify-end gap-2 border-t border-gray-200 p-4">{children}</div>
-}
-
-export function ModalCloseButton({ modalId, children }: { modalId: string; children: ReactNode }) {
-  const { closeModal } = useModalManager()
+export function ModalHeader({ children, className, withCloseButton = false }: ModalHeaderProps) {
   return (
-    <button
-      onClick={() => closeModal(modalId)}
-      className="rounded bg-gray-200 px-3 py-1 hover:bg-gray-300"
+    <div
+      className={cn(
+        'flex items-center justify-between border-b border-slate-200 px-6 py-4',
+        'dark:border-slate-700',
+        className
+      )}
+    >
+      <div className="text-lg font-semibold text-slate-900 dark:text-slate-100">{children}</div>
+      {withCloseButton && <ModalCloseButton />}
+    </div>
+  )
+}
+
+interface ModalBodyProps {
+  children: ReactNode
+  className?: string
+  scrollable?: boolean
+}
+
+export function ModalBody({ children, className, scrollable = true }: ModalBodyProps) {
+  return (
+    <div className={cn('flex-1 px-6 py-4', scrollable && 'overflow-y-auto', className)}>
+      {children}
+    </div>
+  )
+}
+
+interface ModalFooterProps {
+  children: ReactNode
+  className?: string
+}
+
+export function ModalFooter({ children, className }: ModalFooterProps) {
+  return (
+    <div
+      className={cn(
+        'flex items-center justify-end gap-3 border-t border-slate-200 px-6 py-4',
+        'dark:border-slate-700',
+        className
+      )}
     >
       {children}
-    </button>
+    </div>
+  )
+}
+
+interface ModalCloseButtonProps {
+  modalId?: string
+  children?: ReactNode
+  className?: string
+  variant?: 'icon' | 'button'
+}
+
+export function ModalCloseButton({
+  modalId,
+  children,
+  className,
+  variant = 'icon',
+}: ModalCloseButtonProps) {
+  const { closeModal } = useModalManager()
+  const contextModalId = useContext(ModalIdContext)
+  const idToUse = modalId || contextModalId
+
+  if (!idToUse) {
+    console.warn('ModalCloseButton: No modal ID provided and not inside Modal context')
+    return null
+  }
+
+  if (variant === 'icon') {
+    return (
+      <button
+        type="button"
+        onClick={() => closeModal(idToUse)}
+        aria-label="Close modal"
+        className={cn(
+          'rounded-lg p-2 text-slate-400 transition-colors',
+          'hover:bg-slate-100 hover:text-slate-600',
+          'dark:hover:bg-slate-800 dark:hover:text-slate-300',
+          'focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none',
+          className
+        )}
+      >
+        {children || <IoClose className="h-5 w-5" />}
+      </button>
+    )
+  }
+
+  return (
+    <Button variant="default" size="sm" onClick={() => closeModal(idToUse)} className={className}>
+      {children || 'Close'}
+    </Button>
   )
 }
