@@ -1,0 +1,36 @@
+export const FORMATS = {
+  BOLD: 'bold',
+  ITALIC: 'italic',
+  UNDERLINE: 'underline',
+  STRIKETHROUGH: 'strikethrough',
+  LINK: 'link',
+  IMAGE: 'image',
+  LIST: 'list',
+  CODE: 'code',
+  QUOTE: 'quote',
+  CODE_BLOCK: 'code-block',
+  HEADING: 'heading',
+  PARAGRAPH: 'paragraph',
+  LIST_ITEM: 'list-item',
+  ORDERED_LIST: 'ordered-list',
+  UNORDERED_LIST: 'unordered-list',
+} as const
+export type Format = (typeof FORMATS)[keyof typeof FORMATS]
+
+export const TAGS: Record<Format, string> = {
+  bold: 'strong',
+  italic: 'em',
+  underline: 'u',
+  strikethrough: 's',
+  link: 'a',
+  image: 'img',
+  list: 'ul',
+  code: 'code',
+  quote: 'blockquote',
+  'code-block': 'pre',
+  heading: 'h1',
+  paragraph: 'p',
+  'list-item': 'li',
+  'ordered-list': 'ol',
+  'unordered-list': 'ul',
+}
