@@ -33,6 +33,9 @@ export const buttonVariants = tv({
       lg: 'button-lg',
       xl: 'button-xl',
     },
+    active: {
+      true: 'button-active',
+    },
   },
   defaultVariants: {
     variant: 'default',

@@ -1,3 +1,4 @@
+import React from 'react'
 import type { ButtonSize, ButtonVariant } from './button.types'
 import { SIZES, VARIANTS, buttonVariants } from './button.constants'
 import './button.css'
@@ -6,23 +7,23 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant?: ButtonVariant
   size?: ButtonSize
-  ref?: React.RefObject<HTMLButtonElement>
+  active?: boolean
 }
 
-const Button = ({
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   children,
   className = '',
   variant = 'default',
   size = 'default',
-  ref,
+  active = false,
   ...props
-}: ButtonProps) => {
+}, ref) => {
   return (
-    <button ref={ref} className={buttonVariants({ variant, size, className })} {...props}>
+    <button ref={ref} className={buttonVariants({ variant, size, className, active })} {...props}>
       {children}
     </button>
   )
-}
+})
 
 Button.variants = VARIANTS
 Button.sizes = SIZES
