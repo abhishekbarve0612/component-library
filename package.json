@@ -1,5 +1,5 @@
 {
-  "name": "@abhishek/components",
+  "name": "@abhishekbarve/components",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
