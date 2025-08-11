@@ -3,7 +3,7 @@ import { useInputContext } from './context'
 import { cn } from '@/helpers/utils'
 import Error from './Error'
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string
   type?: React.HTMLInputTypeAttribute
   name: string
@@ -14,10 +14,9 @@ function Field({ className, type = 'text', ...props }: InputProps) {
   const [error, setError] = useState<string | null>(null)
   const errorId = `${id}-error`
   const descriptionId = `${id}-description`
-  
-  // Build aria-describedby string with error and description IDs
+
   const ariaDescribedBy = [errorId, descriptionId].filter(Boolean).join(' ')
-  
+
   return (
     <>
       <input

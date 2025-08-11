@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import React from 'react'
 import { expect, within, userEvent } from '@storybook/test'
 
 import Toolbar from './index'
@@ -68,18 +67,19 @@ export const Basic: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
-      <Toolbar.Item 
-        id="bold" 
-        label="Bold" 
-        icon={<FaBold />} 
+      <Toolbar.Item
+        id="bold"
+        label="Bold"
+        icon={<FaBold />}
         onSelect={(id) => console.log('Bold clicked:', id)}
       />
-      <Toolbar.Item 
-        id="italic" 
-        label="Italic" 
+      <Toolbar.Item
+        id="italic"
+        label="Italic"
         icon={<FaItalic />}
         onSelect={(id) => console.log('Italic clicked:', id)}
       />
@@ -92,43 +92,44 @@ export const Default: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
-      <Toolbar.Item 
-        id="bold" 
-        label="Bold" 
-        icon={<FaBold />} 
+      <Toolbar.Item
+        id="bold"
+        label="Bold"
+        icon={<FaBold />}
         onSelect={() => alert('Bold toggled!')}
       />
-      <Toolbar.Item 
-        id="italic" 
-        label="Italic" 
+      <Toolbar.Item
+        id="italic"
+        label="Italic"
         icon={<FaItalic />}
         onSelect={() => alert('Italic toggled!')}
       />
-      <Toolbar.Item 
-        id="underline" 
-        label="Underline" 
+      <Toolbar.Item
+        id="underline"
+        label="Underline"
         icon={<FaUnderline />}
         onSelect={() => alert('Underline toggled!')}
       />
       <Toolbar.Divider />
-      <Toolbar.Item 
-        id="align-left" 
-        label="Align Left" 
+      <Toolbar.Item
+        id="align-left"
+        label="Align Left"
         icon={<FaAlignLeft />}
         onSelect={() => alert('Align left!')}
       />
-      <Toolbar.Item 
-        id="align-center" 
-        label="Align Center" 
+      <Toolbar.Item
+        id="align-center"
+        label="Align Center"
         icon={<FaAlignCenter />}
         onSelect={() => alert('Align center!')}
       />
-      <Toolbar.Item 
-        id="align-right" 
-        label="Align Right" 
+      <Toolbar.Item
+        id="align-right"
+        label="Align Right"
         icon={<FaAlignRight />}
         onSelect={() => alert('Align right!')}
       />
@@ -158,14 +159,30 @@ export const Minimal: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'minimal',
+    children: undefined,
   },
   render: (args) => (
     <div className="p-8">
       <p className="mb-4 text-sm text-slate-600">Minimal variant shows tooltips on hover</p>
       <Toolbar {...args}>
-        <Toolbar.Item id="bold" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
-        <Toolbar.Item id="italic" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
-        <Toolbar.Item id="underline" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+        <Toolbar.Item
+          id="bold"
+          label="Bold"
+          icon={<FaBold />}
+          onSelect={() => console.log('Bold clicked')}
+        />
+        <Toolbar.Item
+          id="italic"
+          label="Italic"
+          icon={<FaItalic />}
+          onSelect={() => console.log('Italic clicked')}
+        />
+        <Toolbar.Item
+          id="underline"
+          label="Underline"
+          icon={<FaUnderline />}
+          onSelect={() => console.log('Underline clicked')}
+        />
       </Toolbar>
     </div>
   ),
@@ -179,7 +196,7 @@ export const Minimal: Story = {
     // In minimal variant, labels should not be visible in the buttons
     const boldButton = canvas.getByRole('button', { name: /bold/i })
     await expect(boldButton).toBeInTheDocument()
-    
+
     // Hover over button to trigger tooltip (manual test)
     await userEvent.hover(boldButton)
   },
@@ -190,6 +207,7 @@ export const Vertical: Story = {
   args: {
     orientation: 'vertical',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
@@ -221,6 +239,7 @@ export const Complete: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
@@ -266,6 +285,7 @@ export const WithDisabledItems: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
@@ -303,31 +323,32 @@ export const WithActiveItems: Story = {
     orientation: 'horizontal',
     variant: 'compact',
     activeItems: ['bold', 'italic'], // These items will appear active
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>
-      <Toolbar.Item 
-        id="bold" 
-        label="Bold" 
-        icon={<FaBold />} 
+      <Toolbar.Item
+        id="bold"
+        label="Bold"
+        icon={<FaBold />}
         onSelect={() => alert('Bold clicked - should toggle active state')}
       />
-      <Toolbar.Item 
-        id="italic" 
-        label="Italic" 
+      <Toolbar.Item
+        id="italic"
+        label="Italic"
         icon={<FaItalic />}
         onSelect={() => alert('Italic clicked - should toggle active state')}
       />
-      <Toolbar.Item 
-        id="underline" 
-        label="Underline" 
+      <Toolbar.Item
+        id="underline"
+        label="Underline"
         icon={<FaUnderline />}
         onSelect={() => alert('Underline clicked - should toggle active state')}
       />
       <Toolbar.Divider />
-      <Toolbar.Item 
-        id="align-left" 
-        label="Align Left" 
+      <Toolbar.Item
+        id="align-left"
+        label="Align Left"
         icon={<FaAlignLeft />}
         onSelect={() => alert('Align left clicked')}
       />
@@ -335,12 +356,12 @@ export const WithActiveItems: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    
+
     // Check that active items have pressed state
     const boldButton = canvas.getByRole('button', { name: /bold/i })
     const italicButton = canvas.getByRole('button', { name: /italic/i })
     const underlineButton = canvas.getByRole('button', { name: /underline/i })
-    
+
     await expect(boldButton).toHaveAttribute('aria-pressed', 'true')
     await expect(italicButton).toHaveAttribute('aria-pressed', 'true')
     await expect(underlineButton).toHaveAttribute('aria-pressed', 'false')
@@ -349,23 +370,58 @@ export const WithActiveItems: Story = {
 
 // Variant comparison - shows both compact (with labels) and minimal (with tooltips)
 export const VariantComparison: Story = {
+  args: {
+    children: undefined,
+  },
   render: () => (
     <div className="space-y-8 p-8">
       <div>
         <h3 className="mb-2 text-sm font-medium text-slate-700">Compact Variant (shows labels)</h3>
         <Toolbar variant="compact">
-          <Toolbar.Item id="bold" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
-          <Toolbar.Item id="italic" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
-          <Toolbar.Item id="underline" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+          <Toolbar.Item
+            id="bold"
+            label="Bold"
+            icon={<FaBold />}
+            onSelect={() => console.log('Bold clicked')}
+          />
+          <Toolbar.Item
+            id="italic"
+            label="Italic"
+            icon={<FaItalic />}
+            onSelect={() => console.log('Italic clicked')}
+          />
+          <Toolbar.Item
+            id="underline"
+            label="Underline"
+            icon={<FaUnderline />}
+            onSelect={() => console.log('Underline clicked')}
+          />
         </Toolbar>
       </div>
-      
+
       <div>
-        <h3 className="mb-2 text-sm font-medium text-slate-700">Minimal Variant (hover for tooltips)</h3>
+        <h3 className="mb-2 text-sm font-medium text-slate-700">
+          Minimal Variant (hover for tooltips)
+        </h3>
         <Toolbar variant="minimal">
-          <Toolbar.Item id="bold-min" label="Bold" icon={<FaBold />} onSelect={() => console.log('Bold clicked')} />
-          <Toolbar.Item id="italic-min" label="Italic" icon={<FaItalic />} onSelect={() => console.log('Italic clicked')} />
-          <Toolbar.Item id="underline-min" label="Underline" icon={<FaUnderline />} onSelect={() => console.log('Underline clicked')} />
+          <Toolbar.Item
+            id="bold-min"
+            label="Bold"
+            icon={<FaBold />}
+            onSelect={() => console.log('Bold clicked')}
+          />
+          <Toolbar.Item
+            id="italic-min"
+            label="Italic"
+            icon={<FaItalic />}
+            onSelect={() => console.log('Italic clicked')}
+          />
+          <Toolbar.Item
+            id="underline-min"
+            label="Underline"
+            icon={<FaUnderline />}
+            onSelect={() => console.log('Underline clicked')}
+          />
         </Toolbar>
       </div>
     </div>
@@ -387,6 +443,7 @@ export const Interactive: Story = {
   args: {
     orientation: 'horizontal',
     variant: 'compact',
+    children: undefined,
   },
   render: (args) => (
     <Toolbar {...args}>

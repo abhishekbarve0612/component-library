@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
+import type { SelectItemProps } from './Item'
 
 export interface SelectContentProps {
   children: React.ReactNode
@@ -14,17 +15,17 @@ function SelectContent({ children, className }: SelectContentProps) {
   const contentId = React.useId()
   const listboxId = `${contentId}-listbox`
   const contentRef = React.useRef<HTMLDivElement>(null)
-  
+
   // Extract option values and register them with context
   React.useEffect(() => {
     const optionValues: string[] = []
-    
+
     React.Children.forEach(children, (child: unknown) => {
       if (React.isValidElement(child) && child?.props) {
-        optionValues.push(child?.props?.value)
+        optionValues.push((child?.props as SelectItemProps)?.value)
       }
     })
-    
+
     setOptions(optionValues)
   }, [children, setOptions])
 
@@ -34,19 +35,20 @@ function SelectContent({ children, className }: SelectContentProps) {
 
     if (isOpen) {
       // Opening animation: scale from top with fade in
-      gsap.fromTo(contentRef.current, 
+      gsap.fromTo(
+        contentRef.current,
         {
           opacity: 0,
           scaleY: 0,
           transformOrigin: 'top center',
-          y: -10
+          y: -10,
         },
         {
           opacity: 1,
           scaleY: 1,
           y: 0,
           duration: 0.2,
-          ease: 'power2.out'
+          ease: 'power2.out',
         }
       )
     } else if (contentRef.current) {
@@ -57,19 +59,19 @@ function SelectContent({ children, className }: SelectContentProps) {
         transformOrigin: 'top center',
         y: -5,
         duration: 0.15,
-        ease: 'power2.in'
+        ease: 'power2.in',
       })
     }
   }, [isOpen])
-  
+
   if (!isOpen) return null
 
   return (
-    <div 
+    <div
       ref={contentRef}
       id={listboxId}
       className={cn(
-        'absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto',
+        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white shadow-lg',
         className
       )}
       role="listbox"
@@ -78,10 +80,10 @@ function SelectContent({ children, className }: SelectContentProps) {
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
-            ...child.props,
+            ...(child.props as SelectItemProps),
             index,
             optionId: `${contentId}-option-${index}`,
-          })
+          } as SelectItemProps)
         }
         return child
       })}
