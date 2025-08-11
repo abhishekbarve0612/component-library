@@ -17,10 +17,49 @@ interface SidebarProps {
 function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: SidebarProps) {
   const sidebarRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
+  const previousActiveElement = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    if (!open) return
-    const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    if (!open) {
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus()
+        previousActiveElement.current = null
+      }
+      return
+    }
+
+    previousActiveElement.current = document.activeElement as HTMLElement
+    if (sidebarRef.current) {
+      sidebarRef.current.focus()
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+
+      if (e.key === 'Tab' && sidebarRef.current) {
+        const focusableElements = sidebarRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstFocusable = focusableElements[0] as HTMLElement
+        const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault()
+            lastFocusable?.focus()
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault()
+            firstFocusable?.focus()
+          }
+        }
+      }
+    }
+
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [open, onClose])
@@ -79,10 +118,15 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
 
       <div
         ref={sidebarRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sidebar-title"
+        aria-describedby="sidebar-description"
         className={cn(
           'fixed top-0 bottom-0 z-50 flex w-80 flex-col bg-white shadow-xl',
           'dark:bg-slate-900 dark:shadow-slate-900/20',
           'border-r border-slate-200 dark:border-slate-700',
+          'focus:outline-none',
           {
             'left-0': side === 'left',
             'right-0': side === 'right',
@@ -91,6 +135,7 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
             'translate-x-0': open,
           }
         )}
+        tabIndex={-1}
       >
         {children}
       </div>

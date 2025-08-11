@@ -1,18 +1,32 @@
 import { cn } from '@/helpers/utils'
 import { type ReactNode } from 'react'
 
-function SidebarHeader({ children }: { children: ReactNode }) {
+interface SidebarHeaderProps {
+  children: ReactNode
+  id?: string
+}
+
+function SidebarHeader({ children, id = 'sidebar-title' }: SidebarHeaderProps) {
   return (
     <div className="border-b border-slate-200 px-6 py-4 dark:border-slate-700">
-      <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{children}</div>
+      <div id={id} className="text-lg font-bold text-slate-900 dark:text-slate-100">
+        {children}
+      </div>
     </div>
   )
 }
 
-function SidebarBody({ children }: { children: ReactNode }) {
+interface SidebarBodyProps {
+  children: ReactNode
+  id?: string
+}
+
+function SidebarBody({ children, id = 'sidebar-description' }: SidebarBodyProps) {
   return (
-    <div className="flex-1 overflow-y-auto px-4 py-4">
-      <div className="space-y-1">{children}</div>
+    <div id={id} className="flex-1 overflow-y-auto px-4 py-4">
+      <div className="space-y-1" role="group">
+        {children}
+      </div>
     </div>
   )
 }
@@ -39,6 +53,7 @@ function SidebarOverlay({ className, onClose, open, overlayRef }: SidebarOverlay
         open ? 'opacity-100' : 'pointer-events-none opacity-0',
         className
       )}
+      aria-hidden="true"
     />
   )
 }

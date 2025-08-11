@@ -1,15 +1,15 @@
 import { type ReactNode } from 'react'
 import { cn } from '@/helpers/utils'
-import Button from '@/components/button'
+import Button, { type ButtonProps } from '@/components/button'
 
-interface ItemProps {
+interface ItemProps extends ButtonProps {
   children: ReactNode
   active?: boolean
   disabled?: boolean
   onClick?: () => void
 }
 
-function Item({ children, active, disabled, onClick }: ItemProps) {
+function Item({ children, active, disabled, onClick, ...props }: ItemProps) {
   return (
     <Button
       variant="default"
@@ -31,6 +31,7 @@ function Item({ children, active, disabled, onClick }: ItemProps) {
 
         disabled && 'pointer-events-none cursor-not-allowed opacity-50'
       )}
+      {...props}
     >
       {children}
     </Button>
