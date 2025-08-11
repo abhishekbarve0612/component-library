@@ -1,17 +1,33 @@
-interface SubmitButtonProps {
+import Button from '@/components/button'
+import type { ButtonProps } from '@/components/button'
+import Loader from '@/components/loader'
+
+interface SubmitButtonProps extends Omit<ButtonProps, 'type'> {
   loading: boolean
   children: React.ReactNode
 }
 
-function SubmitButton({ loading, children }: SubmitButtonProps) {
+function SubmitButton({
+  loading,
+  children,
+  variant = 'primary',
+  size = 'default',
+  className,
+  ...props
+}: SubmitButtonProps) {
   return (
-    <button
+    <Button
       type="submit"
       disabled={loading}
-      className="rounded bg-blue-600 px-4 py-2 text-sm text-white disabled:opacity-50"
+      variant={variant}
+      size={size}
+      className={className}
+      {...props}
     >
-      {loading ? 'Loading...' : children}
-    </button>
+      <Loader variant="bars" size="sm" color="primary" loading={loading} text="Signing in...">
+        {children}
+      </Loader>
+    </Button>
   )
 }
 
