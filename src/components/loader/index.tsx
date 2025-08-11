@@ -40,27 +40,18 @@ function Loader({
   }
 
   const loaderContent = (
-    <div 
-      className={cn('flex flex-col items-center justify-center gap-3', className)}
-      {...props}
-    >
+    <div className={cn('flex flex-col items-center justify-center gap-3', className)} {...props}>
       <VariantComponent size={size} color={colorClass} />
-      {text && (
-        <span className={cn('text-sm font-medium', colorClass)}>
-          {text}
-        </span>
-      )}
+      {text && <span className={cn('text-sm font-medium', colorClass)}>{text}</span>}
     </div>
   )
 
   if (overlay) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+      <div className="bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
         {loaderContent}
         {children && (
-          <div className="absolute inset-0 pointer-events-none opacity-50">
-            {children}
-          </div>
+          <div className="pointer-events-none absolute inset-0 opacity-50">{children}</div>
         )}
       </div>
     )
