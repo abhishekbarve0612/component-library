@@ -86,6 +86,7 @@ function App() {
 ### UI Components
 
 - **Breadcrumb** - Navigation breadcrumb with customizable dividers
+- **Card** - Flexible card container with compound components
 - **Modal** - Accessible modal dialogs
 - **Tooltip** - Interactive tooltips with positioning
 - **Navbar** - Navigation bar components

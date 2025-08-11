@@ -5,6 +5,9 @@ export * from './components/breadcrumb/types'
 export { default as Button } from './components/button'
 export * from './components/button/button.types'
 
+export { default as Card } from './components/card'
+export * from './components/card/types'
+
 export { default as Form } from './components/form'
 export { default as Input } from './components/form/input'
 export { default as Label } from './components/form/label'
