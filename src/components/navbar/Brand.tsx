@@ -1,9 +1,19 @@
 import React from 'react'
 import { cn } from '@/helpers/utils'
 
-function NavbarBrand({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+function NavbarBrand({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-center px-4 py-2 text-lg font-bold', className)} {...props} />
+    <div
+      className={cn(
+        'flex items-center text-lg font-bold',
+        'text-slate-900 dark:text-slate-100',
+        'px-6 py-3',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
   )
 }
 

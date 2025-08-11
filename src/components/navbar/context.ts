@@ -1,12 +1,11 @@
 import { createContext, useContext } from 'react'
-import type { Variant } from './types'
 
 const NavbarContext = createContext<NavbarContextProps | null>(null)
 
 interface NavbarContextProps {
-  variant: Variant
   breakpoint?: string
   collapsible?: boolean
+  isOpen?: boolean
 }
 
 export function useNavbarContext() {
