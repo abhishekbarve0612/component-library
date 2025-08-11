@@ -42,21 +42,27 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepublishOnly": "npm run build:lib",
-    "typecheck": "tsc --noEmit"
+    "prepublishOnly": "pnpm run build:lib",
+    "typecheck": "tsc --noEmit",
+    "publish:npm": "pnpm publish",
+    "publish:dry-run": "pnpm publish --dry-run",
+    "version:patch": "pnpm version patch",
+    "version:minor": "pnpm version minor", 
+    "version:major": "pnpm version major"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.3.1",
-    "tailwind-variants": "^2.1.0"
+    "tailwind-variants": "^2.1.0",
+    "tailwindcss": "^4.1.11"
   },
   "peerDependencies": {
     "@gsap/react": "^2.1.2",
     "gsap": "^3.13.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "react-icons": "^5.0.0",
-    "tailwindcss": "^4.0.0"
+    "react-icons": "^5.0.0"
   },
   "peerDependenciesMeta": {
     "@gsap/react": {
@@ -78,6 +84,7 @@
     "@storybook/addon-themes": "^9.1.1",
     "@storybook/addon-vitest": "^9.1.1",
     "@storybook/react-vite": "^9.1.1",
+    "@types/node": "^24.2.1",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",

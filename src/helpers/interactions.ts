@@ -95,7 +95,7 @@ interface InteractionState {
 }
 
 // Return type
-interface UseElementInteractionsReturn<T extends HTMLElement = HTMLElement> {
+export interface UseElementInteractionsReturn<T extends HTMLElement = HTMLElement> {
   ref: RefObject<T | null>;
   state: InteractionState;
   updateState: (updates: Partial<InteractionState>) => void;
