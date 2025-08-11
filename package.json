@@ -44,10 +44,10 @@
     "build-storybook": "storybook build",
     "prepublishOnly": "pnpm run build:lib",
     "typecheck": "tsc --noEmit",
-    "publish:npm": "pnpm publish",
+    "publish:npm": "pnpm publish --access public",
     "publish:dry-run": "pnpm publish --dry-run",
     "version:patch": "pnpm version patch",
-    "version:minor": "pnpm version minor", 
+    "version:minor": "pnpm version minor",
     "version:major": "pnpm version major"
   },
   "dependencies": {
