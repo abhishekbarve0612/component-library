@@ -11,14 +11,15 @@ export { default as Select } from './select'
 export { default as Textarea } from './textarea'
 export { default as Checkbox } from './checkbox'
 
-interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
-  label: string
+export interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
+  label?: string
   description?: string
   children: React.ReactNode
   className?: string
   errors?: {
     message: string
   }[]
+  action?: (formData: FormData) => any
 }
 
 function Form({ children, label, description, errors, ...props }: FormProps) {
