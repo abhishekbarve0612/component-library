@@ -1,15 +1,15 @@
-# @abhishek/components
+# @abhishekbarve/components
 
 A modern React component library built with TypeScript, Tailwind CSS, and GSAP animations.
 
 ## Installation
 
 ```bash
-npm install @abhishek/components
+npm install @abhishekbarve/components
 # or
-yarn add @abhishek/components
+yarn add @abhishekbarve/components
 # or
-pnpm add @abhishek/components
+pnpm add @abhishekbarve/components
 ```
 
 ## Peer Dependencies
@@ -37,8 +37,8 @@ npm install react-icons
 ### Basic Example
 
 ```tsx
-import { Button, Input, Modal } from '@abhishek/components';
-import '@abhishek/components/styles';
+import { Button, Input, Modal } from '@abhishekbarve/components'
+import '@abhishekbarve/components/styles'
 
 function App() {
   return (
@@ -46,13 +46,13 @@ function App() {
       <Button variant="primary" size="md">
         Click me
       </Button>
-      
+
       <Input.Group>
         <Input.Label>Email</Input.Label>
         <Input.Field type="email" placeholder="Enter your email" />
       </Input.Group>
     </div>
-  );
+  )
 }
 ```
 
@@ -61,20 +61,21 @@ function App() {
 Wrap your app with the theme provider for dark/light mode support:
 
 ```tsx
-import { ThemeProvider } from '@abhishek/components';
+import { ThemeProvider } from '@abhishekbarve/components'
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light">
       <YourApp />
     </ThemeProvider>
-  );
+  )
 }
 ```
 
 ## Available Components
 
 ### Form Components
+
 - **Button** - Customizable button with multiple variants
 - **Input** - Complete input system with labels, errors, descriptions
 - **TextArea** - Multi-line text input with character count
@@ -83,6 +84,7 @@ function App() {
 - **RichTextArea** - Rich text editor component
 
 ### UI Components
+
 - **Modal** - Accessible modal dialogs
 - **Tooltip** - Interactive tooltips with positioning
 - **Navbar** - Navigation bar components
@@ -92,12 +94,14 @@ function App() {
 - **Toggle** - Toggle switch component
 
 ### Auth Components
+
 - **SignIn** - Complete sign-in form
 - **SignUp** - User registration form
 - **ForgotPassword** - Password recovery form
 - **ResetPassword** - Password reset form
 
 ### Theme & Utilities
+
 - **ThemeProvider** - Theme context and management
 - **ThemeToggle** - Dark/light mode toggle
 - Various utility functions and design tokens
@@ -107,60 +111,10 @@ function App() {
 This library uses Tailwind CSS for styling. Make sure to include the component styles:
 
 ```tsx
-import '@abhishek/components/styles';
+import '@abhishekbarve/components/styles'
 ```
 
 If you're using Tailwind CSS in your project, the components will automatically inherit your theme configuration.
-
-## Development
-
-### Building the Library
-
-```bash
-pnpm run build:lib
-```
-
-### Publishing
-
-```bash
-# Test what will be published (dry run)
-pnpm run publish:dry-run
-
-# Publish to npm
-pnpm run publish:npm
-
-# Version bumping
-pnpm run version:patch   # 1.0.0 -> 1.0.1
-pnpm run version:minor   # 1.0.0 -> 1.1.0
-pnpm run version:major   # 1.0.0 -> 2.0.0
-```
-
-### Development Mode
-
-```bash
-pnpm run dev
-```
-
-### Storybook
-
-```bash
-pnpm run storybook
-```
-
-## TypeScript
-
-The library is fully typed with TypeScript. All component props, types, and utilities are exported for your use:
-
-```tsx
-import type { ButtonVariant, InputProps } from '@abhishek/components';
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Run tests and linting
-4. Submit a pull request
 
 ## License
 
