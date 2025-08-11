@@ -28,12 +28,15 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
 
       <div
         className={cn(
-          'fixed top-0 bottom-0 flex w-64 flex-col bg-white shadow-lg transition-transform duration-300',
+          'fixed top-0 bottom-0 z-50 flex w-80 flex-col bg-white shadow-xl transition-transform duration-300',
+          'dark:bg-slate-900 dark:shadow-slate-900/20',
+          'border-r border-slate-200 dark:border-slate-700',
           {
-            'left-0': side === 'left' && open,
-            'right-0': side === 'right' && open,
+            'left-0': side === 'left',
+            'right-0': side === 'right',
+            '-translate-x-full': side === 'left' && !open,
+            'translate-x-full': side === 'right' && !open,
             'translate-x-0': open,
-            'translate-x-full': !open,
           }
         )}
       >
