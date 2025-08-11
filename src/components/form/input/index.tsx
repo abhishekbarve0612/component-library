@@ -10,13 +10,13 @@ import Group from './Group'
 import Description from './Description'
 import './input.css'
 
-interface Props {
+export interface InputProps {
   id?: string
   className?: string
   children?: React.ReactNode
 }
 
-function Input({ className, children, id }: Props) {
+function Input({ className, children, id }: InputProps) {
   const _id = useId()
   const inputId = id ?? _id
   const [error, setError] = useState<string | undefined>(undefined)
