@@ -19,23 +19,23 @@ export const VARIANTS = {
 }
 
 export const buttonVariants = tv({
-  base: 'inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  base: 'inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none disabled:opacity-50',
   variants: {
     variant: {
       default:
-        'bg-slate-900 text-slate-50 shadow hover:bg-slate-800 focus:ring-slate-500 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-200',
+        'bg-primary text-primary-foreground shadow hover:bg-primary/90',
       primary:
-        'bg-blue-600 text-white shadow hover:bg-blue-700 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700',
+        'bg-primary text-primary-foreground shadow hover:bg-primary/90',
       secondary:
-        'bg-slate-100 text-slate-900 shadow-sm hover:bg-slate-200 focus:ring-slate-500 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-700',
+        'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
       outline:
-        'border border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-50 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+        'border border-border bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
       ghost:
-        'text-slate-900 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-500 dark:text-slate-50 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+        'hover:bg-accent hover:text-accent-foreground',
       link:
-        'text-slate-900 underline-offset-4 hover:underline focus:ring-slate-500 dark:text-slate-50',
+        'text-primary underline-offset-4 hover:underline',
       destructive:
-        'bg-red-600 text-white shadow hover:bg-red-700 focus:ring-red-500 dark:bg-red-600 dark:hover:bg-red-700',
+        'bg-destructive text-destructive-foreground shadow hover:bg-destructive/90',
     },
     size: {
       default: 'px-3 py-2',
@@ -45,7 +45,7 @@ export const buttonVariants = tv({
       xl: 'px-4 py-2.5 text-xl',
     },
     active: {
-      true: 'ring-2 ring-slate-500 ring-offset-2 dark:ring-slate-400 dark:ring-offset-slate-900',
+      true: 'ring-2 ring-ring ring-offset-2',
     },
   },
   defaultVariants: {

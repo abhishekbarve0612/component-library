@@ -123,9 +123,8 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
         aria-labelledby="sidebar-title"
         aria-describedby="sidebar-description"
         className={cn(
-          'fixed top-0 bottom-0 z-50 flex w-80 flex-col bg-white shadow-xl',
-          'dark:bg-slate-900 dark:shadow-slate-900/20',
-          'border-r border-slate-200 dark:border-slate-700',
+          'fixed top-0 bottom-0 z-50 flex w-80 flex-col bg-background shadow-xl',
+          'border-r border-border',
           'focus:outline-none',
           {
             'left-0': side === 'left',
