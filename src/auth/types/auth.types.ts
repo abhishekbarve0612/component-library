@@ -66,3 +66,18 @@ export interface SignUpActionState {
   error: string | null
   user: User | null
 }
+
+export interface ForgotPasswordRequest {
+  email: string
+}
+
+export interface ForgotPasswordResponse {
+  message: string
+  success: boolean
+}
+
+export interface ForgotPasswordActionState {
+  success: boolean
+  error: string | null
+  message: string | null
+}
