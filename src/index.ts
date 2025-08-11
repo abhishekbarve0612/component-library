@@ -1,4 +1,7 @@
 // Components
+export { default as Breadcrumb } from './components/breadcrumb'
+export * from './components/breadcrumb/types'
+
 export { default as Button } from './components/button'
 export * from './components/button/button.types'
 
