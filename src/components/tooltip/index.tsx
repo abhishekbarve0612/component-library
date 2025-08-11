@@ -328,7 +328,7 @@ export function Tooltip({
   )
 }
 
-function Close({ children }: { children?: React.ReactNode }) {
+export function Close({ children }: { children?: React.ReactNode }) {
   const { setVisible } = useContext(TooltipContext)
   return (
     <Button 

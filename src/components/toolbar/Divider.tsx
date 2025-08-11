@@ -11,7 +11,7 @@ const useToolbarContext = () => {
   return context
 }
 
-interface ToolbarDividerProps {
+export interface ToolbarDividerProps {
   className?: string
 }
 
