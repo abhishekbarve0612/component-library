@@ -1,7 +1,6 @@
 import React from 'react'
 import type { ButtonSize, ButtonVariant } from './button.types'
 import { SIZES, VARIANTS, buttonVariants } from './button.constants'
-import './button.css'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
