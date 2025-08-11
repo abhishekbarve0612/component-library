@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'path'
 
 // https://vite.dev/config/
 import path from 'node:path'
@@ -11,8 +12,46 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const isLibMode = mode === 'lib'
+  
+  return {
   plugins: [react(), tailwindcss()],
+
+  ...(isLibMode && {
+    build: {
+      lib: {
+        entry: resolve(dirname, 'src/index.ts'),
+        name: 'ComponentLib',
+        formats: ['es'],
+        fileName: 'index',
+      },
+      rollupOptions: {
+        external: [
+          'react',
+          'react-dom',
+          'react/jsx-runtime',
+          '@gsap/react',
+          'gsap',
+          'react-icons',
+          'react-icons/fa',
+          'react-icons/hi',
+          'react-icons/md',
+          'react-icons/ri',
+          'react-icons/tb',
+        ],
+        output: {
+          globals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            'react/jsx-runtime': 'jsxRuntime',
+          },
+        },
+      },
+      cssCodeSplit: false,
+      sourcemap: true,
+    },
+  }),
 
   resolve: {
     alias: {
@@ -52,4 +91,5 @@ export default defineConfig({
       },
     ],
   },
+  }
 })
