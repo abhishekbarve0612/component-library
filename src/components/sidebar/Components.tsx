@@ -8,8 +8,8 @@ interface SidebarHeaderProps {
 
 function SidebarHeader({ children, id = 'sidebar-title' }: SidebarHeaderProps) {
   return (
-    <div className="border-b border-slate-200 px-6 py-4 dark:border-slate-700">
-      <div id={id} className="text-lg font-bold text-slate-900 dark:text-slate-100">
+    <div className="border-b border-border px-6 py-4">
+      <div id={id} className="text-lg font-bold text-foreground">
         {children}
       </div>
     </div>
@@ -32,7 +32,7 @@ function SidebarBody({ children, id = 'sidebar-description' }: SidebarBodyProps)
 }
 
 function SidebarFooter({ children }: { children: ReactNode }) {
-  return <div className="border-t border-slate-200 px-4 py-4 dark:border-slate-700">{children}</div>
+  return <div className="border-t border-border px-4 py-4">{children}</div>
 }
 
 interface SidebarOverlayProps {
@@ -48,8 +48,7 @@ function SidebarOverlay({ className, onClose, open, overlayRef }: SidebarOverlay
       ref={overlayRef}
       onClick={onClose}
       className={cn(
-        'fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm',
-        'dark:bg-slate-950/50',
+        'fixed inset-0 z-40 bg-background/80 backdrop-blur-sm',
         open ? 'opacity-100' : 'pointer-events-none opacity-0',
         className
       )}

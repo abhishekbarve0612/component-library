@@ -6,7 +6,7 @@ function NavbarBrand({ className, children, ...props }: React.HTMLAttributes<HTM
     <div
       className={cn(
         'flex items-center text-lg font-bold',
-        'text-slate-900 dark:text-slate-100',
+        'text-foreground',
         'px-6 py-3',
         className
       )}
