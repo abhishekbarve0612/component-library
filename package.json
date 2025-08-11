@@ -1,5 +1,5 @@
 {
-  "name": "@abhishek/component-lib",
+  "name": "@abhishek/components",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -34,8 +34,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
-    "build:lib": "vite build --mode lib",
+    "build": "tsc -b && vite build",
+    "build:lib": "vite build --mode lib && tsc --project tsconfig.lib.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
