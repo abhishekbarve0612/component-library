@@ -63,7 +63,7 @@ function Toolbar({
             }
             newIndex = focusedIndex - 1
           } else {
-            // Tab: Next item, or leave toolbar if on last item  
+            // Tab: Next item, or leave toolbar if on last item
             if (focusedIndex === itemCount - 1) {
               // Let it naturally leave the toolbar
               return
@@ -145,7 +145,7 @@ function Toolbar({
               // Call parent onChange if provided (optional)
               onChange?.(id)
             },
-          })
+          } as ToolbarItemProps)
         })}
       </div>
     </ToolbarContext.Provider>

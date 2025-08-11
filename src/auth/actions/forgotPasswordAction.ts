@@ -7,7 +7,7 @@ import type { ForgotPasswordActionState, ForgotPasswordResponse } from '../types
  * @param endpoint - API endpoint for forgot password (defaults to '/api/auth/forgot-password')
  */
 async function forgotPasswordAction(
-  prevState: ForgotPasswordActionState,
+  _prevState: ForgotPasswordActionState,
   formData: FormData,
   endpoint: string = '/api/auth/forgot-password'
 ): Promise<ForgotPasswordActionState> {

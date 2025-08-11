@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
 import Loader from './index'
+import type { LoaderProps } from './types'
 
 const meta = {
   title: 'Components/Loader',
@@ -62,23 +63,23 @@ export const Variants: Story = {
     <div className="grid grid-cols-5 gap-8 p-8">
       <div className="flex flex-col items-center gap-2">
         <Loader variant="spinner" />
-        <span className="text-sm text-muted-foreground">Spinner</span>
+        <span className="text-muted-foreground text-sm">Spinner</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader variant="dots" />
-        <span className="text-sm text-muted-foreground">Dots</span>
+        <span className="text-muted-foreground text-sm">Dots</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader variant="bars" />
-        <span className="text-sm text-muted-foreground">Bars</span>
+        <span className="text-muted-foreground text-sm">Bars</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader variant="pulse" />
-        <span className="text-sm text-muted-foreground">Pulse</span>
+        <span className="text-muted-foreground text-sm">Pulse</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader variant="ripple" />
-        <span className="text-sm text-muted-foreground">Ripple</span>
+        <span className="text-muted-foreground text-sm">Ripple</span>
       </div>
     </div>
   ),
@@ -89,23 +90,23 @@ export const Sizes: Story = {
     <div className="grid grid-cols-5 gap-8 p-8">
       <div className="flex flex-col items-center gap-2">
         <Loader size="xs" />
-        <span className="text-sm text-muted-foreground">XS</span>
+        <span className="text-muted-foreground text-sm">XS</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader size="sm" />
-        <span className="text-sm text-muted-foreground">SM</span>
+        <span className="text-muted-foreground text-sm">SM</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader size="md" />
-        <span className="text-sm text-muted-foreground">MD</span>
+        <span className="text-muted-foreground text-sm">MD</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader size="lg" />
-        <span className="text-sm text-muted-foreground">LG</span>
+        <span className="text-muted-foreground text-sm">LG</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader size="xl" />
-        <span className="text-sm text-muted-foreground">XL</span>
+        <span className="text-muted-foreground text-sm">XL</span>
       </div>
     </div>
   ),
@@ -116,19 +117,19 @@ export const Colors: Story = {
     <div className="grid grid-cols-4 gap-8 p-8">
       <div className="flex flex-col items-center gap-2">
         <Loader color="primary" />
-        <span className="text-sm text-muted-foreground">Primary</span>
+        <span className="text-muted-foreground text-sm">Primary</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader color="secondary" />
-        <span className="text-sm text-muted-foreground">Secondary</span>
+        <span className="text-muted-foreground text-sm">Secondary</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader color="muted" />
-        <span className="text-sm text-muted-foreground">Muted</span>
+        <span className="text-muted-foreground text-sm">Muted</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Loader color="accent" />
-        <span className="text-sm text-muted-foreground">Accent</span>
+        <span className="text-muted-foreground text-sm">Accent</span>
       </div>
     </div>
   ),
@@ -138,7 +139,7 @@ export const WithChildren: Story = {
   args: {
     loading: false,
   },
-  render: (args) => (
+  render: (args: LoaderProps) => (
     <div className="space-y-4">
       <div>
         <label className="flex items-center gap-2">
@@ -154,8 +155,8 @@ export const WithChildren: Story = {
         </label>
       </div>
       <Loader {...args}>
-        <div className="p-8 border rounded-lg">
-          <h3 className="text-lg font-semibold mb-4">Content</h3>
+        <div className="rounded-lg border p-8">
+          <h3 className="mb-4 text-lg font-semibold">Content</h3>
           <p className="text-muted-foreground">
             This content is shown when loading is false, and hidden when loading is true.
           </p>
@@ -172,22 +173,20 @@ export const OverlayExample: Story = {
   },
   render: (args) => (
     <div className="relative">
-      <div className="p-8 bg-card rounded-lg">
-        <h3 className="text-lg font-semibold mb-4">Page Content</h3>
+      <div className="bg-card rounded-lg p-8">
+        <h3 className="mb-4 text-lg font-semibold">Page Content</h3>
         <p className="text-muted-foreground mb-4">
           This is the main page content that gets overlaid when loading.
         </p>
-        <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md">
-          Button
-        </button>
+        <button className="bg-primary text-primary-foreground rounded-md px-4 py-2">Button</button>
       </div>
       <Loader {...args}>
-        <div className="p-8 bg-card rounded-lg">
-          <h3 className="text-lg font-semibold mb-4">Page Content</h3>
+        <div className="bg-card rounded-lg p-8">
+          <h3 className="mb-4 text-lg font-semibold">Page Content</h3>
           <p className="text-muted-foreground mb-4">
             This is the main page content that gets overlaid when loading.
           </p>
-          <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md">
+          <button className="bg-primary text-primary-foreground rounded-md px-4 py-2">
             Button
           </button>
         </div>
@@ -200,20 +199,20 @@ export const Interactive: Story = {
   render: () => {
     const [loading, setLoading] = React.useState(false)
     const [variant, setVariant] = React.useState('spinner')
-    
+
     return (
       <div className="space-y-6 p-6">
         <div className="flex gap-4">
           <button
             onClick={() => setLoading(!loading)}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+            className="bg-primary text-primary-foreground rounded-md px-4 py-2"
           >
             {loading ? 'Stop Loading' : 'Start Loading'}
           </button>
           <select
             value={variant}
             onChange={(e) => setVariant(e.target.value)}
-            className="px-3 py-2 border rounded-md"
+            className="rounded-md border px-3 py-2"
           >
             <option value="spinner">Spinner</option>
             <option value="dots">Dots</option>
@@ -222,9 +221,13 @@ export const Interactive: Story = {
             <option value="ripple">Ripple</option>
           </select>
         </div>
-        
-        <div className="min-h-[200px] flex items-center justify-center border-2 border-dashed border-border rounded-lg">
-          <Loader loading={loading} variant={variant as any} text="Loading content..." />
+
+        <div className="border-border flex min-h-[200px] items-center justify-center rounded-lg border-2 border-dashed">
+          <Loader
+            loading={loading}
+            variant={variant as LoaderProps['variant']}
+            text="Loading content..."
+          />
         </div>
       </div>
     )

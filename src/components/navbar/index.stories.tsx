@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A clean, spacious horizontal navigation component with mobile responsiveness. Uses composition pattern for maximum flexibility.'
+          'A clean, spacious horizontal navigation component with mobile responsiveness. Uses composition pattern for maximum flexibility.',
       },
     },
   },
@@ -47,7 +47,16 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Mock Link component for examples
-function MockLink({ href, children, className, ...props }: any) {
+function MockLink({
+  href,
+  children,
+  className,
+  ...props
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
   return (
     <a
       href={href}
@@ -170,7 +179,6 @@ export const Responsive: Story = {
     await expect(brand).toBeInTheDocument()
   },
 }
-
 
 // Different alignment options
 export const AlignmentOptions: Story = {
@@ -376,13 +384,27 @@ export const Interactive: Story = {
           <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800">
             <h2 className="mb-4 text-xl font-semibold">Simple & Flexible Features:</h2>
             <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-              <li>✅ <strong>Composition pattern</strong> - wrap any component in Navbar.Item</li>
-              <li>✅ <strong>Responsive design</strong> with clean mobile hamburger menu</li>
-              <li>✅ <strong>Generous spacing</strong> for modern, breathable design</li>
-              <li>✅ <strong>Accessibility first</strong> with proper ARIA attributes</li>
-              <li>✅ <strong>Dark mode support</strong> throughout</li>
-              <li>✅ <strong>Smooth animations</strong> powered by GSAP</li>
-              <li>✅ <strong>Framework agnostic</strong> - works with any routing solution</li>
+              <li>
+                ✅ <strong>Composition pattern</strong> - wrap any component in Navbar.Item
+              </li>
+              <li>
+                ✅ <strong>Responsive design</strong> with clean mobile hamburger menu
+              </li>
+              <li>
+                ✅ <strong>Generous spacing</strong> for modern, breathable design
+              </li>
+              <li>
+                ✅ <strong>Accessibility first</strong> with proper ARIA attributes
+              </li>
+              <li>
+                ✅ <strong>Dark mode support</strong> throughout
+              </li>
+              <li>
+                ✅ <strong>Smooth animations</strong> powered by GSAP
+              </li>
+              <li>
+                ✅ <strong>Framework agnostic</strong> - works with any routing solution
+              </li>
             </ul>
           </div>
         </div>

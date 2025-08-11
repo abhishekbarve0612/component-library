@@ -21,7 +21,11 @@ function Checkbox({ checked, onCheckedChange, className = '', ...props }: Checkb
 
   return (
     <button
-      className={clsx(styles.checkbox, checked && styles.checkboxChecked, className)}
+      className={cn(
+        'relative inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded-md border border-slate-300 bg-white transition-all duration-200 outline-none',
+        checked && 'bg-primary border-primary',
+        className
+      )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       type="button"
@@ -33,10 +37,10 @@ function Checkbox({ checked, onCheckedChange, className = '', ...props }: Checkb
         type="checkbox"
         checked={checked}
         onChange={() => {}}
-        className={styles.checkboxInput}
+        className="hidden"
         tabIndex={-1}
       />
-      <FaCheck className={styles.checkboxIcon} />
+      <FaCheck className="h-3 w-3 text-white opacity-0 transition-opacity duration-200" />
     </button>
   )
 }

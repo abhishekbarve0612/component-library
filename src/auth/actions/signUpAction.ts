@@ -8,7 +8,7 @@ import type { SignUpActionState, SignUpResponse } from '../types/auth.types'
  * @param endpoint - API endpoint for sign-up (defaults to '/api/auth/signup')
  */
 async function signUpAction(
-  prevState: SignUpActionState,
+  _prevState: SignUpActionState,
   formData: FormData,
   endpoint: string = '/api/auth/signup'
 ): Promise<SignUpActionState> {

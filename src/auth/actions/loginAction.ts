@@ -8,7 +8,7 @@ import type { LoginActionState, LoginResponse } from '../types/auth.types'
  * @param endpoint - API endpoint for login (defaults to '/api/auth/login')
  */
 async function loginAction(
-  prevState: LoginActionState,
+  _prevState: LoginActionState,
   formData: FormData,
   endpoint: string = '/api/auth/login'
 ): Promise<LoginActionState> {

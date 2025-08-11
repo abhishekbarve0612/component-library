@@ -16,7 +16,7 @@ interface RichTextareaProps {
   'aria-describedby'?: string
 }
 
-function RichTextarea({ 
+function RichTextarea({
   className,
   initialValue = '',
   placeholder = 'Enter your text...',
@@ -38,7 +38,7 @@ function RichTextarea({
       if (editorRef.current && !editorRef.current.contains(document.activeElement)) {
         editorRef.current.focus()
       }
-      
+
       return document.execCommand(command, false, value)
     } catch (error) {
       console.warn('RichTextArea: execCommand failed:', command, error)
@@ -47,15 +47,18 @@ function RichTextarea({
   }, [])
 
   // Apply formatting using execCommand (more reliable than DOM manipulation)
-  const applyFormat = useCallback((format: Format) => {
-    if (disabled) return
-    
-    const command = COMMANDS[format]
-    if (command) {
-      executeCommand(command)
-      updateActiveFormats()
-    }
-  }, [disabled, executeCommand])
+  const applyFormat = useCallback(
+    (format: Format) => {
+      if (disabled) return
+
+      const command = COMMANDS[format]
+      if (command) {
+        executeCommand(command)
+        updateActiveFormats()
+      }
+    },
+    [disabled, executeCommand]
+  )
 
   // Update active formats based on current selection
   const updateActiveFormats = useCallback(() => {
@@ -63,12 +66,12 @@ function RichTextarea({
 
     try {
       const formats: Format[] = []
-      
+
       // Use queryCommandState for reliable state detection
       if (document.queryCommandState('bold')) formats.push('bold')
       if (document.queryCommandState('italic')) formats.push('italic')
       if (document.queryCommandState('underline')) formats.push('underline')
-      
+
       setActiveFormats(formats)
     } catch (error) {
       console.warn('RichTextArea: queryCommandState failed:', error)
@@ -76,35 +79,38 @@ function RichTextarea({
   }, [disabled])
 
   // Handle keyboard shortcuts
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (disabled) return
-    
-    // Handle Ctrl/Cmd + key shortcuts
-    if (e.ctrlKey || e.metaKey) {
-      const shortcut = SHORTCUTS[e.key.toLowerCase()]
-      if (shortcut) {
-        e.preventDefault()
-        applyFormat(shortcut)
-        return
-      }
-    }
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (disabled) return
 
-    // Handle other shortcuts
-    switch (e.key) {
-      case 'Tab':
-        // Allow tab to exit editor (accessibility)
-        break
-      case 'Escape':
-        // Blur editor on escape
-        editorRef.current?.blur()
-        break
-    }
-  }, [disabled, applyFormat])
+      // Handle Ctrl/Cmd + key shortcuts
+      if (e.ctrlKey || e.metaKey) {
+        const shortcut = SHORTCUTS[e.key.toLowerCase()]
+        if (shortcut) {
+          e.preventDefault()
+          applyFormat(shortcut)
+          return
+        }
+      }
+
+      // Handle other shortcuts
+      switch (e.key) {
+        case 'Tab':
+          // Allow tab to exit editor (accessibility)
+          break
+        case 'Escape':
+          // Blur editor on escape
+          editorRef.current?.blur()
+          break
+      }
+    },
+    [disabled, applyFormat]
+  )
 
   // Handle input changes
   const handleInput = useCallback(() => {
     if (disabled || !editorRef.current) return
-    
+
     const content = editorRef.current.innerHTML
     onChange?.(content)
     updateActiveFormats()
@@ -145,14 +151,11 @@ function RichTextarea({
     }
   }, [initialValue])
 
-  // Determine if format is active for toolbar
-  const isFormatActive = (format: Format) => activeFormats.includes(format)
-
   return (
     <div className={cn('space-y-2', className)}>
       {/* Toolbar */}
-      <Toolbar 
-        variant="compact" 
+      <Toolbar
+        variant="compact"
         className="border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800"
         activeItems={activeFormats}
       >
@@ -196,27 +199,27 @@ function RichTextarea({
         className={cn(
           // Base styles
           'min-h-[120px] w-full rounded-md border px-3 py-2 text-sm',
-          'resize-none outline-none transition-colors',
-          
+          'resize-none transition-colors outline-none',
+
           // Border and background
           'border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900',
-          
+
           // Focus states
           'focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2',
-          
+
           // Disabled states
           disabled && 'cursor-not-allowed opacity-50',
-          
+
           // Placeholder styles
-          'empty:before:content-[attr(data-placeholder)] empty:before:text-slate-500',
+          'empty:before:text-slate-500 empty:before:content-[attr(data-placeholder)]',
           'empty:before:pointer-events-none empty:before:float-left empty:before:h-0',
-          
+
           // Content styles
-          '[&_strong]:font-bold [&_em]:italic [&_u]:underline',
-          '[&_s]:line-through [&_code]:font-mono [&_code]:bg-slate-100',
+          '[&_em]:italic [&_strong]:font-bold [&_u]:underline',
+          '[&_code]:bg-slate-100 [&_code]:font-mono [&_s]:line-through',
           '[&_blockquote]:border-l-4 [&_blockquote]:border-slate-300 [&_blockquote]:pl-4',
-          '[&_pre]:bg-slate-100 [&_pre]:p-2 [&_pre]:rounded [&_pre]:font-mono',
-          '[&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside'
+          '[&_pre]:rounded [&_pre]:bg-slate-100 [&_pre]:p-2 [&_pre]:font-mono',
+          '[&_ol]:list-inside [&_ol]:list-decimal [&_ul]:list-inside [&_ul]:list-disc'
         )}
         style={{
           // Ensure proper line height and spacing
@@ -224,7 +227,7 @@ function RichTextarea({
           wordBreak: 'break-word',
         }}
       />
-      
+
       {/* Accessibility improvements */}
       <div className="sr-only" aria-live="polite">
         {activeFormats.length > 0 && `Active formatting: ${activeFormats.join(', ')}`}

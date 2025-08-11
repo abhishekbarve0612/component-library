@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import SignUp from '../sign-up/index'
+import type { User } from '../types/auth.types'
+import { userMockAction } from './utils'
 
 const meta = {
   title: 'Auth/SignUp',
@@ -21,14 +23,18 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => {
     const [formState, setFormState] = useState({ loading: false, error: null, success: false })
-    
-    const handleSuccess = (user: any) => {
+
+    const handleSuccess = (user: User) => {
       console.log('Sign up successful:', user)
       setFormState({ loading: false, error: null, success: true })
     }
-    
+
     const handleSubmit = async () => {
       setFormState({ loading: true, error: null, success: false })
       // Simulate API call
@@ -57,7 +63,7 @@ export const Default: Story = {
 
           {formState.error && <SignUp.Error error={formState.error} />}
           {formState.success && (
-            <div className="p-3 text-sm text-green-700 bg-green-100 border border-green-200 rounded-md">
+            <div className="rounded-md border border-green-200 bg-green-100 p-3 text-sm text-green-700">
               Account created successfully!
             </div>
           )}
@@ -79,6 +85,10 @@ export const Default: Story = {
 }
 
 export const WithCustomFields: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => (
     <div className="w-full max-w-md space-y-6">
       <div className="text-center">
@@ -112,6 +122,10 @@ export const WithCustomFields: Story = {
 }
 
 export const MinimalForm: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => (
     <div className="w-full max-w-sm space-y-4">
       <SignUp.Form className="space-y-4">
@@ -128,6 +142,10 @@ export const MinimalForm: Story = {
 }
 
 export const CompactLayout: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => (
     <div className="w-full max-w-sm space-y-4">
       <div className="text-center">
@@ -157,6 +175,10 @@ export const CompactLayout: Story = {
 }
 
 export const WithCustomEndpoint: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => (
     <div className="w-full max-w-md space-y-6">
       <div className="text-center">
@@ -179,6 +201,10 @@ export const WithCustomEndpoint: Story = {
 }
 
 export const AllFieldTypes: Story = {
+  args: {
+    onSuccess: userMockAction('Sign up successful'),
+    children: undefined,
+  },
   render: () => (
     <div className="w-full max-w-lg space-y-6">
       <div className="text-center">

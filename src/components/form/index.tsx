@@ -19,7 +19,7 @@ export interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   errors?: {
     message: string
   }[]
-  action?: (formData: FormData) => any
+  action?: (formData: FormData) => void
 }
 
 function Form({ children, label, description, errors, ...props }: FormProps) {

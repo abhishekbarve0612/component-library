@@ -7,7 +7,7 @@ import type { ResetPasswordActionState, ResetPasswordResponse } from '../types/a
  * @param endpoint - API endpoint for reset password (defaults to '/api/auth/reset-password')
  */
 async function resetPasswordAction(
-  prevState: ResetPasswordActionState,
+  _prevState: ResetPasswordActionState,
   formData: FormData,
   endpoint: string = '/api/auth/reset-password'
 ): Promise<ResetPasswordActionState> {

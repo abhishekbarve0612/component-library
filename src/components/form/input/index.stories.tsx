@@ -5,13 +5,33 @@ import Input from './index'
 import { FaSearch, FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { IoMdClose, IoMdMail } from 'react-icons/io'
 
+// Interface for Interactive story args
+interface InteractiveStoryArgs {
+  id?: string
+  className?: string
+  label: string
+  placeholder: string
+  type: 'text' | 'email' | 'password' | 'tel' | 'url' | 'search'
+  required: boolean
+  disabled: boolean
+  showLeftIcon: boolean
+  showRightIcon: boolean
+  leftIconType: 'search' | 'user' | 'mail' | 'lock'
+  rightIconType: 'close' | 'eye' | 'eye-slash'
+  showDescription: boolean
+  description: string
+  showError: boolean
+  errorMessage: string
+}
+
 const meta = {
   title: 'Components/Form/Input',
   component: Input,
   parameters: {
     docs: {
       description: {
-        component: 'A flexible compound input component with support for labels, icons, descriptions, and error states.',
+        component:
+          'A flexible compound input component with support for labels, icons, descriptions, and error states.',
       },
     },
   },
@@ -32,7 +52,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Interactive story with full controls
-export const Interactive: Story = {
+export const Interactive: StoryObj<InteractiveStoryArgs> = {
   argTypes: {
     label: {
       control: 'text',
@@ -107,23 +127,32 @@ export const Interactive: Story = {
       if: { arg: 'showError', truthy: true },
     },
   },
-  render: (args) => {
+  render: (args: InteractiveStoryArgs) => {
     const getLeftIcon = () => {
       switch (args.leftIconType) {
-        case 'search': return <FaSearch />
-        case 'user': return <FaUser />
-        case 'mail': return <IoMdMail />
-        case 'lock': return <FaLock />
-        default: return <FaSearch />
+        case 'search':
+          return <FaSearch />
+        case 'user':
+          return <FaUser />
+        case 'mail':
+          return <IoMdMail />
+        case 'lock':
+          return <FaLock />
+        default:
+          return <FaSearch />
       }
     }
 
     const getRightIcon = () => {
       switch (args.rightIconType) {
-        case 'close': return <IoMdClose />
-        case 'eye': return <FaEye />
-        case 'eye-slash': return <FaEyeSlash />
-        default: return <IoMdClose />
+        case 'close':
+          return <IoMdClose />
+        case 'eye':
+          return <FaEye />
+        case 'eye-slash':
+          return <FaEyeSlash />
+        default:
+          return <IoMdClose />
       }
     }
 
@@ -131,11 +160,7 @@ export const Interactive: Story = {
       <Input className={args.className} id={args.id}>
         <Input.Label>{args.label}</Input.Label>
         <Input.Group>
-          {args.showLeftIcon && (
-            <Input.Icon position="left">
-              {getLeftIcon()}
-            </Input.Icon>
-          )}
+          {args.showLeftIcon && <Input.Icon>{getLeftIcon()}</Input.Icon>}
           <Input.Field
             type={args.type}
             name="interactive-input"
@@ -143,18 +168,10 @@ export const Interactive: Story = {
             required={args.required}
             disabled={args.disabled}
           />
-          {args.showRightIcon && (
-            <Input.Icon position="right">
-              {getRightIcon()}
-            </Input.Icon>
-          )}
+          {args.showRightIcon && <Input.Icon>{getRightIcon()}</Input.Icon>}
         </Input.Group>
-        {args.showDescription && (
-          <Input.Description>{args.description}</Input.Description>
-        )}
-        {args.showError && (
-          <Input.Error>{args.errorMessage}</Input.Error>
-        )}
+        {args.showDescription && <Input.Description>{args.description}</Input.Description>}
+        {args.showError && <Input.Error>{args.errorMessage}</Input.Error>}
       </Input>
     )
   },
@@ -184,7 +201,8 @@ export const WithLeftIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Input with a search icon on the left. Icons before the field are automatically positioned left.',
+        story:
+          'Input with a search icon on the left. Icons before the field are automatically positioned left.',
       },
     },
   },
@@ -217,7 +235,7 @@ export const WithRightIcon: Story = {
         <Input.Label>Search</Input.Label>
         <Input.Group>
           <Input.Field type="search" name="search" placeholder="Search..." />
-          <Input.Icon position="right">
+          <Input.Icon>
             <IoMdClose />
           </Input.Icon>
         </Input.Group>
@@ -230,7 +248,8 @@ export const WithBothIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Input with multiple icons on both sides. Great for search inputs with clear functionality.',
+        story:
+          'Input with multiple icons on both sides. Great for search inputs with clear functionality.',
       },
     },
   },
@@ -239,11 +258,11 @@ export const WithBothIcons: Story = {
       <>
         <Input.Label>Advanced Search</Input.Label>
         <Input.Group>
-          <Input.Icon position="left">
+          <Input.Icon>
             <FaSearch />
           </Input.Icon>
           <Input.Field type="search" name="search" placeholder="Search with filters..." />
-          <Input.Icon position="right">
+          <Input.Icon>
             <IoMdClose />
           </Input.Icon>
         </Input.Group>
@@ -269,12 +288,7 @@ export const EmailWithValidation: Story = {
           <Input.Icon>
             <IoMdMail />
           </Input.Icon>
-          <Input.Field 
-            type="email" 
-            name="email" 
-            required 
-            placeholder="you@example.com"
-          />
+          <Input.Field type="email" name="email" required placeholder="you@example.com" />
         </Input.Group>
         <Input.Description>
           We'll use this email to send you updates about your account.
@@ -294,7 +308,7 @@ export const PasswordInput: Story = {
   },
   render: () => {
     const [showPassword, setShowPassword] = React.useState(false)
-    
+
     return (
       <Input>
         <Input.Label>Password</Input.Label>
@@ -308,13 +322,11 @@ export const PasswordInput: Story = {
             required
             placeholder="Enter your password"
           />
-          <Input.Icon position="right" onClick={() => setShowPassword(!showPassword)}>
+          <Input.Icon onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </Input.Icon>
         </Input.Group>
-        <Input.Description>
-          Must be at least 8 characters long.
-        </Input.Description>
+        <Input.Description>Must be at least 8 characters long.</Input.Description>
       </Input>
     )
   },
@@ -344,9 +356,7 @@ export const DisabledState: Story = {
             placeholder="Username"
           />
         </Input.Group>
-        <Input.Description>
-          Username cannot be changed once set.
-        </Input.Description>
+        <Input.Description>Username cannot be changed once set.</Input.Description>
       </>
     ),
   },

@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { mockAction } from './utils'
 
-const mockAction = (label: string) => (message: any) => {
-  console.log(`${label}:`, message)
-}
 import { within, userEvent, expect } from '@storybook/test'
 
 import ForgotPassword from '../forgot-password'
@@ -53,6 +51,7 @@ export const Default: Story = {
   ),
   args: {
     onSuccess: mockAction('Reset request successful'),
+    children: undefined,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -82,6 +81,7 @@ export const CustomStyling: Story = {
   ),
   args: {
     onSuccess: mockAction('Reset request successful'),
+    children: undefined,
   },
 }
 
@@ -91,7 +91,7 @@ export const WithRenderProps: Story = {
     <ForgotPassword.Form onSuccess={args.onSuccess}>
       {({ isPending, error, success, message }) => (
         <>
-          <ForgotPassword.Input type="email" error={error} />
+          <ForgotPassword.Input type="email" error={error || undefined} />
 
           {error && <ForgotPassword.Error>{error}</ForgotPassword.Error>}
           {success && message && <ForgotPassword.Success>{message}</ForgotPassword.Success>}
@@ -105,6 +105,7 @@ export const WithRenderProps: Story = {
   ),
   args: {
     onSuccess: mockAction('Reset request successful'),
+    children: undefined,
   },
   parameters: {
     docs: {
@@ -126,6 +127,7 @@ export const ValidationErrors: Story = {
   ),
   args: {
     onSuccess: mockAction('Reset request successful'),
+    children: undefined,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -145,6 +147,7 @@ export const Accessibility: Story = {
   ),
   args: {
     onSuccess: mockAction('Reset request successful'),
+    children: undefined,
   },
   parameters: {
     docs: {

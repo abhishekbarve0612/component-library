@@ -6,7 +6,7 @@ import Modal from './index'
 import ModalProvider from './ModalProvider'
 import { useModalManager } from './context'
 import Button from '../button'
-import { FaExclamationTriangle, FaCheck, FaInfo } from 'react-icons/fa'
+import { FaExclamationTriangle, FaInfo } from 'react-icons/fa'
 
 const meta = {
   title: 'Components/Modal',
@@ -70,7 +70,7 @@ function StoryModalWrapper({
   children: React.ReactNode
   modalId: string
   buttonText?: string
-  [key: string]: any
+  [key: string]: unknown
 }) {
   const { openModal } = useModalManager()
 
@@ -91,6 +91,8 @@ export const Basic: Story = {
     size: 'md',
     centered: true,
     scrollable: true,
+    id: 'basic-modal',
+    children: undefined,
   },
   render: (args) => (
     <StoryModalWrapper modalId="basic-modal" {...args}>
@@ -111,6 +113,13 @@ export const Basic: Story = {
 
 // Size variants
 export const SizeVariants: Story = {
+  args: {
+    size: 'md',
+    centered: true,
+    scrollable: true,
+    id: 'size-variants-modal',
+    children: undefined,
+  },
   render: () => (
     <div className="flex gap-4">
       <StoryModalWrapper modalId="small-modal" size="sm" buttonText="Small Modal">
@@ -142,6 +151,10 @@ export const SizeVariants: Story = {
 
 // Confirmation modal
 export const ConfirmationModal: Story = {
+  args: {
+    id: 'confirmation-modal',
+    children: undefined,
+  },
   render: () => (
     <StoryModalWrapper modalId="confirm-modal">
       <Modal.Header className="pb-4">
@@ -168,6 +181,8 @@ export const ScrollableContent: Story = {
   args: {
     size: 'lg',
     scrollable: true,
+    id: 'scrollable-modal',
+    children: undefined,
   },
   render: (args) => (
     <StoryModalWrapper modalId="scrollable-modal" {...args} buttonText="Open Scrollable Modal">
@@ -195,6 +210,10 @@ export const ScrollableContent: Story = {
 
 // Form modal
 export const FormModal: Story = {
+  args: {
+    id: 'form-modal',
+    children: undefined,
+  },
   render: () => (
     <StoryModalWrapper modalId="form-modal">
       <Modal.Header withCloseButton>Create Account</Modal.Header>
@@ -248,6 +267,8 @@ export const Interactive: Story = {
     scrollable: true,
     closeOnOutsideClick: true,
     closeOnEscape: true,
+    id: 'interactive-modal',
+    children: undefined,
   },
   render: (args) => (
     <StoryModalWrapper modalId="interactive-modal" {...args}>

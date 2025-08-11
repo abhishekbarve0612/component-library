@@ -42,7 +42,16 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Mock Link component for examples
-function MockLink({ href, children, className, ...props }: any) {
+function MockLink({
+  href,
+  children,
+  className,
+  ...props
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
   return (
     <a
       href={href}
@@ -59,7 +68,13 @@ function MockLink({ href, children, className, ...props }: any) {
 }
 
 // Wrapper component for interactive stories
-function SidebarWrapper({ side = 'left', children }: { side?: 'left' | 'right'; children: React.ReactNode }) {
+function SidebarWrapper({
+  side = 'left',
+  children,
+}: {
+  side?: 'left' | 'right'
+  children: React.ReactNode
+}) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -76,12 +91,17 @@ function SidebarWrapper({ side = 'left', children }: { side?: 'left' | 'right'; 
 
       <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800">
         <p className="text-slate-600 dark:text-slate-400">
-          Click the "Open Sidebar" button to see the sidebar slide in from the {side} side. 
-          The sidebar includes focus trapping, keyboard navigation, and smooth GSAP animations.
+          Click the "Open Sidebar" button to see the sidebar slide in from the {side} side. The
+          sidebar includes focus trapping, keyboard navigation, and smooth GSAP animations.
         </p>
         <ul className="mt-4 space-y-2 text-sm text-slate-500 dark:text-slate-400">
-          <li>• Press <kbd className="rounded bg-slate-100 px-1 dark:bg-slate-700">Escape</kbd> to close</li>
-          <li>• Use <kbd className="rounded bg-slate-100 px-1 dark:bg-slate-700">Tab</kbd> to navigate</li>
+          <li>
+            • Press <kbd className="rounded bg-slate-100 px-1 dark:bg-slate-700">Escape</kbd> to
+            close
+          </li>
+          <li>
+            • Use <kbd className="rounded bg-slate-100 px-1 dark:bg-slate-700">Tab</kbd> to navigate
+          </li>
           <li>• Click overlay to close</li>
           <li>• Focus is trapped within the sidebar</li>
         </ul>
@@ -96,6 +116,12 @@ function SidebarWrapper({ side = 'left', children }: { side?: 'left' | 'right'; 
 
 // Basic sidebar story
 export const Basic: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'left',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper>
       <Sidebar.Header>Navigation</Sidebar.Header>
@@ -129,6 +155,12 @@ export const Basic: Story = {
 
 // Right side sidebar
 export const RightSide: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'right',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper side="right">
       <Sidebar.Header>Quick Actions</Sidebar.Header>
@@ -157,6 +189,12 @@ export const RightSide: Story = {
 
 // Navigation sidebar with links
 export const NavigationSidebar: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'left',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper>
       <Sidebar.Header>
@@ -195,7 +233,10 @@ export const NavigationSidebar: Story = {
       </Sidebar.Body>
       <Sidebar.Footer>
         <Sidebar.Item aria-label="Sign out of application">
-          <MockLink href="/logout" className="flex w-full items-center text-red-600 dark:text-red-400">
+          <MockLink
+            href="/logout"
+            className="flex w-full items-center text-red-600 dark:text-red-400"
+          >
             <HiLogout className="mr-3 h-4 w-4" />
             Sign Out
           </MockLink>
@@ -205,22 +246,22 @@ export const NavigationSidebar: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    
+
     // Find and click the open sidebar button
     const openButton = canvas.getByText('Open Sidebar')
     await userEvent.click(openButton)
-    
+
     // Wait for sidebar to appear
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
     // Check if sidebar is accessible
     const sidebar = canvas.getByRole('dialog')
     await expect(sidebar).toBeInTheDocument()
     await expect(sidebar).toHaveAttribute('aria-modal', 'true')
-    
+
     // Test keyboard navigation
     await userEvent.keyboard('{Tab}')
-    
+
     // Test escape key
     await userEvent.keyboard('{Escape}')
   },
@@ -228,6 +269,12 @@ export const NavigationSidebar: Story = {
 
 // Contextual sidebar with custom content
 export const ContextualSidebar: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'right',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper side="right">
       <Sidebar.Header>File Details</Sidebar.Header>
@@ -237,14 +284,10 @@ export const ContextualSidebar: Story = {
             <h4 className="mb-2 text-sm font-medium text-slate-900 dark:text-slate-100">
               Document.pdf
             </h4>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              Last modified: 2 hours ago
-            </p>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              Size: 2.4 MB
-            </p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Last modified: 2 hours ago</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Size: 2.4 MB</p>
           </div>
-          
+
           <div className="border-t border-slate-200 pt-4 dark:border-slate-700">
             <h5 className="mb-2 text-sm font-medium text-slate-900 dark:text-slate-100">
               Quick Actions
@@ -277,6 +320,12 @@ export const ContextualSidebar: Story = {
 
 // Minimal sidebar without header/footer
 export const MinimalSidebar: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'left',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper>
       <Sidebar.Body>
@@ -304,6 +353,12 @@ export const MinimalSidebar: Story = {
 
 // Interactive playground
 export const Interactive: Story = {
+  args: {
+    open: false,
+    onClose: () => {},
+    side: 'left',
+    children: undefined,
+  },
   render: () => (
     <SidebarWrapper>
       <Sidebar.Header>Interactive Demo</Sidebar.Header>
@@ -326,7 +381,7 @@ export const Interactive: Story = {
               Coming Soon
             </Sidebar.Item>
           </div>
-          
+
           <div className="border-t border-slate-200 pt-4 dark:border-slate-700">
             <h4 className="mb-2 text-sm font-medium text-slate-900 dark:text-slate-100">
               Custom Content
@@ -335,7 +390,7 @@ export const Interactive: Story = {
               <input
                 type="search"
                 placeholder="Search..."
-                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500 dark:border-slate-600 dark:bg-slate-800 dark:focus:border-slate-400"
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:focus:border-slate-400"
               />
               <Button size="sm" className="w-full">
                 Search
@@ -358,11 +413,11 @@ export const Interactive: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    
+
     // Test that the demo content is visible
     const title = canvas.getByText('Interactive Demo')
     await expect(title).toBeInTheDocument()
-    
+
     // Test button functionality
     const openButton = canvas.getByText('Open Sidebar')
     await expect(openButton).toBeInTheDocument()
