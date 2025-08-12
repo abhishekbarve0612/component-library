@@ -14,82 +14,85 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig(({ mode }) => {
   const isLibMode = mode === 'lib'
-  
+
   return {
-  plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss()],
 
-  ...(isLibMode && {
-    build: {
-      lib: {
-        entry: resolve(dirname, 'src/index.ts'),
-        name: 'ComponentLib',
-        formats: ['es'],
-        fileName: 'index',
-      },
-      rollupOptions: {
-        external: [
-          'react',
-          'react-dom',
-          'react/jsx-runtime',
-          '@gsap/react',
-          'gsap',
-          'react-icons',
-          'react-icons/fa',
-          'react-icons/hi',
-          'react-icons/md',
-          'react-icons/ri',
-          'react-icons/tb',
-        ],
-        output: {
-          globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-            'react/jsx-runtime': 'jsxRuntime',
+    ...(isLibMode && {
+      build: {
+        lib: {
+          entry: resolve(dirname, 'src/index.ts'),
+          name: 'ComponentLib',
+          formats: ['es'],
+          fileName: 'index',
+        },
+        rollupOptions: {
+          external: [
+            'react',
+            'react-dom',
+            'react/jsx-runtime',
+            'react/jsx-dev-runtime',
+            '@gsap/react',
+            'gsap',
+            'react-icons',
+            'react-icons/fa',
+            'react-icons/hi',
+            'react-icons/md',
+            'react-icons/ri',
+            'react-icons/tb',
+            /^react($|\/)/,
+            /^react-dom($|\/)/,
+          ],
+          output: {
+            globals: {
+              react: 'React',
+              'react-dom': 'ReactDOM',
+              'react/jsx-runtime': 'jsxRuntime',
+            },
           },
         },
+        cssCodeSplit: false,
+        sourcemap: true,
       },
-      cssCodeSplit: false,
-      sourcemap: true,
-    },
-  }),
+    }),
 
-  resolve: {
-    alias: {
-      '@': path.resolve(dirname, './src'),
-      '@components': path.resolve(dirname, './src/components'),
-      '@containers': path.resolve(dirname, './src/containers'),
-      '@assets': path.resolve(dirname, './src/assets'),
-      '@routes': path.resolve(dirname, './src/routes'),
-      '@style': path.resolve(dirname, './src/index.css'),
-    },
-  },
-  test: {
-    projects: [
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, '.storybook'),
-          }),
-        ],
-        test: {
-          name: 'storybook',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: 'playwright',
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
-          },
-          setupFiles: ['.storybook/vitest.setup.ts'],
-        },
+    resolve: {
+      alias: {
+        '@': path.resolve(dirname, './src'),
+        '@components': path.resolve(dirname, './src/components'),
+        '@containers': path.resolve(dirname, './src/containers'),
+        '@assets': path.resolve(dirname, './src/assets'),
+        '@routes': path.resolve(dirname, './src/routes'),
+        '@style': path.resolve(dirname, './src/index.css'),
       },
-    ],
-  },
+    },
+    test: {
+      projects: [
+        {
+          extends: true,
+          plugins: [
+            // The plugin will run tests for the stories defined in your Storybook config
+            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+            storybookTest({
+              configDir: path.join(dirname, '.storybook'),
+            }),
+          ],
+          test: {
+            name: 'storybook',
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: 'playwright',
+              instances: [
+                {
+                  browser: 'chromium',
+                },
+              ],
+            },
+            setupFiles: ['.storybook/vitest.setup.ts'],
+          },
+        },
+      ],
+    },
   }
 })
