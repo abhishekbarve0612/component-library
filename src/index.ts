@@ -64,3 +64,10 @@ export * from './helpers/interactions'
 // Styles
 import './index.css'
 import './styles/themes.css'
+
+// Layout
+export { default as Main } from './layout/Main'
+export { default as Footer } from './layout/Footer'
+export { default as Header } from './layout/Header'
+export { default as Heading } from './layout/Heading'
+export { default as Section } from './layout/Section'
