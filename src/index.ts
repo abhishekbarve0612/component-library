@@ -36,6 +36,12 @@ export * from './components/toolbar/types'
 
 export { default as Tooltip } from './components/tooltip'
 
+export { default as Switch } from './components/switch'
+export * from './components/switch/types'
+
+export { default as Accordion } from './components/accordion'
+export * from './components/accordion/types'
+
 // Auth Components
 export { default as SignIn } from './auth/sign-in'
 export { default as SignUp } from './auth/sign-up'
@@ -71,3 +77,5 @@ export { default as Footer } from './layout/Footer'
 export { default as Header } from './layout/Header'
 export { default as Heading } from './layout/Heading'
 export { default as Section } from './layout/Section'
+export { default as Tabs } from './layout/tab'
+export * from './layout/tab/types'

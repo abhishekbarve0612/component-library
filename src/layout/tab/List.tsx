@@ -1,13 +1,9 @@
 import { cn } from '@/helpers/utils'
 import { useContext } from 'react'
 import TabsContext from './context'
-import type { HTMLAttributes } from 'react'
+import type { TabListProps } from './types'
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
-}
-
-function List({ children, className = '', ...props }: Props) {
+function List({ children, className = '', ...props }: TabListProps) {
   const context = useContext(TabsContext)
   if (!context) throw new Error('Tabs.List must be used within Tabs')
 

@@ -1,12 +1,7 @@
-import { useContext, type ButtonHTMLAttributes } from 'react'
+import { useContext } from 'react'
 import TabsContext from './context'
 import { cn } from '@/helpers/utils'
-
-interface TabTriggerProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
-  value: string
-  children: React.ReactNode
-  className?: string
-}
+import type { TabTriggerProps } from './types'
 
 function TabTrigger({
   value,

@@ -1,18 +1,9 @@
-import { useState, useId, useCallback, type HTMLAttributes } from 'react'
+import { useState, useId, useCallback } from 'react'
 import TabsContext from './context'
 import List from './List'
 import Trigger from './Trigger'
 import Content from './Content'
-
-interface TabsProps extends HTMLAttributes<HTMLDivElement> {
-  defaultValue?: string
-  value?: string
-  onValueChange?: (value: string) => void
-  orientation?: 'horizontal' | 'vertical'
-  size?: 'sm' | 'md' | 'lg'
-  children: React.ReactNode
-  className?: string
-}
+import type { TabsProps } from './types'
 
 function Tabs({
   defaultValue,
