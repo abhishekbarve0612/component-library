@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { cn } from '@/helpers/utils'
 import { useContext } from 'react'
@@ -23,10 +24,8 @@ const Divider: React.FC<ToolbarDividerProps> = ({ className }) => {
       role="separator"
       aria-orientation={orientation}
       className={cn(
-        'bg-slate-300 dark:bg-slate-700 flex-shrink-0',
-        orientation === 'horizontal' 
-          ? 'w-px h-6 mx-1' 
-          : 'h-px w-full my-1',
+        'flex-shrink-0 bg-slate-300 dark:bg-slate-700',
+        orientation === 'horizontal' ? 'mx-1 h-6 w-px' : 'my-1 h-px w-full',
         className
       )}
     />

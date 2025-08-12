@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useGSAP } from '@gsap/react'
@@ -44,7 +45,11 @@ export function Tooltip({
   const [visible, setVisible] = useState(false)
   const [coords, setCoords] = useState<{ top: number; left: number }>({ top: -9999, left: -9999 })
   const [actualPlacement, setActualPlacement] = useState<Placement>(placement)
-  const [arrowPosition, setArrowPosition] = useState<{ top?: number; left?: number; transform?: string }>({})
+  const [arrowPosition, setArrowPosition] = useState<{
+    top?: number
+    left?: number
+    transform?: string
+  }>({})
   const tooltipRef = useRef<HTMLDivElement>(null)
   const showTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -57,7 +62,7 @@ export function Tooltip({
     if (isAnimating.current) return
     if (showTimer.current) clearTimeout(showTimer.current)
     if (hideTimer.current) clearTimeout(hideTimer.current)
-    
+
     showTimer.current = setTimeout(() => {
       setVisible(true)
     }, delay)
@@ -67,7 +72,7 @@ export function Tooltip({
     if (isAnimating.current) return
     if (showTimer.current) clearTimeout(showTimer.current)
     if (hideTimer.current) clearTimeout(hideTimer.current)
-    
+
     if (interactive) {
       hideTimer.current = setTimeout(() => setVisible(false), 300)
     } else {
@@ -164,7 +169,7 @@ export function Tooltip({
       el?.removeAttribute('aria-describedby')
       if (showTimer.current) clearTimeout(showTimer.current)
       if (hideTimer.current) clearTimeout(hideTimer.current)
-      
+
       // Remove event listeners
       if (trigger === 'hover') {
         el.removeEventListener('mouseenter', handleMouseEnter)
@@ -178,7 +183,7 @@ export function Tooltip({
         el.removeEventListener('focus', handleFocus)
         el.removeEventListener('blur', handleBlur)
       }
-      
+
       el.removeEventListener('keydown', handleKeyDown)
     }
   }, [id, targetRef, trigger, toggleTooltip, showTooltip, hideTooltip])
@@ -189,13 +194,13 @@ export function Tooltip({
 
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as Node
-      
+
       // Don't close if clicking on trigger element
       if (triggerEl.current?.contains(target)) return
-      
+
       // Don't close if clicking inside tooltip content
       if (tooltipRef.current?.contains(target)) return
-      
+
       setVisible(false)
     }
 
@@ -212,29 +217,27 @@ export function Tooltip({
 
   const positionTooltip = () => {
     if (!triggerEl.current || !tooltipRef.current) return
-    
+
     const triggerRect = triggerEl.current.getBoundingClientRect()
     const tooltipRect = tooltipRef.current.getBoundingClientRect()
-    
+
     const position = calculateTooltipPosition({
       triggerRect,
       tooltipRect,
       placement,
       offset,
-      arrowSize: showArrow ? 8 : 0
+      arrowSize: showArrow ? 8 : 0,
     })
-    
+
     setCoords({ top: position.top, left: position.left })
     setActualPlacement(position.actualPlacement)
-    
+
     // Calculate arrow position if needed
     if (showArrow) {
-      const arrowPos = calculateArrowPosition(
-        position.actualPlacement,
-        triggerRect,
-        tooltipRect,
-        { top: position.top, left: position.left }
-      )
+      const arrowPos = calculateArrowPosition(position.actualPlacement, triggerRect, tooltipRect, {
+        top: position.top,
+        left: position.left,
+      })
       setArrowPosition(arrowPos)
     }
   }
@@ -249,7 +252,7 @@ export function Tooltip({
   // GSAP animations
   useGSAP(() => {
     if (!tooltipRef.current) return
-    
+
     if (visible) {
       isAnimating.current = true
       showTooltipAnimation(tooltipRef.current, actualPlacement)
@@ -290,38 +293,33 @@ export function Tooltip({
           tooltipInteractions.ref.current = node
         }}
         id={tooltipId.current}
-        role='tooltip'
-        aria-live='polite'
+        role="tooltip"
+        aria-live="polite"
         style={{
           position: 'fixed',
           top: coords.top,
           left: coords.left,
           zIndex: 9999,
-          pointerEvents: (interactive || showCloseButton) ? 'auto' : 'none',
+          pointerEvents: interactive || showCloseButton ? 'auto' : 'none',
           opacity: coords.top === -9999 ? 0 : 1,
         }}
         className={className}
       >
-        <div className='relative'>
+        <div className="relative">
           {showCloseButton && (
             <button
               ref={closeButtonInteractions.ref as React.RefObject<HTMLButtonElement>}
-              type='button' 
-              className='absolute -top-1 -right-1 h-6 w-6 p-0 rounded-full bg-white hover:bg-gray-100 shadow-md border border-gray-200 z-20 flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500' 
-              aria-label='Close tooltip'
+              type="button"
+              className="absolute -top-1 -right-1 z-20 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white p-0 shadow-md hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              aria-label="Close tooltip"
               tabIndex={0}
             >
-              <IoClose className='h-3 w-3 text-gray-600' />
+              <IoClose className="h-3 w-3 text-gray-600" />
             </button>
           )}
           {children}
         </div>
-        {showArrow && (
-          <TooltipArrow
-            style={arrowPosition}
-            className='text-white'
-          />
-        )}
+        {showArrow && <TooltipArrow style={arrowPosition} className="text-white" />}
       </div>
     </TooltipContext.Provider>,
     document.body
@@ -331,14 +329,14 @@ export function Tooltip({
 export function Close({ children }: { children?: React.ReactNode }) {
   const { setVisible } = useContext(TooltipContext)
   return (
-    <Button 
-      type='button' 
-      variant='ghost' 
-      size='sm' 
-      className='absolute top-1 right-1' 
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className="absolute top-1 right-1"
       onClick={() => setVisible(false)}
     >
-      {children ?? <IoClose className='size-3 inline-block text-current' />}
+      {children ?? <IoClose className="inline-block size-3 text-current" />}
     </Button>
   )
 }

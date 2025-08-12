@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext } from 'react'
 import { cn } from '@/helpers/utils'
 import CardContext from './context'

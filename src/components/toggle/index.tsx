@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Button, { type ButtonProps } from '@/components/button'
 import ToggleContext, { type ToggleState } from './context'

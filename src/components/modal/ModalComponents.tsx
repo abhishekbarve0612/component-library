@@ -1,3 +1,4 @@
+'use client'
 import { type ReactNode, useContext, createContext } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { useModalManager } from './context'

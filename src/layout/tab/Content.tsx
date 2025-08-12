@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext, useRef, useEffect, useState, type HTMLAttributes } from 'react'
 import TabsContext from './context'
 import { cn } from '@/helpers/utils'

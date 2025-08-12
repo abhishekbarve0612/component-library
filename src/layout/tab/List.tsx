@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/helpers/utils'
 import { useContext } from 'react'
 import TabsContext from './context'
