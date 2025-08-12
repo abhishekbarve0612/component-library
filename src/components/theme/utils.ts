@@ -1,6 +1,5 @@
 'use client'
 
-import { colorTokens } from '@/design-system/tokens'
 import { useTheme } from './context'
 
 export function useThemeToggle() {
@@ -20,6 +19,19 @@ export function useThemeToggle() {
 }
 
 export function useThemeColors() {
-  const { resolvedTheme } = useTheme()
-  return colorTokens[resolvedTheme]
+  // Since colors are now handled through CSS custom properties,
+  // we can access them via getComputedStyle if needed
+  if (typeof window !== 'undefined') {
+    const root = document.documentElement
+    const computedStyle = getComputedStyle(root)
+    
+    return {
+      background: computedStyle.getPropertyValue('--background'),
+      foreground: computedStyle.getPropertyValue('--foreground'),
+      primary: computedStyle.getPropertyValue('--primary'),
+      // Add more as needed, but prefer using CSS classes directly
+    }
+  }
+  
+  return {}
 }

@@ -84,7 +84,7 @@ function TextareaField({ placeholder, rows = 4, className, ...props }: TextareaF
       className={cn(
         'w-full resize-y rounded-md border bg-white/70 px-3 py-2 text-sm backdrop-blur-sm transition-all outline-none',
         'focus:border-blue-500 focus:ring-2 focus:ring-blue-200',
-        'hover:border-gray-400 hover:bg-white/90',
+        'hover:hover:border-border/80 hover:hover:bg-muted/20',
         {
           'border-gray-300': !hasError,
           'border-red-500 focus:border-red-500 focus:ring-red-200': hasError,

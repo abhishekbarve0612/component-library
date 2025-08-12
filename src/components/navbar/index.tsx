@@ -69,9 +69,9 @@ function Navbar({
         aria-label="Main navigation"
         onKeyDown={handleKeyDown}
         className={cn(
-          'relative w-full bg-background shadow-sm',
+          'bg-background relative w-full shadow-sm',
 
-          bordered && 'border-b border-border',
+          bordered && 'border-border border-b',
 
           fixed && 'fixed top-0 right-0 left-0 z-50',
 
@@ -97,8 +97,8 @@ function Navbar({
                 onClick={toggleMobileMenu}
                 className={cn(
                   'inline-flex items-center justify-center rounded-lg p-2',
-                  'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-                  'focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none',
+                  'text-muted-foreground hover:hover:bg-accent hover:hover:text-accent-foreground',
+                  'focus:ring-ring focus:ring-2 focus:ring-offset-2 focus:outline-none',
                   'transition-colors duration-200',
                   `${bp}:hidden`
                 )}
@@ -116,7 +116,7 @@ function Navbar({
               id="mobile-navigation"
               data-mobile-menu
               className={cn(
-                'flex-col border-t border-border py-2',
+                'border-border flex-col border-t py-2',
                 `${bp}:hidden`,
                 isOpen ? 'flex' : 'hidden'
               )}

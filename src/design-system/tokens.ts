@@ -109,20 +109,11 @@ export const colorTokens = {
 
 export const colors = {
   getCSSVar: (colorName: string) => `hsl(var(--${colorName}))`,
-
   toKebabCase: (str: string) => str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`),
 }
 
-export function generateCSSProperties(theme: 'light' | 'dark' = 'light') {
-  const tokens = colorTokens[theme]
-  const properties: Record<string, string> = {}
-
-  Object.entries(tokens).forEach(([key, value]) => {
-    const cssVarName = colors.toKebabCase(key)
-    properties[`--${cssVarName}`] = value
-  })
-
-  return properties
-}
+// Note: Theme colors are now handled through CSS layers in src/styles/themes.css
+// This tokens object is kept for reference and potential future use cases
+// The actual theming is handled through Tailwind CSS custom properties
 
 export type ColorToken = keyof typeof colorTokens.light

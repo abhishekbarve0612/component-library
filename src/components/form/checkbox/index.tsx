@@ -24,9 +24,9 @@ function Checkbox({ checked, onCheckedChange, className = '', ...props }: Checkb
   return (
     <button
       className={cn(
-        'relative inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-foreground transition-all duration-200 outline-none',
+        'border-input bg-background text-foreground relative inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded-md border transition-all duration-200 outline-none',
         'hover:hover:border-border/80 hover:hover:bg-hover/20',
-        'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
+        'focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2 focus:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-50',
         {
           'bg-primary border-primary text-primary-foreground': checked,
@@ -48,11 +48,11 @@ function Checkbox({ checked, onCheckedChange, className = '', ...props }: Checkb
         className="hidden"
         tabIndex={-1}
       />
-      <FaCheck 
+      <FaCheck
         className={cn(
           'h-3 w-3 transition-opacity duration-200',
-          checked ? 'opacity-100 text-primary-foreground' : 'opacity-0'
-        )} 
+          checked ? 'text-primary-foreground opacity-100' : 'opacity-0'
+        )}
       />
     </button>
   )

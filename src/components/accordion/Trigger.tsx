@@ -32,8 +32,8 @@ function AccordionTrigger({ children, className, disabled = false }: AccordionTr
     <summary
       className={cn(
         'flex w-full cursor-pointer items-center justify-between px-4 py-3 transition-colors duration-200',
-        'bg-surface1 text-foreground hover:hover:bg-hover',
-        'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset',
+        'bg-surface-1 text-foreground hover:hover:bg-hover',
+        'focus:ring-ring focus:ring-2 focus:outline-none focus:ring-inset',
         'list-none [&::-webkit-details-marker]:hidden',
         {
           'cursor-not-allowed opacity-50': disabled,

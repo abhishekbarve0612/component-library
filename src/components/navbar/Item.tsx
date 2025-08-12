@@ -18,13 +18,13 @@ function NavbarItem({
     <div
       className={cn(
         'relative flex items-center px-4 py-3 text-sm font-medium transition-colors',
-        'rounded-lg focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+        'focus-within:ring-ring rounded-lg focus-within:ring-2 focus-within:ring-offset-2',
 
-        'text-foreground hover:hover:bg-hover hover:hover:text-foreground',
+        'text-foreground hover:bg-hover hover:text-foreground',
 
         active && [
-          'bg-surface2 font-semibold text-foreground shadow-sm',
-          'before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r before:bg-primary',
+          'bg-surface-2 text-foreground font-semibold shadow-sm',
+          'before:bg-primary before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r',
         ],
 
         disabled && ['pointer-events-none cursor-not-allowed opacity-50'],

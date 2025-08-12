@@ -43,11 +43,11 @@ function Card({
     variantClasses[variant],
     sizeClasses[size],
     {
-      'hover:shadow-md transition-shadow cursor-pointer': hoverable || onClick || href,
-      'hover:bg-hover hover:border-border/80': hoverable && variant === 'default',
-      'hover:shadow-xl hover:bg-hover': hoverable && variant === 'elevated',
-      'hover:border-border/80 hover:bg-hover/20': hoverable && variant === 'outlined',
-      'hover:bg-surface2': hoverable && variant === 'ghost',
+      'hover:hover:shadow-md transition-shadow cursor-pointer': hoverable || onClick || href,
+      'hover:hover:bg-hover hover:hover:border-border/80': hoverable && variant === 'default',
+      'hover:hover:shadow-xl hover:hover:bg-hover': hoverable && variant === 'elevated',
+      'hover:hover:border-border/80 hover:hover:bg-hover/20': hoverable && variant === 'outlined',
+      'hover:hover:bg-surface-2': hoverable && variant === 'ghost',
     },
     className
   )

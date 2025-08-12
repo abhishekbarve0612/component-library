@@ -56,11 +56,11 @@ function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
       ref={triggerRef}
       id={triggerId}
       className={cn(
-        'flex w-full cursor-pointer items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-all outline-none',
+        'border-input bg-background text-foreground flex w-full cursor-pointer items-center justify-between rounded-md border px-3 py-2 text-sm transition-all outline-none',
         'hover:hover:border-border/80 hover:hover:bg-hover/20',
-        'focus:border-ring focus:ring-2 focus:ring-ring/20 focus:ring-offset-2 focus:ring-offset-background',
+        'focus:border-ring focus:ring-ring/20 focus:ring-offset-background focus:ring-2 focus:ring-offset-2',
         {
-          'border-ring ring-2 ring-ring/20': isOpen,
+          'border-ring ring-ring/20 ring-2': isOpen,
         },
         className
       )}
@@ -77,7 +77,7 @@ function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
       {children}
       <div ref={chevronRef}>
         <FaCircleChevronDown
-          className="ml-auto inline-block h-4 w-4 text-muted-foreground"
+          className="text-muted-foreground ml-auto inline-block h-4 w-4"
           aria-hidden="true"
         />
       </div>

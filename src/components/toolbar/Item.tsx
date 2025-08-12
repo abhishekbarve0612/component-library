@@ -51,10 +51,9 @@ function Item({ id, label, icon, disabled = false, index = 0, onSelect, ref }: T
         className={cn(
           'flex items-center justify-center rounded-md transition-colors',
           'hover:hover:bg-hover hover:hover:text-foreground',
-          'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none',
+          'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           'disabled:pointer-events-none disabled:opacity-50',
-          isItemActive &&
-            'bg-surface2 text-foreground shadow-sm',
+          isItemActive && 'bg-surface-2 text-foreground shadow-sm',
           variant === 'minimal' ? 'h-9 w-9 p-0' : 'min-h-9 gap-2 px-3 py-2'
         )}
       >

@@ -6,18 +6,18 @@ const sizeVariants = {
   sm: {
     container: 'h-4 w-8',
     thumb: 'h-2.5 w-2.5',
-    translate: { off: 'translate-x-0.5', on: 'translate-x-4.5' }
+    translate: { off: 'translate-x-0.5', on: 'translate-x-4.5' },
   },
   md: {
     container: 'h-6 w-11',
     thumb: 'h-4 w-4',
-    translate: { off: 'translate-x-1', on: 'translate-x-6' }
+    translate: { off: 'translate-x-1', on: 'translate-x-6' },
   },
   lg: {
     container: 'h-7 w-12',
     thumb: 'h-5 w-5',
-    translate: { off: 'translate-x-1', on: 'translate-x-6' }
-  }
+    translate: { off: 'translate-x-1', on: 'translate-x-6' },
+  },
 }
 
 function Switch({
@@ -51,29 +51,16 @@ function Switch({
       id={id}
       disabled={disabled}
       onClick={handleToggle}
-      className={`
-        relative inline-flex items-center rounded-full
-        transition-colors duration-200 ease-out
-        motion-reduce:transition-none
-        focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none
-        disabled:cursor-not-allowed disabled:opacity-50
-        hover:enabled:shadow-sm hover:hover:enabled:scale-[1.02] hover:hover:enabled:shadow-md
-        ${variant.container}
-        ${isChecked 
-          ? 'bg-primary hover:enabled:bg-primary/90' 
-          : 'bg-input hover:enabled:bg-surface2'
-        }
-        ${className}
-      `.trim().replace(/\s+/g, ' ')}
+      className={`focus-visible:ring-ring focus-visible:ring-offset-background relative inline-flex items-center rounded-full transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none hover:hover:enabled:scale-[1.02] hover:hover:enabled:shadow-md hover:hover:enabled:shadow-sm disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none ${variant.container} ${
+        isChecked ? 'bg-primary hover:hover:enabled:bg-primary/90' : 'bg-input hover:hover:enabled:bg-surface-2'
+      } ${className} `
+        .trim()
+        .replace(/\s+/g, ' ')}
     >
       <span
-        className={`
-          inline-block rounded-full bg-background shadow-sm
-          transition-transform duration-200 ease-out
-          motion-reduce:transition-none
-          ${variant.thumb}
-          ${isChecked ? variant.translate.on : variant.translate.off}
-        `.trim().replace(/\s+/g, ' ')}
+        className={`bg-background inline-block rounded-full shadow-sm transition-transform duration-200 ease-out motion-reduce:transition-none ${variant.thumb} ${isChecked ? variant.translate.on : variant.translate.off} `
+          .trim()
+          .replace(/\s+/g, ' ')}
       />
     </button>
   )

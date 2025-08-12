@@ -69,7 +69,7 @@ function Item({
     <li className={itemClasses}>
       {content}
       {!isCurrentPage && (
-        <span className="mx-2 text-muted-foreground select-none" aria-hidden="true">
+        <span className="text-muted-foreground mx-2 select-none" aria-hidden="true">
           {divider}
         </span>
       )}

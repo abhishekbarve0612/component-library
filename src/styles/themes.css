@@ -2,119 +2,114 @@
   Design System Color Tokens
 
   This file defines the semantic color system used throughout the component library.
-  Colors are defined as HSL values to work with CSS custom properties.
+  Colors are defined using Tailwind CSS v4 @theme directive with oklch color space.
 */
 
-:root {
-  /* Light theme (default) */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+@theme {
+  /* Light theme colors (default) */
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.09 0.005 258);
 
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.09 0.005 258);
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.09 0.005 258);
 
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
+  --color-primary: oklch(0.6 0.18 258);
+  --color-primary-foreground: oklch(0.98 0.013 258);
 
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 84% 4.9%;
+  --color-secondary: oklch(0.96 0.006 258);
+  --color-secondary-foreground: oklch(0.09 0.005 258);
 
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  --color-muted: oklch(0.96 0.006 258);
+  --color-muted-foreground: oklch(0.45 0.004 258);
 
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 84% 4.9%;
+  --color-accent: oklch(0.96 0.006 258);
+  --color-accent-foreground: oklch(0.09 0.005 258);
 
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  --color-destructive: oklch(0.65 0.22 22);
+  --color-destructive-foreground: oklch(0.98 0.013 258);
 
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --color-border: oklch(0.91 0.006 258);
+  --color-input: oklch(0.91 0.006 258);
+  --color-ring: oklch(0.6 0.18 258);
 
   /* Surface colors for layered UI */
-  --surface-1: 210 20% 98%;
-  --surface-2: 210 16% 93%;
-  --surface-3: 210 14% 89%;
+  --color-surface-1: oklch(0.98 0.002 258);
+  --color-surface-2: oklch(0.93 0.003 258);
+  --color-surface-3: oklch(0.89 0.003 258);
 
   /* Interactive states */
-  --hover: 210 40% 92%;
-  --active: 210 40% 88%;
+  --color-hover: oklch(0.92 0.006 258);
+  --color-active: oklch(0.88 0.006 258);
 
   /* Status colors */
-  --success: 142 76% 36%;
-  --success-foreground: 210 40% 98%;
+  --color-success: oklch(0.5 0.15 142);
+  --color-success-foreground: oklch(0.98 0.013 258);
 
-  --warning: 38 92% 50%;
-  --warning-foreground: 222.2 84% 4.9%;
+  --color-warning: oklch(0.7 0.18 85);
+  --color-warning-foreground: oklch(0.09 0.005 258);
 
-  --error: 0 84.2% 60.2%;
-  --error-foreground: 210 40% 98%;
+  --color-error: oklch(0.65 0.22 22);
+  --color-error-foreground: oklch(0.98 0.013 258);
 
-  --info: 199 89% 48%;
-  --info-foreground: 210 40% 98%;
+  --color-info: oklch(0.6 0.17 220);
+  --color-info-foreground: oklch(0.98 0.013 258);
+
+  /* Border radius */
+  --radius: 0.5rem;
 }
 
+/* Dark theme colors - using CSS custom properties */
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
+  --color-background: oklch(0.09 0.005 258);
+  --color-foreground: oklch(0.98 0.013 258);
 
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
+  --color-card: oklch(0.09 0.005 258);
+  --color-card-foreground: oklch(0.98 0.013 258);
 
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
+  --color-popover: oklch(0.09 0.005 258);
+  --color-popover-foreground: oklch(0.98 0.013 258);
 
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 84% 4.9%;
+  --color-primary: oklch(0.7 0.18 258);
+  --color-primary-foreground: oklch(0.09 0.005 258);
 
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
+  --color-secondary: oklch(0.18 0.006 258);
+  --color-secondary-foreground: oklch(0.98 0.013 258);
 
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+  --color-muted: oklch(0.18 0.006 258);
+  --color-muted-foreground: oklch(0.65 0.004 258);
 
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  --color-accent: oklch(0.18 0.006 258);
+  --color-accent-foreground: oklch(0.98 0.013 258);
 
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  --color-destructive: oklch(0.45 0.22 22);
+  --color-destructive-foreground: oklch(0.98 0.013 258);
 
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 94.1%;
+  --color-border: oklch(0.18 0.006 258);
+  --color-input: oklch(0.18 0.006 258);
+  --color-ring: oklch(0.85 0.18 258);
 
   /* Surface colors for layered UI */
-  --surface-1: 217.2 32.6% 17.5%;
-  --surface-2: 215 27.9% 16.9%;
-  --surface-3: 215 25% 26.9%;
+  --color-surface-1: oklch(0.18 0.006 258);
+  --color-surface-2: oklch(0.16 0.005 258);
+  --color-surface-3: oklch(0.26 0.005 258);
 
   /* Interactive states */
-  --hover: 217.2 32.6% 22.5%;
-  --active: 217.2 32.6% 27.5%;
+  --color-hover: oklch(0.23 0.006 258);
+  --color-active: oklch(0.28 0.006 258);
 
   /* Status colors */
-  --success: 142 76% 45%;
-  --success-foreground: 210 40% 98%;
+  --color-success: oklch(0.55 0.15 142);
+  --color-success-foreground: oklch(0.98 0.013 258);
 
-  --warning: 38 92% 60%;
-  --warning-foreground: 222.2 84% 4.9%;
+  --color-warning: oklch(0.75 0.18 85);
+  --color-warning-foreground: oklch(0.09 0.005 258);
 
-  --error: 0 62.8% 30.6%;
-  --error-foreground: 210 40% 98%;
+  --color-error: oklch(0.45 0.22 22);
+  --color-error-foreground: oklch(0.98 0.013 258);
 
-  --info: 199 89% 58%;
-  --info-foreground: 210 40% 98%;
-}
-
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  --color-info: oklch(0.65 0.17 220);
+  --color-info-foreground: oklch(0.98 0.013 258);
 }

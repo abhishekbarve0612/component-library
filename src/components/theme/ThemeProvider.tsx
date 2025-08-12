@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { generateCSSProperties } from '@/design-system/tokens'
 import type { Theme, CustomTheme } from './context'
 import ThemeContext from './context'
 
@@ -42,16 +41,14 @@ export function ThemeProvider({
       systemTheme = theme as 'light' | 'dark'
     }
 
-    root.classList.add(systemTheme)
+    // Only add dark class if dark theme - light theme is the default in CSS
+    if (systemTheme === 'dark') {
+      root.classList.add('dark')
+    }
+    
     setResolvedTheme(systemTheme)
 
-    // Apply base theme CSS custom properties
-    const baseProperties = generateCSSProperties(systemTheme)
-    Object.entries(baseProperties).forEach(([property, value]) => {
-      root.style.setProperty(property, value)
-    })
-
-    // Apply custom theme overrides if provided
+    // Apply custom theme overrides if provided (only for custom properties not handled by CSS)
     if (customThemeState?.colors) {
       Object.entries(customThemeState.colors).forEach(([colorKey, value]) => {
         if (value) {
@@ -62,11 +59,9 @@ export function ThemeProvider({
       })
     }
 
-    // Apply border radius if provided
+    // Apply border radius if provided (override the CSS default)
     if (customThemeState?.borderRadius) {
       root.style.setProperty('--radius', customThemeState.borderRadius)
-    } else {
-      root.style.setProperty('--radius', '0.5rem')
     }
   }, [theme, customThemeState])
 
@@ -77,7 +72,9 @@ export function ThemeProvider({
       if (theme === 'system') {
         const systemTheme = mediaQuery.matches ? 'dark' : 'light'
         document.documentElement.classList.remove('light', 'dark')
-        document.documentElement.classList.add(systemTheme)
+        if (systemTheme === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
         setResolvedTheme(systemTheme)
       }
     }

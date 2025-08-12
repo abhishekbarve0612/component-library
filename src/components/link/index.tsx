@@ -10,12 +10,12 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 function Link({ children, className, ...props }: LinkProps) {
   return (
-    <a 
+    <a
       className={cn(
-        'text-primary hover:text-primary/80 underline-offset-4 transition-colors duration-200',
-        'hover:hover:underline focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
+        'text-primary hover:hover:text-primary/80 underline-offset-4 transition-colors duration-200',
+        'focus:ring-ring focus:ring-offset-background hover:hover:underline focus:ring-2 focus:ring-offset-2 focus:outline-none',
         className
-      )} 
+      )}
       {...props}
     >
       {children}

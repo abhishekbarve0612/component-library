@@ -122,7 +122,7 @@ function SelectItem({
       ref={itemRef}
       id={optionId}
       className={cn(
-        'relative w-full px-3 py-2 text-left text-sm text-foreground transition-colors focus:outline-none',
+        'text-foreground relative w-full px-3 py-2 text-left text-sm transition-colors focus:outline-none',
         'hover:hover:bg-hover hover:hover:text-foreground',
         {
           'bg-primary/10 text-primary': isSelected,

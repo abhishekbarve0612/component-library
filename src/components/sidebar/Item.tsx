@@ -24,7 +24,7 @@ function Item({ children, active, disabled, onClick, ...props }: ItemProps) {
         'text-foreground hover:hover:bg-hover hover:hover:text-foreground',
 
         active && [
-          'bg-surface2 text-foreground font-semibold shadow-sm',
+          'bg-surface-2 text-foreground font-semibold shadow-sm',
           'before:bg-primary before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r',
         ],
 
