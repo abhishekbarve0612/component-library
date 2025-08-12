@@ -55,19 +55,20 @@ function Switch({
         relative inline-flex items-center rounded-full
         transition-colors duration-200 ease-out
         motion-reduce:transition-none
-        focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none
         disabled:cursor-not-allowed disabled:opacity-50
-        hover:enabled:shadow-sm
-        [@media(hover:hover)_and_(pointer:fine)]:hover:enabled:scale-[1.02]
-        [@media(hover:hover)_and_(pointer:fine)]:hover:enabled:shadow-md
+        hover:enabled:shadow-sm hover:hover:enabled:scale-[1.02] hover:hover:enabled:shadow-md
         ${variant.container}
-        ${isChecked ? 'bg-slate-900 hover:enabled:bg-slate-800' : 'bg-slate-200 hover:enabled:bg-slate-300'}
+        ${isChecked 
+          ? 'bg-primary hover:enabled:bg-primary/90' 
+          : 'bg-input hover:enabled:bg-surface2'
+        }
         ${className}
       `.trim().replace(/\s+/g, ' ')}
     >
       <span
         className={`
-          inline-block rounded-full bg-white shadow-sm
+          inline-block rounded-full bg-background shadow-sm
           transition-transform duration-200 ease-out
           motion-reduce:transition-none
           ${variant.thumb}

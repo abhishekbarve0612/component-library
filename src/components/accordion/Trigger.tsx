@@ -32,12 +32,12 @@ function AccordionTrigger({ children, className, disabled = false }: AccordionTr
     <summary
       className={cn(
         'flex w-full cursor-pointer items-center justify-between px-4 py-3 transition-colors duration-200',
-        'bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700',
-        'focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-inset',
+        'bg-surface1 text-foreground hover:hover:bg-hover',
+        'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset',
         'list-none [&::-webkit-details-marker]:hidden',
         {
           'cursor-not-allowed opacity-50': disabled,
-          'bg-gray-100 dark:bg-gray-700': isOpen,
+          'bg-surface2': isOpen,
         },
         className
       )}

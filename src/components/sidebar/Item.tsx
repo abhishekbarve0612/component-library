@@ -21,10 +21,10 @@ function Item({ children, active, disabled, onClick, ...props }: ItemProps) {
         'relative flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors duration-200',
         'focus:ring-ring focus:ring-2 focus:ring-offset-2 focus:outline-none',
 
-        'text-foreground hover:bg-accent hover:text-accent-foreground',
+        'text-foreground hover:hover:bg-hover hover:hover:text-foreground',
 
         active && [
-          'bg-accent text-accent-foreground font-semibold shadow-sm',
+          'bg-surface2 text-foreground font-semibold shadow-sm',
           'before:bg-primary before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r',
         ],
 

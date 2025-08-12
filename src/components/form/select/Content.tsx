@@ -71,7 +71,7 @@ function SelectContent({ children, className }: SelectContentProps) {
       ref={contentRef}
       id={listboxId}
       className={cn(
-        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white shadow-lg',
+        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-border bg-popover text-popover-foreground shadow-lg',
         className
       )}
       role="listbox"

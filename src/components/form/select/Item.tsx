@@ -109,7 +109,7 @@ function SelectItem({
         itemRef.current,
         { backgroundColor: 'transparent' },
         {
-          backgroundColor: '#f3f4f6',
+          backgroundColor: 'hsl(var(--hover))',
           duration: 0.15,
           ease: 'power2.out',
         }
@@ -122,9 +122,10 @@ function SelectItem({
       ref={itemRef}
       id={optionId}
       className={cn(
-        'relative w-full px-3 py-2 text-left text-sm transition-colors focus:outline-none',
+        'relative w-full px-3 py-2 text-left text-sm text-foreground transition-colors focus:outline-none',
+        'hover:hover:bg-hover hover:hover:text-foreground',
         {
-          'bg-blue-50 text-blue-600': isSelected,
+          'bg-primary/10 text-primary': isSelected,
           'cursor-not-allowed opacity-50': disabled,
           'cursor-pointer': !disabled,
         },

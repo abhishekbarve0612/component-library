@@ -27,10 +27,10 @@ function Item({
   const itemClasses = cn('flex items-center text-sm', className)
 
   const contentClasses = cn({
-    'text-gray-500 dark:text-gray-400': !isCurrentPage && !href && !onClick,
-    'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer hover:underline focus:outline-none focus:underline':
+    'text-muted-foreground': !isCurrentPage && !href && !onClick,
+    'text-foreground/80 hover:hover:text-foreground transition-colors cursor-pointer hover:hover:underline focus:outline-none focus:underline':
       (href || onClick) && !disabled && !isCurrentPage,
-    'text-gray-900 dark:text-white font-medium': isCurrentPage,
+    'text-foreground font-medium': isCurrentPage,
     'cursor-default': disabled || isCurrentPage,
     'opacity-50': disabled,
   })
@@ -69,7 +69,7 @@ function Item({
     <li className={itemClasses}>
       {content}
       {!isCurrentPage && (
-        <span className="mx-2 text-gray-400 select-none dark:text-gray-500" aria-hidden="true">
+        <span className="mx-2 text-muted-foreground select-none" aria-hidden="true">
           {divider}
         </span>
       )}

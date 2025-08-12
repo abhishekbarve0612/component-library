@@ -9,13 +9,13 @@ export interface TooltipContentProps {
 }
 
 const variantClasses = {
-  default: 'bg-white text-gray-900 border border-gray-200 shadow-lg',
-  dark: 'bg-gray-900 text-white border border-gray-700 shadow-lg',
-  light: 'bg-gray-50 text-gray-900 border border-gray-200 shadow-md',
-  info: 'bg-blue-50 text-blue-900 border border-blue-200 shadow-lg',
-  success: 'bg-green-50 text-green-900 border border-green-200 shadow-lg',
-  warning: 'bg-yellow-50 text-yellow-900 border border-yellow-200 shadow-lg',
-  error: 'bg-red-50 text-red-900 border border-red-200 shadow-lg'
+  default: 'bg-popover text-popover-foreground border border-border shadow-lg',
+  dark: 'bg-surface3 text-background border border-border shadow-lg',
+  light: 'bg-surface1 text-foreground border border-border shadow-md',
+  info: 'bg-info/10 text-info-foreground border border-info/20 shadow-lg',
+  success: 'bg-success/10 text-success-foreground border border-success/20 shadow-lg',
+  warning: 'bg-warning/10 text-warning-foreground border border-warning/20 shadow-lg',
+  error: 'bg-destructive/10 text-destructive-foreground border border-destructive/20 shadow-lg'
 }
 
 const sizeClasses = {

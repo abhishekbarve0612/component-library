@@ -20,10 +20,10 @@ function NavbarItem({
         'relative flex items-center px-4 py-3 text-sm font-medium transition-colors',
         'rounded-lg focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
 
-        'text-foreground hover:bg-accent hover:text-accent-foreground',
+        'text-foreground hover:hover:bg-hover hover:hover:text-foreground',
 
         active && [
-          'bg-accent font-semibold text-accent-foreground shadow-sm',
+          'bg-surface2 font-semibold text-foreground shadow-sm',
           'before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r before:bg-primary',
         ],
 

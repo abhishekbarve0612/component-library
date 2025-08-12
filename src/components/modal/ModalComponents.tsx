@@ -21,12 +21,11 @@ export function ModalHeader({ children, className, withCloseButton = false }: Mo
   return (
     <div
       className={cn(
-        'flex items-center justify-between border-b border-slate-200 px-6 py-4',
-        'dark:border-slate-700',
+        'flex items-center justify-between border-b border-border px-6 py-4',
         className
       )}
     >
-      <div className="text-lg font-semibold text-slate-900 dark:text-slate-100">{children}</div>
+      <div className="text-lg font-semibold text-foreground">{children}</div>
       {withCloseButton && <ModalCloseButton />}
     </div>
   )
@@ -55,8 +54,7 @@ export function ModalFooter({ children, className }: ModalFooterProps) {
   return (
     <div
       className={cn(
-        'flex items-center justify-end gap-3 border-t border-slate-200 px-6 py-4',
-        'dark:border-slate-700',
+        'flex items-center justify-end gap-3 border-t border-border px-6 py-4',
         className
       )}
     >
@@ -94,10 +92,9 @@ export function ModalCloseButton({
         onClick={() => closeModal(idToUse)}
         aria-label="Close modal"
         className={cn(
-          'rounded-lg p-2 text-slate-400 transition-colors',
-          'hover:bg-slate-100 hover:text-slate-600',
-          'dark:hover:bg-slate-800 dark:hover:text-slate-300',
-          'focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none',
+          'rounded-lg p-2 text-muted-foreground transition-colors',
+          'hover:hover:bg-hover hover:hover:text-foreground',
+          'focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background focus:outline-none',
           className
         )}
       >

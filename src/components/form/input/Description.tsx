@@ -16,9 +16,9 @@ function Description({ children, className, ...props }: DescriptionProps) {
     <p
       id={descriptionId}
       className={cn(
-        'text-sm text-gray-500',
+        'text-sm text-muted-foreground',
         'group-has-[input:user-invalid]:block',
-        'group-has-[input:user-invalid]:text-red-500',
+        'group-has-[input:user-invalid]:text-destructive',
         'group-has-[input:user-valid]:hidden',
         'group-has-[input:empty]:hidden',
         className

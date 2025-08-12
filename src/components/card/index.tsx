@@ -26,10 +26,10 @@ function Card({
   }
 
   const variantClasses = {
-    default: 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700',
-    elevated: 'bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-800',
-    outlined: 'bg-transparent border-2 border-gray-300 dark:border-gray-600',
-    ghost: 'bg-gray-50 dark:bg-gray-800/50 border-none',
+    default: 'bg-card border border-border text-card-foreground',
+    elevated: 'bg-card shadow-lg border border-border/50 text-card-foreground',
+    outlined: 'bg-transparent border-2 border-border text-foreground',
+    ghost: 'bg-surface1 border-none text-foreground',
   }
 
   const sizeClasses = {
@@ -39,15 +39,15 @@ function Card({
   }
 
   const baseClasses = cn(
-    'rounded-lg transition-colors duration-200 flex flex-col',
+    'rounded-lg transition-all duration-200 flex flex-col',
     variantClasses[variant],
     sizeClasses[size],
     {
       'hover:shadow-md transition-shadow cursor-pointer': hoverable || onClick || href,
-      'hover:bg-gray-50 dark:hover:bg-gray-800': hoverable && variant === 'default',
-      'hover:shadow-xl': hoverable && variant === 'elevated',
-      'hover:border-gray-400 dark:hover:border-gray-500': hoverable && variant === 'outlined',
-      'hover:bg-gray-100 dark:hover:bg-gray-700': hoverable && variant === 'ghost',
+      'hover:bg-hover hover:border-border/80': hoverable && variant === 'default',
+      'hover:shadow-xl hover:bg-hover': hoverable && variant === 'elevated',
+      'hover:border-border/80 hover:bg-hover/20': hoverable && variant === 'outlined',
+      'hover:bg-surface2': hoverable && variant === 'ghost',
     },
     className
   )

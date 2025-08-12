@@ -24,11 +24,12 @@ function Field({ className, type = 'text', ...props }: InputProps) {
       <input
         id={id}
         className={cn(
-          'input user-invalid:border-red-500 user-invalid:text-red-500',
-          'flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white',
-          'file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500',
-          'focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 focus-visible:outline-none',
-          'disabled:cursor-not-allowed disabled:opacity-50',
+          'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors',
+          'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground',
+          'hover:border-border/80 hover:bg-muted/20',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+          'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted disabled:text-muted-foreground',
+          'user-invalid:border-destructive user-invalid:text-destructive user-invalid:focus-visible:ring-destructive',
           className
         )}
         type={type}

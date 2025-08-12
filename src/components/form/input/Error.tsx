@@ -15,7 +15,7 @@ function Error({ children, className, ...props }: ErrorProps) {
   if (!children) return null
 
   return (
-    <p id={errorId} role="alert" className={cn('text-sm text-red-500', className)} {...props}>
+    <p id={errorId} role="alert" className={cn('text-sm text-destructive', className)} {...props}>
       {children}
     </p>
   )

@@ -24,11 +24,11 @@ function AccordionContent({ children, className }: AccordionContentProps) {
       ref={contentRef}
       className={cn(
         'accordion-content overflow-hidden',
-        'border-t border-gray-200 dark:border-gray-700',
+        'border-t border-border',
         className
       )}
     >
-      <div className="bg-white px-4 py-3 dark:bg-gray-900">{children}</div>
+      <div className="bg-background px-4 py-3 text-foreground">{children}</div>
     </div>
   )
 }

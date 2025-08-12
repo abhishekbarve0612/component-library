@@ -173,9 +173,8 @@ function Modal({
         onKeyDown={trapFocus}
         className={cn(
           // Base styles
-          'relative flex max-h-[90vh] w-full flex-col rounded-xl border border-slate-200',
-          'bg-white shadow-2xl focus:outline-none',
-          'dark:border-slate-700 dark:bg-slate-900',
+          'relative flex max-h-[90vh] w-full flex-col rounded-xl border border-border',
+          'bg-background shadow-2xl focus:outline-none text-foreground',
 
           // Size variants
           sizeConfig[size],
