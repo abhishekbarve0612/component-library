@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react'
 import { generateCSSProperties } from '@/design-system/tokens'
 import type { Theme, CustomTheme } from './context'

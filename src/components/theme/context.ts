@@ -1,3 +1,5 @@
+'use client'
+
 import type { ColorToken } from '@/design-system/tokens'
 import { createContext, useContext } from 'react'
 

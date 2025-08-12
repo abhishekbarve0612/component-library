@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/helpers/utils'
 import BreadcrumbContext from './context'
 import BreadcrumbItem from './Item'
