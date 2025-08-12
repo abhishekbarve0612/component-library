@@ -36,8 +36,8 @@ export * from './components/toolbar/types'
 
 export { default as Tooltip } from './components/tooltip'
 
-export { default as Switch } from './components/switch'
-export * from './components/switch/types'
+export { default as Switch } from './components/form/switch'
+export * from './components/form/switch/types'
 
 export { default as Accordion } from './components/accordion'
 export * from './components/accordion/types'

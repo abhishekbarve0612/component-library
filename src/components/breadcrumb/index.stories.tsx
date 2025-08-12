@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { FiHome, FiChevronRight, FiFolder, FiFile } from 'react-icons/fi'
 import Breadcrumb from './index'
-import type { LinkComponentProps } from './types'
+import type { LinkProps } from '@components/link'
+import type { ComponentType } from 'react'
 
 const mockAction = (action: string) => {
   return (...args: unknown[]) => {
@@ -42,12 +43,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Mock Link component for demonstration
-const MockLink = ({ href, children, onClick, className }: LinkComponentProps) => (
+const MockLink = ({ href, children, onClick, className }: LinkProps) => (
   <a
     href={href}
     onClick={(e) => {
       e.preventDefault()
-      onClick?.()
+      onClick?.(e)
       mockAction('mock-link-click')(href)
     }}
     className={className}
@@ -127,7 +128,7 @@ export const WithHrefLinks: Story = {
 
 export const WithCustomLinkComponent: Story = {
   render: () => (
-    <Breadcrumb LinkComponent={MockLink}>
+    <Breadcrumb LinkComponent={MockLink as unknown as ComponentType<Partial<LinkProps>>}>
       <Breadcrumb.Item href="/" onClick={mockAction('home-click')}>
         Home
       </Breadcrumb.Item>

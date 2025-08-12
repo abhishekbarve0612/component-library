@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import Switch from './index'
 
@@ -87,14 +87,8 @@ export const Controlled: Story = {
     const [checked, setChecked] = useState(false)
     return (
       <div className="flex items-center gap-4">
-        <Switch
-          {...args}
-          checked={checked}
-          onCheckedChange={setChecked}
-        />
-        <span className="text-sm text-slate-600">
-          Status: {checked ? 'On' : 'Off'}
-        </span>
+        <Switch {...args} checked={checked} onCheckedChange={setChecked} />
+        <span className="text-sm text-slate-600">Status: {checked ? 'On' : 'Off'}</span>
       </div>
     )
   },
@@ -128,7 +122,7 @@ export const AllSizes: Story = {
 }
 
 export const Interactive: Story = {
-  render: (args) => {
+  render: () => {
     const [switches, setSwitches] = useState({
       notifications: true,
       darkMode: false,
@@ -137,11 +131,11 @@ export const Interactive: Story = {
     })
 
     const updateSwitch = (key: keyof typeof switches) => (checked: boolean) => {
-      setSwitches(prev => ({ ...prev, [key]: checked }))
+      setSwitches((prev) => ({ ...prev, [key]: checked }))
     }
 
     return (
-      <div className="space-y-4 p-6 bg-white rounded-lg border">
+      <div className="space-y-4 rounded-lg border bg-white p-6">
         <h3 className="text-lg font-semibold text-slate-900">Settings</h3>
         <div className="space-y-3">
           <div className="flex items-center justify-between">
