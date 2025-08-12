@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { useInputContext } from './context'
 import { cn } from '@/helpers/utils'

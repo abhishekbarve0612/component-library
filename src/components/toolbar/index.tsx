@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useRef, useCallback, type KeyboardEvent } from 'react'
 import { cn } from '@/helpers/utils'
 import ToolbarContext from './context'

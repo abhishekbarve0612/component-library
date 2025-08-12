@@ -1,3 +1,5 @@
+'use client'
+
 import { colorTokens } from '@/design-system/tokens'
 import { useTheme } from './context'
 

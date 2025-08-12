@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
@@ -13,27 +15,41 @@ export interface SelectItemProps {
   optionId?: string
 }
 
-function SelectItem({ value, children, disabled = false, className, index = -1, optionId }: SelectItemProps) {
-  const { value: selectedValue, setValue, setIsOpen, highlightedIndex, setHighlightedIndex } = useSelectContext()
+function SelectItem({
+  value,
+  children,
+  disabled = false,
+  className,
+  index = -1,
+  optionId,
+}: SelectItemProps) {
+  const {
+    value: selectedValue,
+    setValue,
+    setIsOpen,
+    highlightedIndex,
+    setHighlightedIndex,
+  } = useSelectContext()
   const itemRef = React.useRef<HTMLButtonElement>(null)
-  
+
   const handleClick = () => {
     if (disabled) return
-    
+
     // Selection feedback animation
     if (itemRef.current) {
-      gsap.fromTo(itemRef.current,
+      gsap.fromTo(
+        itemRef.current,
         { scale: 1 },
-        { 
-          scale: 0.95, 
-          duration: 0.1, 
+        {
+          scale: 0.95,
+          duration: 0.1,
           ease: 'power2.out',
           yoyo: true,
           repeat: 1,
           onComplete: () => {
             setValue(value)
             setIsOpen(false)
-          }
+          },
         }
       )
     } else {
@@ -45,15 +61,16 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
   const handleMouseEnter = () => {
     if (!disabled && !isHighlighted) {
       setHighlightedIndex(index)
-      
+
       // Subtle hover animation
       if (itemRef.current) {
-        gsap.fromTo(itemRef.current,
+        gsap.fromTo(
+          itemRef.current,
           { x: 0 },
-          { 
-            x: 4, 
-            duration: 0.2, 
-            ease: 'power2.out'
+          {
+            x: 4,
+            duration: 0.2,
+            ease: 'power2.out',
           }
         )
       }
@@ -65,7 +82,7 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
       gsap.to(itemRef.current, {
         x: 0,
         duration: 0.2,
-        ease: 'power2.out'
+        ease: 'power2.out',
       })
     }
   }
@@ -78,7 +95,7 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
     if (isHighlighted && itemRef.current) {
       itemRef.current.scrollIntoView({
         block: 'nearest',
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }, [isHighlighted])
@@ -88,12 +105,13 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
     if (!itemRef.current) return
 
     if (isHighlighted && !isSelected) {
-      gsap.fromTo(itemRef.current,
+      gsap.fromTo(
+        itemRef.current,
         { backgroundColor: 'transparent' },
-        { 
+        {
           backgroundColor: '#f3f4f6',
           duration: 0.15,
-          ease: 'power2.out'
+          ease: 'power2.out',
         }
       )
     }
@@ -104,10 +122,10 @@ function SelectItem({ value, children, disabled = false, className, index = -1, 
       ref={itemRef}
       id={optionId}
       className={cn(
-        'w-full px-3 py-2 text-sm text-left transition-colors focus:outline-none relative',
+        'relative w-full px-3 py-2 text-left text-sm transition-colors focus:outline-none',
         {
           'bg-blue-50 text-blue-600': isSelected,
-          'opacity-50 cursor-not-allowed': disabled,
+          'cursor-not-allowed opacity-50': disabled,
           'cursor-pointer': !disabled,
         },
         className

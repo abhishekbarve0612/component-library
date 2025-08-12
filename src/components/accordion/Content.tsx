@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useEffect } from 'react'
 import { cn } from '@/helpers/utils'
 import { useAccordionItemContext } from './context'

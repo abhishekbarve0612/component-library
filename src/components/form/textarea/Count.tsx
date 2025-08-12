@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useGSAP } from '@gsap/react'
 import { cn } from '@/helpers/utils'
@@ -10,18 +12,14 @@ export interface TextareaCountProps {
   warningThreshold?: number
 }
 
-function TextareaCount({ 
-  className, 
-  showMax = true, 
-  warningThreshold = 0.8 
-}: TextareaCountProps) {
+function TextareaCount({ className, showMax = true, warningThreshold = 0.8 }: TextareaCountProps) {
   const { value, maxLength } = useTextareaContext()
   const countRef = React.useRef<HTMLSpanElement>(null)
-  
+
   const currentLength = value.length
   const isOverLimit = maxLength && currentLength > maxLength
-  const isNearLimit = maxLength && currentLength >= (maxLength * warningThreshold)
-  
+  const isNearLimit = maxLength && currentLength >= maxLength * warningThreshold
+
   useGSAP(() => {
     if (!countRef.current || !maxLength) return
 
@@ -33,23 +31,22 @@ function TextareaCount({
       countAnimation(countRef.current)
     }
   }, [isOverLimit, isNearLimit, maxLength])
-  
+
   if (!maxLength && !showMax) return null
-  
-  const displayText = showMax && maxLength 
-    ? `${currentLength}/${maxLength}`
-    : currentLength.toString()
-  
+
+  const displayText =
+    showMax && maxLength ? `${currentLength}/${maxLength}` : currentLength.toString()
+
   return (
-    <div className='flex justify-end'>
+    <div className="flex justify-end">
       <span
         ref={countRef}
         className={cn(
           'text-xs transition-colors',
           {
             'text-gray-500': !isNearLimit && !isOverLimit,
-            'text-orange-600 font-medium': isNearLimit && !isOverLimit,
-            'text-red-600 font-semibold': isOverLimit,
+            'font-medium text-orange-600': isNearLimit && !isOverLimit,
+            'font-semibold text-red-600': isOverLimit,
           },
           className
         )}

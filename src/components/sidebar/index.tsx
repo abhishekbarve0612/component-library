@@ -1,3 +1,5 @@
+'use client'
+
 import { createPortal } from 'react-dom'
 import { type ReactNode, useEffect, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
@@ -123,8 +125,8 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
         aria-labelledby="sidebar-title"
         aria-describedby="sidebar-description"
         className={cn(
-          'fixed top-0 bottom-0 z-50 flex w-80 flex-col bg-background shadow-xl',
-          'border-r border-border',
+          'bg-background fixed top-0 bottom-0 z-50 flex w-80 flex-col shadow-xl',
+          'border-border border-r',
           'focus:outline-none',
           {
             'left-0': side === 'left',

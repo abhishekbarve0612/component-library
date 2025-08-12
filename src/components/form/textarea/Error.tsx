@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useGSAP } from '@gsap/react'
 import { FaExclamationTriangle } from 'react-icons/fa'
@@ -13,7 +15,7 @@ export interface TextareaErrorProps {
 function TextareaError({ children, className }: TextareaErrorProps) {
   const { error, errorId, hasError } = useTextareaContext()
   const errorRef = React.useRef<HTMLDivElement>(null)
-  
+
   useGSAP(() => {
     if (!errorRef.current) return
 
@@ -21,23 +23,20 @@ function TextareaError({ children, className }: TextareaErrorProps) {
       errorAnimation(errorRef.current)
     }
   }, [hasError])
-  
+
   if (!hasError) return null
-  
+
   const errorMessage = children || (typeof error === 'string' ? error : 'This field has an error')
-  
+
   return (
     <div
       ref={errorRef}
       id={errorId}
-      role='alert'
-      aria-live='polite'
-      className={cn(
-        'flex items-center gap-1.5 text-sm text-red-600',
-        className
-      )}
+      role="alert"
+      aria-live="polite"
+      className={cn('flex items-center gap-1.5 text-sm text-red-600', className)}
     >
-      <FaExclamationTriangle className='w-3 h-3 flex-shrink-0' />
+      <FaExclamationTriangle className="h-3 w-3 flex-shrink-0" />
       <span>{errorMessage}</span>
     </div>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import { HiSun, HiMoon, HiDesktopComputer } from 'react-icons/hi'
 import { useTheme, type Theme } from './context'
 import Button from '../button'

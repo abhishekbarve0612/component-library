@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/helpers/utils'
 import { useInputContext } from './context'
 
@@ -9,9 +11,9 @@ interface DescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
 function Description({ children, className, ...props }: DescriptionProps) {
   const { id } = useInputContext()
   const descriptionId = `${id}-description`
-  
+
   return (
-    <p 
+    <p
       id={descriptionId}
       className={cn(
         'text-sm text-gray-500',
@@ -20,7 +22,7 @@ function Description({ children, className, ...props }: DescriptionProps) {
         'group-has-[input:user-valid]:hidden',
         'group-has-[input:empty]:hidden',
         className
-      )} 
+      )}
       {...props}
     >
       {children}

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useRef, useCallback } from 'react'
 import ReactDOM from 'react-dom'
 import { useGSAP } from '@gsap/react'

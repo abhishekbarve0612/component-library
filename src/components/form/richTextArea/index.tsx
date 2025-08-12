@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { cn } from '@/helpers/utils'
 import { type Format, COMMANDS, SHORTCUTS } from './constants'

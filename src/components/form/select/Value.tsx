@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
 
@@ -9,7 +11,9 @@ interface SelectValueProps {
 function SelectValue({ placeholder, className }: SelectValueProps) {
   const { value } = useSelectContext()
   return (
-    <span className={cn('text-sm capitalize', value ? 'text-gray-900' : 'text-gray-500', className)}>
+    <span
+      className={cn('text-sm capitalize', value ? 'text-gray-900' : 'text-gray-500', className)}
+    >
       {value || placeholder}
     </span>
   )

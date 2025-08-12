@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useCallback } from 'react'
 import { cn } from '@/helpers/utils'
 import { AccordionContext } from './context'
@@ -45,9 +47,7 @@ function Accordion({
 
   return (
     <AccordionContext.Provider value={contextValue}>
-      <div className={cn('space-y-2', className)}>
-        {children}
-      </div>
+      <div className={cn('space-y-2', className)}>{children}</div>
     </AccordionContext.Provider>
   )
 }

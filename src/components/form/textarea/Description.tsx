@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
@@ -9,12 +11,9 @@ export interface TextareaDescriptionProps {
 
 function TextareaDescription({ children, className }: TextareaDescriptionProps) {
   const { descriptionId } = useTextareaContext()
-  
+
   return (
-    <p
-      id={descriptionId}
-      className={cn('text-sm text-gray-600', className)}
-    >
+    <p id={descriptionId} className={cn('text-sm text-gray-600', className)}>
       {children}
     </p>
   )

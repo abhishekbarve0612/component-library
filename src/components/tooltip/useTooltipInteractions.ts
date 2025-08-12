@@ -1,3 +1,5 @@
+'use client'
+
 import useElementInteractions, { CONFIG } from '@/helpers/interactions'
 
 interface UseTooltipInteractionsProps {
@@ -16,32 +18,42 @@ export function useTooltipTriggerInteractions({
   onEscape,
 }: UseTooltipInteractionsProps) {
   return useElementInteractions({
-    mouse: trigger === 'hover' ? {
-      onEnter: onShow,
-      onLeave: onHide,
-    } : trigger === 'click' ? {
-      onClick: onToggle,
-    } : {},
-    
-    focus: (trigger === 'hover' || trigger === 'focus') ? {
-      onFocus: onShow,
-      onBlur: onHide,
-    } : {},
-    
+    mouse:
+      trigger === 'hover'
+        ? {
+            onEnter: onShow,
+            onLeave: onHide,
+          }
+        : trigger === 'click'
+          ? {
+              onClick: onToggle,
+            }
+          : {},
+
+    focus:
+      trigger === 'hover' || trigger === 'focus'
+        ? {
+            onFocus: onShow,
+            onBlur: onHide,
+          }
+        : {},
+
     keys: {
       [CONFIG.KEYS.ESCAPE]: onEscape,
-      ...(trigger === 'click' ? {
-        [CONFIG.KEYS.ENTER]: (e: KeyboardEvent) => {
-          e.preventDefault()
-          onToggle()
-        },
-        [CONFIG.KEYS.SPACE]: (e: KeyboardEvent) => {
-          e.preventDefault()
-          onToggle()
-        },
-      } : {}),
+      ...(trigger === 'click'
+        ? {
+            [CONFIG.KEYS.ENTER]: (e: KeyboardEvent) => {
+              e.preventDefault()
+              onToggle()
+            },
+            [CONFIG.KEYS.SPACE]: (e: KeyboardEvent) => {
+              e.preventDefault()
+              onToggle()
+            },
+          }
+        : {}),
     },
-    
+
     preventDefault: {
       keyboard: trigger === 'click',
     },
@@ -61,10 +73,12 @@ export function useTooltipContentInteractions({
   onMouseLeave,
 }: UseTooltipContentInteractionsProps) {
   return useElementInteractions({
-    mouse: interactive ? {
-      onEnter: onMouseEnter,
-      onLeave: onMouseLeave,
-    } : {},
+    mouse: interactive
+      ? {
+          onEnter: onMouseEnter,
+          onLeave: onMouseLeave,
+        }
+      : {},
     disabled: !interactive,
   })
 }

@@ -1,3 +1,4 @@
+'use client'
 import { useState, useId, useCallback } from 'react'
 import TabsContext from './context'
 import List from './List'

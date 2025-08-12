@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/helpers/utils'
 import { FaCheck } from 'react-icons/fa6'
 

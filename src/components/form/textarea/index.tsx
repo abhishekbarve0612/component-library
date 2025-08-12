@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import TextareaProvider from './TextAreaProvider'
 import TextareaField from './Field'
@@ -48,9 +50,7 @@ function Textarea({
       className={className}
       {...props}
     >
-      <div className="space-y-2">
-        {children}
-      </div>
+      <div className="space-y-2">{children}</div>
     </TextareaProvider>
   )
 }

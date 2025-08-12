@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/helpers/utils'
 import { type ReactNode } from 'react'
 
@@ -8,8 +10,8 @@ interface SidebarHeaderProps {
 
 function SidebarHeader({ children, id = 'sidebar-title' }: SidebarHeaderProps) {
   return (
-    <div className="border-b border-border px-6 py-4">
-      <div id={id} className="text-lg font-bold text-foreground">
+    <div className="border-border border-b px-6 py-4">
+      <div id={id} className="text-foreground text-lg font-bold">
         {children}
       </div>
     </div>
@@ -32,7 +34,7 @@ function SidebarBody({ children, id = 'sidebar-description' }: SidebarBodyProps)
 }
 
 function SidebarFooter({ children }: { children: ReactNode }) {
-  return <div className="border-t border-border px-4 py-4">{children}</div>
+  return <div className="border-border border-t px-4 py-4">{children}</div>
 }
 
 interface SidebarOverlayProps {
@@ -48,7 +50,7 @@ function SidebarOverlay({ className, onClose, open, overlayRef }: SidebarOverlay
       ref={overlayRef}
       onClick={onClose}
       className={cn(
-        'fixed inset-0 z-40 bg-background/80 backdrop-blur-sm',
+        'bg-background/80 fixed inset-0 z-40 backdrop-blur-sm',
         open ? 'opacity-100' : 'pointer-events-none opacity-0',
         className
       )}

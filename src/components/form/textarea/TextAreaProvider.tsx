@@ -1,6 +1,8 @@
-import { useId } from "react"
-import type { TextareaContextType } from "./context"
-import TextareaContext from "./context"
+'use client'
+
+import { useId } from 'react'
+import type { TextareaContextType } from './context'
+import TextareaContext from './context'
 
 interface TextareaProviderProps {
   children: React.ReactNode
@@ -27,13 +29,13 @@ function TextareaProvider({
   description,
   maxLength,
   autoResize,
-  className
+  className,
 }: TextareaProviderProps) {
   const textareaId = useId()
   const labelId = `${textareaId}-label`
   const errorId = `${textareaId}-error`
   const descriptionId = `${textareaId}-description`
-  
+
   const hasError = Boolean(error)
 
   const contextValue: TextareaContextType = {
@@ -51,14 +53,10 @@ function TextareaProvider({
     labelId,
     errorId,
     descriptionId,
-    hasError
+    hasError,
   }
 
-  return (
-    <TextareaContext.Provider value={contextValue}>
-      {children}
-    </TextareaContext.Provider>
-  )
+  return <TextareaContext.Provider value={contextValue}>{children}</TextareaContext.Provider>
 }
 
 export default TextareaProvider
