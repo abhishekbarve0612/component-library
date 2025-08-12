@@ -17,3 +17,8 @@ export interface BreadcrumbItemProps {
   isCurrentPage?: boolean
   LinkComponent?: React.ComponentType<Partial<LinkProps>>
 }
+
+export interface BreadcrumbDividerProps {
+  children?: React.ReactNode
+  className?: string
+}

@@ -1,11 +1,6 @@
 import React from 'react'
 import { cn } from '@/helpers/utils'
-
-interface BreadcrumbDividerProps {
-  children?: React.ReactNode
-  className?: string
-}
-
+import type { BreadcrumbDividerProps } from './types'
 const Divider: React.FC<BreadcrumbDividerProps> = ({ children = '/', className }) => {
   return (
     <span
@@ -16,5 +11,7 @@ const Divider: React.FC<BreadcrumbDividerProps> = ({ children = '/', className }
     </span>
   )
 }
+
+Divider.displayName = 'Breadcrumb.Divider'
 
 export default Divider
