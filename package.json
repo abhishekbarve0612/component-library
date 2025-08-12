@@ -7,10 +7,12 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "module": "./dist/index.js",
+      "default": "./dist/index.js"
     },
-    "./styles": "./dist/styles.css"
+    "./styles": "./dist/index.css"
   },
   "files": [
     "dist",
@@ -63,6 +65,14 @@
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",

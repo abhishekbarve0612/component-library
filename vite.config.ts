@@ -27,22 +27,17 @@ export default defineConfig(({ mode }) => {
           fileName: 'index',
         },
         rollupOptions: {
-          external: [
-            'react',
-            'react-dom',
-            'react/jsx-runtime',
-            'react/jsx-dev-runtime',
-            '@gsap/react',
-            'gsap',
-            'react-icons',
-            'react-icons/fa',
-            'react-icons/hi',
-            'react-icons/md',
-            'react-icons/ri',
-            'react-icons/tb',
-            /^react($|\/)/,
-            /^react-dom($|\/)/,
-          ],
+          external: (id) => {
+            // Externalize React and all its submodules
+            if (id === 'react' || id.startsWith('react/')) return true;
+            if (id === 'react-dom' || id.startsWith('react-dom/')) return true;
+            
+            // Externalize other peer dependencies
+            if (id === '@gsap/react' || id === 'gsap') return true;
+            if (id.startsWith('react-icons')) return true;
+            
+            return false;
+          },
           output: {
             globals: {
               react: 'React',
