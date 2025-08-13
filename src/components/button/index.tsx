@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import type { ButtonSize, ButtonVariant } from './button.types'
 import { SIZES, VARIANTS, buttonVariants } from './button.constants'
