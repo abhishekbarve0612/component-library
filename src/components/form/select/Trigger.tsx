@@ -6,11 +6,7 @@ import { gsap } from 'gsap'
 import { FaCircleChevronDown } from 'react-icons/fa6'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
-
-interface SelectTriggerProps {
-  children: React.ReactNode
-  className?: string
-}
+import type { SelectTriggerProps } from './types'
 
 function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
   const { isOpen, setIsOpen, highlightedIndex } = useSelectContext()

@@ -2,13 +2,9 @@
 
 import { cn } from '@/helpers/utils'
 import { useInputContext } from './context'
+import type { InputDescriptionProps } from './types'
 
-interface DescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  children: React.ReactNode
-  className?: string
-}
-
-function Description({ children, className, ...props }: DescriptionProps) {
+function Description({ children, className, ...props }: InputDescriptionProps) {
   const { id } = useInputContext()
   const descriptionId = `${id}-description`
 
@@ -16,7 +12,7 @@ function Description({ children, className, ...props }: DescriptionProps) {
     <p
       id={descriptionId}
       className={cn(
-        'text-sm text-muted-foreground',
+        'text-muted-foreground text-sm',
         'group-has-[input:user-invalid]:block',
         'group-has-[input:user-invalid]:text-destructive',
         'group-has-[input:user-valid]:hidden',

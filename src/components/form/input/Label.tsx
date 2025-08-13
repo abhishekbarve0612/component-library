@@ -2,13 +2,9 @@
 
 import { cn } from '@/helpers/utils'
 import { useInputContext } from './context'
+import type { InputLabelProps } from './types'
 
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode
-  className?: string
-}
-
-function Label({ children, className, ...props }: LabelProps) {
+function Label({ children, className, ...props }: InputLabelProps) {
   const { id } = useInputContext()
   return (
     <label

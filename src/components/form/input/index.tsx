@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useId, useState } from 'react'
+import { useId, useState } from 'react'
 
 import { cn } from '@/helpers/utils'
 import { InputContext } from './context'
@@ -11,12 +11,7 @@ import Label from './Label'
 import Group from './Group'
 import Description from './Description'
 import './input.css'
-
-export interface InputProps {
-  id?: string
-  className?: string
-  children?: React.ReactNode
-}
+import type { InputProps } from './types'
 
 function Input({ className, children, id }: InputProps) {
   const _id = useId()

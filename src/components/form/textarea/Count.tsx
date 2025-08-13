@@ -5,12 +5,7 @@ import { useGSAP } from '@gsap/react'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
 import { countAnimation, nearLimitAnimation, overLimitAnimation } from './animations'
-
-export interface TextareaCountProps {
-  className?: string
-  showMax?: boolean
-  warningThreshold?: number
-}
+import type { TextareaCountProps } from './types'
 
 function TextareaCount({ className, showMax = true, warningThreshold = 0.8 }: TextareaCountProps) {
   const { value, maxLength } = useTextareaContext()

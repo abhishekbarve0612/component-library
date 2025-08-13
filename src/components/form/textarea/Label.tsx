@@ -1,14 +1,8 @@
 'use client'
 
-import React from 'react'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
-
-export interface TextareaLabelProps {
-  children: React.ReactNode
-  className?: string
-  htmlFor?: string
-}
+import type { TextareaLabelProps } from './types'
 
 function TextareaLabel({ children, className, htmlFor }: TextareaLabelProps) {
   const { textareaId, required, labelId } = useTextareaContext()

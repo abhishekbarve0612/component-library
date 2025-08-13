@@ -1,16 +1,9 @@
 import { cn } from '@/helpers/utils'
-
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode
-  className?: string
-}
+import type { LabelProps } from './types'
 
 function Label({ children, className, ...props }: LabelProps) {
   return (
-    <label
-      className={cn('block text-sm font-medium text-foreground', className)}
-      {...props}
-    >
+    <label className={cn('text-foreground block text-sm font-medium', className)} {...props}>
       {children}
     </label>
   )

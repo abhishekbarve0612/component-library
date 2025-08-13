@@ -3,12 +3,7 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
-import type { SelectItemProps } from './Item'
-
-export interface SelectContentProps {
-  children: React.ReactNode
-  className?: string
-}
+import type { SelectContentProps, SelectItemProps } from './types'
 
 function SelectContent({ children, className }: SelectContentProps) {
   const { isOpen, setOptions } = useSelectContext()
@@ -71,7 +66,7 @@ function SelectContent({ children, className }: SelectContentProps) {
       ref={contentRef}
       id={listboxId}
       className={cn(
-        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-border bg-popover text-popover-foreground shadow-lg',
+        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border shadow-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-slate-200 dark:border-slate-700',
         className
       )}
       role="listbox"

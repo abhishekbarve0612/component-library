@@ -6,11 +6,7 @@ import { FaExclamationTriangle } from 'react-icons/fa'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
 import { errorAnimation } from './animations'
-
-export interface TextareaErrorProps {
-  children?: React.ReactNode
-  className?: string
-}
+import type { TextareaErrorProps } from './types'
 
 function TextareaError({ children, className }: TextareaErrorProps) {
   const { error, errorId, hasError } = useTextareaContext()

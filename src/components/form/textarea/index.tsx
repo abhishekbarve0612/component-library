@@ -1,26 +1,12 @@
 'use client'
 
-import React from 'react'
 import TextareaProvider from './TextAreaProvider'
 import TextareaField from './Field'
 import TextareaLabel from './Label'
 import TextareaDescription from './Description'
 import TextareaError from './Error'
 import TextareaCount from './Count'
-
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  children: React.ReactNode
-  value?: string
-  onValueChange?: (value: string) => void
-  name?: string
-  required?: boolean
-  disabled?: boolean
-  error?: string | boolean
-  description?: string
-  maxLength?: number
-  autoResize?: boolean
-  className?: string
-}
+import type { TextareaProps } from './types'
 
 function Textarea({
   children,

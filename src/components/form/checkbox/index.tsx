@@ -2,12 +2,7 @@
 
 import { cn } from '@/helpers/utils'
 import { FaCheck } from 'react-icons/fa6'
-
-interface CheckboxProps extends React.HTMLAttributes<HTMLButtonElement> {
-  checked: boolean
-  onCheckedChange: (checked: boolean) => void
-  className?: string
-}
+import type { CheckboxProps } from './types'
 
 function Checkbox({ checked, onCheckedChange, className = '', ...props }: CheckboxProps) {
   const handleClick = () => {

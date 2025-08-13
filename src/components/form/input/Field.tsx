@@ -4,14 +4,9 @@ import { useState } from 'react'
 import { useInputContext } from './context'
 import { cn } from '@/helpers/utils'
 import Error from './Error'
+import type { InputFieldProps } from './types'
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  className?: string
-  type?: React.HTMLInputTypeAttribute
-  name: string
-}
-
-function Field({ className, type = 'text', ...props }: InputProps) {
+function Field({ className, type = 'text', ...props }: InputFieldProps) {
   const { id } = useInputContext()
   const [error, setError] = useState<string | null>(null)
   const errorId = `${id}-error`
@@ -24,11 +19,11 @@ function Field({ className, type = 'text', ...props }: InputProps) {
       <input
         id={id}
         className={cn(
-          'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors',
-          'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground',
+          'border-input bg-background text-foreground flex h-10 w-full rounded-md border px-3 py-2 text-sm transition-colors',
+          'file:text-foreground placeholder:text-muted-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium',
           'hover:hover:border-border/80 hover:hover:bg-muted/20',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-          'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted disabled:text-muted-foreground',
+          'focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+          'disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
           'user-invalid:border-destructive user-invalid:text-destructive user-invalid:focus-visible:ring-destructive',
           className
         )}

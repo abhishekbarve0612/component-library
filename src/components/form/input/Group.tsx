@@ -1,12 +1,8 @@
 import React from 'react'
 import { cn } from '@/helpers/utils'
+import type { InputGroupProps } from './types'
 
-interface GroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
-  className?: string
-}
-
-function Group({ children, className, ...props }: GroupProps) {
+function Group({ children, className, ...props }: InputGroupProps) {
   // Convert children to array for easier processing
   const childArray = React.Children.toArray(children)
 
@@ -47,25 +43,13 @@ function Group({ children, className, ...props }: GroupProps) {
   return (
     <div className={cn('input-group', className)} {...props}>
       {/* Left icons - render only if present */}
-      {leftIcons.length > 0 && (
-        <div className="input-group-left-icons">
-          {leftIcons}
-        </div>
-      )}
+      {leftIcons.length > 0 && <div className="input-group-left-icons">{leftIcons}</div>}
 
       {/* Input field - takes remaining space */}
-      {fieldElement && (
-        <div className="input-group-field">
-          {fieldElement}
-        </div>
-      )}
+      {fieldElement && <div className="input-group-field">{fieldElement}</div>}
 
       {/* Right icons - render only if present */}
-      {rightIcons.length > 0 && (
-        <div className="input-group-right-icons">
-          {rightIcons}
-        </div>
-      )}
+      {rightIcons.length > 0 && <div className="input-group-right-icons">{rightIcons}</div>}
     </div>
   )
 }

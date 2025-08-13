@@ -7,16 +7,16 @@ import SelectTrigger from './Trigger'
 import SelectValue from './Value'
 import SelectContent from './Content'
 import SelectContext from './context'
+import type { SelectProps } from './types'
 
-interface SelectProps {
-  value: string
-  onValueChange: (value: string) => void
-  children: React.ReactNode
-  className?: string
-  disabled?: boolean
-}
-
-function Select({ value, onValueChange, children, className, disabled = false, ...props }: SelectProps) {
+function Select({
+  value,
+  onValueChange,
+  children,
+  className,
+  disabled = false,
+  ...props
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [options, setOptions] = useState<string[]>([])
@@ -41,7 +41,7 @@ function Select({ value, onValueChange, children, className, disabled = false, .
   useEffect(() => {
     if (isOpen) {
       // Set initial highlighted index to current value or first option
-      const currentIndex = options.findIndex(option => option === value)
+      const currentIndex = options.findIndex((option) => option === value)
       setHighlightedIndex(currentIndex >= 0 ? currentIndex : 0)
     } else {
       setHighlightedIndex(-1)
@@ -63,9 +63,7 @@ function Select({ value, onValueChange, children, className, disabled = false, .
           if (!isOpen) {
             setIsOpen(true)
           } else {
-            setHighlightedIndex(prev => 
-              prev < options.length - 1 ? prev + 1 : 0
-            )
+            setHighlightedIndex((prev) => (prev < options.length - 1 ? prev + 1 : 0))
           }
           break
 
@@ -74,9 +72,7 @@ function Select({ value, onValueChange, children, className, disabled = false, .
           if (!isOpen) {
             setIsOpen(true)
           } else {
-            setHighlightedIndex(prev => 
-              prev > 0 ? prev - 1 : options.length - 1
-            )
+            setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : options.length - 1))
           }
           break
 
@@ -126,24 +122,23 @@ function Select({ value, onValueChange, children, className, disabled = false, .
   }, [disabled, isOpen, options, highlightedIndex, onValueChange])
 
   // Prevent opening when disabled
-  const contextValue = React.useMemo(() => ({
-    value,
-    setValue: disabled ? () => {} : onValueChange,
-    isOpen: disabled ? false : isOpen,
-    setIsOpen: disabled ? () => {} : setIsOpen,
-    highlightedIndex,
-    setHighlightedIndex: disabled ? () => {} : setHighlightedIndex,
-    options,
-    setOptions,
-  }), [value, onValueChange, isOpen, disabled, highlightedIndex, options])
+  const contextValue = React.useMemo(
+    () => ({
+      value,
+      setValue: disabled ? () => {} : onValueChange,
+      isOpen: disabled ? false : isOpen,
+      setIsOpen: disabled ? () => {} : setIsOpen,
+      highlightedIndex,
+      setHighlightedIndex: disabled ? () => {} : setHighlightedIndex,
+      options,
+      setOptions,
+    }),
+    [value, onValueChange, isOpen, disabled, highlightedIndex, options]
+  )
 
   return (
     <SelectContext.Provider value={contextValue}>
-      <div 
-        className={cn('relative w-full', className)} 
-        ref={selectRef} 
-        {...props}
-      >
+      <div className={cn('relative w-full', className)} ref={selectRef} {...props}>
         {children}
       </div>
     </SelectContext.Provider>

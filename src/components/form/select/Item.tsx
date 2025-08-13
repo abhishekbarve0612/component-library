@@ -5,15 +5,7 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
-
-export interface SelectItemProps {
-  value: string
-  children: React.ReactNode
-  disabled?: boolean
-  className?: string
-  index?: number
-  optionId?: string
-}
+import type { SelectItemProps } from './types'
 
 function SelectItem({
   value,

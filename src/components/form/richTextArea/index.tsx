@@ -5,18 +5,7 @@ import { cn } from '@/helpers/utils'
 import { type Format, COMMANDS, SHORTCUTS } from './constants'
 import Toolbar from '@/components/toolbar'
 import { FaBold, FaItalic, FaUnderline } from 'react-icons/fa'
-
-interface RichTextareaProps {
-  className?: string
-  initialValue?: string
-  placeholder?: string
-  disabled?: boolean
-  onChange?: (value: string) => void
-  onFocus?: () => void
-  onBlur?: () => void
-  'aria-label'?: string
-  'aria-describedby'?: string
-}
+import type { RichTextareaProps } from './types'
 
 function RichTextarea({
   className,

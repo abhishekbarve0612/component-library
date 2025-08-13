@@ -4,16 +4,7 @@ import React from 'react'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
 import { focusAnimation } from './animations'
-
-export interface TextareaFieldProps
-  extends Omit<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'value' | 'onChange' | 'name' | 'required' | 'disabled'
-  > {
-  placeholder?: string
-  rows?: number
-  className?: string
-}
+import type { TextareaFieldProps } from './types'
 
 function TextareaField({ placeholder, rows = 4, className, ...props }: TextareaFieldProps) {
   const {

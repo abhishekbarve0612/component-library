@@ -1,13 +1,8 @@
 'use client'
 
-import React from 'react'
 import { cn } from '@/helpers/utils'
 import { useTextareaContext } from './context'
-
-export interface TextareaDescriptionProps {
-  children: React.ReactNode
-  className?: string
-}
+import type { TextareaDescriptionProps } from './types'
 
 function TextareaDescription({ children, className }: TextareaDescriptionProps) {
   const { descriptionId } = useTextareaContext()
