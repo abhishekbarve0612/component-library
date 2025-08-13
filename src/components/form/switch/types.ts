@@ -1,4 +1,6 @@
-export interface SwitchProps {
+import type { HTMLAttributes } from 'react'
+
+export interface SwitchProps extends HTMLAttributes<HTMLButtonElement> {
   checked?: boolean
   onCheckedChange?: (checked: boolean) => void
   disabled?: boolean

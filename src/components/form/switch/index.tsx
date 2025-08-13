@@ -27,6 +27,7 @@ function Switch({
   id,
   className = '',
   size = 'md',
+  ...props
 }: SwitchProps) {
   const [internalChecked, setInternalChecked] = useState(checked)
   const isChecked = onCheckedChange ? checked : internalChecked
@@ -52,10 +53,13 @@ function Switch({
       disabled={disabled}
       onClick={handleToggle}
       className={`focus-visible:ring-ring focus-visible:ring-offset-background relative inline-flex items-center rounded-full transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none hover:hover:enabled:scale-[1.02] hover:hover:enabled:shadow-md hover:hover:enabled:shadow-sm disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none ${variant.container} ${
-        isChecked ? 'bg-primary hover:hover:enabled:bg-primary/90' : 'bg-input hover:hover:enabled:bg-surface-2'
+        isChecked
+          ? 'bg-primary hover:hover:enabled:bg-primary/90'
+          : 'bg-input hover:hover:enabled:bg-surface-2'
       } ${className} `
         .trim()
         .replace(/\s+/g, ' ')}
+      {...props}
     >
       <span
         className={`bg-background inline-block rounded-full shadow-sm transition-transform duration-200 ease-out motion-reduce:transition-none ${variant.thumb} ${isChecked ? variant.translate.on : variant.translate.off} `
