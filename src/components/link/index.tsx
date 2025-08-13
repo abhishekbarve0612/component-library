@@ -6,6 +6,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string
   href?: string
   to?: string
+  [key: string]: unknown
 }
 
 function Link({ children, className, ...props }: LinkProps) {
