@@ -1,5 +1,5 @@
 import Input from '@/components/form/input'
-import type { InputProps } from '@/components/form/input/Field'
+import type { InputFieldProps } from '@/components/form/input/types'
 
 const fields = [
   'email',
@@ -72,7 +72,7 @@ const fieldConfig: Record<Field, FieldConfig> = {
   },
 }
 
-interface SignUpInputProps extends Omit<InputProps, 'name'> {
+interface SignUpInputProps extends Omit<InputFieldProps, 'name'> {
   field: Field
   fieldConfig?: FieldConfig
 }
