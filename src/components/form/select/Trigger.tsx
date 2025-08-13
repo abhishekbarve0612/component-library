@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
 import { FaCircleChevronDown } from 'react-icons/fa6'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
@@ -10,8 +8,6 @@ import type { SelectTriggerProps } from './types'
 
 function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
   const { isOpen, setIsOpen, highlightedIndex } = useSelectContext()
-  const chevronRef = React.useRef<HTMLDivElement>(null)
-  const triggerRef = React.useRef<HTMLButtonElement>(null)
 
   // Generate IDs for ARIA relationships
   const triggerId = React.useId()
@@ -19,49 +15,21 @@ function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
   const activeDescendant =
     highlightedIndex >= 0 ? `${triggerId}-option-${highlightedIndex}` : undefined
 
-  // GSAP animations for chevron rotation
-  useGSAP(() => {
-    if (!chevronRef.current) return
-
-    gsap.to(chevronRef.current, {
-      rotation: isOpen ? 180 : 0,
-      duration: 0.25,
-      ease: 'power2.out',
-    })
-  }, [isOpen])
-
-  // Subtle pulse animation on focus
-  const handleFocus = () => {
-    if (triggerRef.current) {
-      gsap.fromTo(
-        triggerRef.current,
-        { scale: 1 },
-        {
-          scale: 1.02,
-          duration: 0.15,
-          ease: 'power2.out',
-          yoyo: true,
-          repeat: 1,
-        }
-      )
-    }
-  }
-
   return (
     <button
-      ref={triggerRef}
       id={triggerId}
       className={cn(
-        'border-input bg-background text-foreground flex w-full cursor-pointer items-center justify-between rounded-md border px-3 py-2 text-sm transition-all outline-none',
-        'hover:hover:border-border/80 hover:hover:bg-hover/20',
-        'focus:border-ring focus:ring-ring/20 focus:ring-offset-background focus:ring-2 focus:ring-offset-2',
+        'flex w-full cursor-pointer items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm transition-all duration-200 outline-none',
+        'hover:border-slate-300 hover:bg-slate-50',
+        'focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20',
+        'active:scale-[0.99] transition-transform',
+        'dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600 dark:hover:bg-slate-800',
         {
-          'border-ring ring-ring/20 ring-2': isOpen,
+          'border-blue-500 ring-2 ring-blue-500/20': isOpen,
         },
         className
       )}
       onClick={() => setIsOpen(!isOpen)}
-      onFocus={handleFocus}
       aria-expanded={isOpen}
       aria-haspopup="listbox"
       aria-controls={isOpen ? listboxId : undefined}
@@ -71,9 +39,9 @@ function SelectTrigger({ children, className = '' }: SelectTriggerProps) {
       tabIndex={0}
     >
       {children}
-      <div ref={chevronRef}>
+      <div className={cn('transition-transform duration-200', { 'rotate-180': isOpen })}>
         <FaCircleChevronDown
-          className="text-muted-foreground ml-auto inline-block h-4 w-4"
+          className="ml-auto inline-block h-4 w-4 text-slate-400"
           aria-hidden="true"
         />
       </div>

@@ -1,6 +1,4 @@
 import React from 'react'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
 import { cn } from '@/helpers/utils'
 import { useSelectContext } from './context'
 import type { SelectContentProps, SelectItemProps } from './types'
@@ -9,7 +7,8 @@ function SelectContent({ children, className }: SelectContentProps) {
   const { isOpen, setOptions } = useSelectContext()
   const contentId = React.useId()
   const listboxId = `${contentId}-listbox`
-  const contentRef = React.useRef<HTMLDivElement>(null)
+  const [isAnimating, setIsAnimating] = React.useState(false)
+  const [shouldRender, setShouldRender] = React.useState(false)
 
   // Extract option values and register them with context
   React.useEffect(() => {
@@ -24,49 +23,36 @@ function SelectContent({ children, className }: SelectContentProps) {
     setOptions(optionValues)
   }, [children, setOptions])
 
-  // GSAP animations for dropdown open/close
-  useGSAP(() => {
-    if (!contentRef.current) return
-
+  // Handle opening animation
+  React.useEffect(() => {
     if (isOpen) {
-      // Opening animation: scale from top with fade in
-      gsap.fromTo(
-        contentRef.current,
-        {
-          opacity: 0,
-          scaleY: 0,
-          transformOrigin: 'top center',
-          y: -10,
-        },
-        {
-          opacity: 1,
-          scaleY: 1,
-          y: 0,
-          duration: 0.2,
-          ease: 'power2.out',
-        }
-      )
-    } else if (contentRef.current) {
-      // Closing animation: scale to top with fade out
-      gsap.to(contentRef.current, {
-        opacity: 0,
-        scaleY: 0,
-        transformOrigin: 'top center',
-        y: -5,
-        duration: 0.15,
-        ease: 'power2.in',
-      })
+      setShouldRender(true)
+      // Small delay to ensure element is rendered before starting animation
+      const timeout = setTimeout(() => setIsAnimating(true), 10)
+      return () => clearTimeout(timeout)
+    } else {
+      setIsAnimating(false)
+      // Wait for animation to complete before unmounting
+      const timeout = setTimeout(() => setShouldRender(false), 150)
+      return () => clearTimeout(timeout)
     }
   }, [isOpen])
 
-  if (!isOpen) return null
+  if (!shouldRender) return null
 
   return (
     <div
-      ref={contentRef}
       id={listboxId}
       className={cn(
-        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border shadow-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-slate-200 dark:border-slate-700',
+        'absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-slate-200 bg-white text-slate-900 shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100',
+        'transition-all duration-150 ease-out origin-top',
+        'transform-gpu', // Use GPU acceleration
+        {
+          // Opening state
+          'opacity-100 scale-y-100 translate-y-0': isAnimating,
+          // Closing state  
+          'opacity-0 scale-y-95 -translate-y-1': !isAnimating,
+        },
         className
       )}
       role="listbox"
