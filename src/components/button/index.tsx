@@ -22,7 +22,7 @@ function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button ref={ref} className={buttonVariants({ variant, size, className, active })} {...props}>
+    <button ref={ref} className={buttonVariants({ variant, size, active, className })} {...props}>
       {children}
     </button>
   )
