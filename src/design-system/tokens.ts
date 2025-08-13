@@ -17,7 +17,7 @@ export const colorTokens = {
     popover: '0 0% 100%',
     popoverForeground: '222.2 84% 4.9%',
 
-    primary: '221.2 83.2% 53.3%',
+    primary: '185 71% 41%',
     primaryForeground: '210 40% 98%',
 
     secondary: '210 40% 96%',
@@ -29,12 +29,12 @@ export const colorTokens = {
     accent: '210 40% 96%',
     accentForeground: '222.2 84% 4.9%',
 
-    destructive: '0 84.2% 60.2%',
+    destructive: '10 85% 55%',
     destructiveForeground: '210 40% 98%',
 
     border: '214.3 31.8% 91.4%',
     input: '214.3 31.8% 91.4%',
-    ring: '221.2 83.2% 53.3%',
+    ring: '185 71% 41%',
 
     // Surface layers
     surface1: '210 20% 98%',
@@ -46,13 +46,13 @@ export const colorTokens = {
     active: '210 40% 88%',
 
     // Status colors
-    success: '142 76% 36%',
+    success: '150 75% 45%',
     successForeground: '210 40% 98%',
-    warning: '38 92% 50%',
+    warning: '45 90% 60%',
     warningForeground: '222.2 84% 4.9%',
-    error: '0 84.2% 60.2%',
+    error: '10 85% 55%',
     errorForeground: '210 40% 98%',
-    info: '199 89% 48%',
+    info: '200 80% 52%',
     infoForeground: '210 40% 98%',
   },
 
@@ -67,7 +67,7 @@ export const colorTokens = {
     popover: '222.2 84% 4.9%',
     popoverForeground: '210 40% 98%',
 
-    primary: '217.2 91.2% 59.8%',
+    primary: '185 80% 55%',
     primaryForeground: '222.2 84% 4.9%',
 
     secondary: '217.2 32.6% 17.5%',
@@ -79,12 +79,12 @@ export const colorTokens = {
     accent: '217.2 32.6% 17.5%',
     accentForeground: '210 40% 98%',
 
-    destructive: '0 62.8% 30.6%',
+    destructive: '10 75% 42%',
     destructiveForeground: '210 40% 98%',
 
     border: '217.2 32.6% 17.5%',
     input: '217.2 32.6% 17.5%',
-    ring: '224.3 76.3% 94.1%',
+    ring: '185 80% 75%',
 
     // Surface layers
     surface1: '217.2 32.6% 17.5%',
@@ -96,13 +96,13 @@ export const colorTokens = {
     active: '217.2 32.6% 27.5%',
 
     // Status colors
-    success: '142 76% 45%',
+    success: '150 75% 50%',
     successForeground: '210 40% 98%',
-    warning: '38 92% 60%',
+    warning: '45 90% 65%',
     warningForeground: '222.2 84% 4.9%',
-    error: '0 62.8% 30.6%',
+    error: '10 75% 42%',
     errorForeground: '210 40% 98%',
-    info: '199 89% 58%',
+    info: '200 80% 58%',
     infoForeground: '210 40% 98%',
   },
 } as const

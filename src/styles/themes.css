@@ -16,7 +16,7 @@
   --color-popover: oklch(1 0 0);
   --color-popover-foreground: oklch(0.09 0.005 258);
 
-  --color-primary: oklch(0.6 0.18 258);
+  --color-primary: oklch(0.55 0.2 185);
   --color-primary-foreground: oklch(0.98 0.013 258);
 
   --color-secondary: oklch(0.96 0.006 258);
@@ -28,12 +28,12 @@
   --color-accent: oklch(0.96 0.006 258);
   --color-accent-foreground: oklch(0.09 0.005 258);
 
-  --color-destructive: oklch(0.65 0.22 22);
+  --color-destructive: oklch(0.6 0.25 10);
   --color-destructive-foreground: oklch(0.98 0.013 258);
 
   --color-border: oklch(0.91 0.006 258);
   --color-input: oklch(0.91 0.006 258);
-  --color-ring: oklch(0.6 0.18 258);
+  --color-ring: oklch(0.55 0.2 185);
 
   /* Surface colors for layered UI */
   --color-surface-1: oklch(0.98 0.002 258);
@@ -45,16 +45,16 @@
   --color-active: oklch(0.88 0.006 258);
 
   /* Status colors */
-  --color-success: oklch(0.5 0.15 142);
+  --color-success: oklch(0.55 0.22 150);
   --color-success-foreground: oklch(0.98 0.013 258);
 
-  --color-warning: oklch(0.7 0.18 85);
+  --color-warning: oklch(0.72 0.2 45);
   --color-warning-foreground: oklch(0.09 0.005 258);
 
   --color-error: oklch(0.65 0.22 22);
   --color-error-foreground: oklch(0.98 0.013 258);
 
-  --color-info: oklch(0.6 0.17 220);
+  --color-info: oklch(0.62 0.2 200);
   --color-info-foreground: oklch(0.98 0.013 258);
 
   /* Border radius */
@@ -72,7 +72,7 @@
   --color-popover: oklch(0.09 0.005 258);
   --color-popover-foreground: oklch(0.98 0.013 258);
 
-  --color-primary: oklch(0.7 0.18 258);
+  --color-primary: oklch(0.7 0.2 185);
   --color-primary-foreground: oklch(0.09 0.005 258);
 
   --color-secondary: oklch(0.18 0.006 258);
@@ -84,12 +84,12 @@
   --color-accent: oklch(0.18 0.006 258);
   --color-accent-foreground: oklch(0.98 0.013 258);
 
-  --color-destructive: oklch(0.45 0.22 22);
+  --color-destructive: oklch(0.5 0.25 10);
   --color-destructive-foreground: oklch(0.98 0.013 258);
 
   --color-border: oklch(0.18 0.006 258);
   --color-input: oklch(0.18 0.006 258);
-  --color-ring: oklch(0.85 0.18 258);
+  --color-ring: oklch(0.7 0.2 185);
 
   /* Surface colors for layered UI */
   --color-surface-1: oklch(0.18 0.006 258);
@@ -101,15 +101,15 @@
   --color-active: oklch(0.28 0.006 258);
 
   /* Status colors */
-  --color-success: oklch(0.55 0.15 142);
+  --color-success: oklch(0.6 0.22 150);
   --color-success-foreground: oklch(0.98 0.013 258);
 
-  --color-warning: oklch(0.75 0.18 85);
+  --color-warning: oklch(0.77 0.2 45);
   --color-warning-foreground: oklch(0.09 0.005 258);
 
-  --color-error: oklch(0.45 0.22 22);
+  --color-error: oklch(0.5 0.25 10);
   --color-error-foreground: oklch(0.98 0.013 258);
 
-  --color-info: oklch(0.65 0.17 220);
+  --color-info: oklch(0.67 0.2 200);
   --color-info-foreground: oklch(0.98 0.013 258);
 }
