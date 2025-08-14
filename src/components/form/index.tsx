@@ -4,12 +4,14 @@ import Label from './label'
 import Select from './select'
 import Textarea from './textarea'
 import Checkbox from './checkbox'
+import RangeInput from './range-input'
 
 export { default as Input } from './input'
 export { default as Label } from './label'
 export { default as Select } from './select'
 export { default as Textarea } from './textarea'
 export { default as Checkbox } from './checkbox'
+export { default as RangeInput } from './range-input'
 
 export interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   label?: string
@@ -52,5 +54,6 @@ Form.Label = Label
 Form.Select = Select
 Form.Textarea = Textarea
 Form.Checkbox = Checkbox
+Form.RangeInput = RangeInput
 
 export default Form

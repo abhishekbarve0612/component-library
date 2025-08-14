@@ -5,6 +5,9 @@ export * from './components/breadcrumb/types'
 export { default as Button } from './components/button'
 export * from './components/button/button.types'
 
+export { default as Badge } from './components/badge'
+export * from './components/badge/badge.types'
+
 export { default as Card } from './components/card'
 export * from './components/card/types'
 
@@ -21,6 +24,8 @@ export { default as RichTextArea } from './components/form/richTextArea'
 export * from './components/form/richTextArea/types'
 export { default as Checkbox } from './components/form/checkbox'
 export * from './components/form/checkbox/types'
+export { default as RangeInput } from './components/form/range-input'
+export * from './components/form/range-input/types'
 
 export { default as Loader } from './components/loader'
 export * from './components/loader/types'
