@@ -33,7 +33,59 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: { addUtilities: (utilities: Record<string, Record<string, string | number>>) => void }) {
+      const scrollbarUtilities = {
+        '.scrollbar-hide': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+        '.scrollbar-thin': {
+          'scrollbar-width': 'thin',
+          '&::-webkit-scrollbar': {
+            width: '8px',
+            height: '8px',
+          },
+        },
+        '.scrollbar-track-transparent': {
+          '&::-webkit-scrollbar-track': {
+            background: 'transparent',
+          },
+        },
+        '.scrollbar-thumb-transparent': {
+          '&::-webkit-scrollbar-thumb': {
+            background: 'transparent',
+          },
+        },
+        '.scrollbar-thumb-gray-300': {
+          '&::-webkit-scrollbar-thumb': {
+            background: '#d1d5db',
+            borderRadius: '9999px',
+          },
+        },
+        '.hover\\:scrollbar-thumb-gray-400:hover': {
+          '&::-webkit-scrollbar-thumb': {
+            background: '#9ca3af',
+          },
+        },
+        '.dark .dark\\:scrollbar-thumb-gray-600': {
+          '&::-webkit-scrollbar-thumb': {
+            background: '#4b5563',
+            borderRadius: '9999px',
+          },
+        },
+        '.dark .dark\\:hover\\:scrollbar-thumb-gray-500:hover': {
+          '&::-webkit-scrollbar-thumb': {
+            background: '#6b7280',
+          },
+        },
+      }
+      addUtilities(scrollbarUtilities)
+    },
+  ],
 } satisfies Config
 
 export default config
