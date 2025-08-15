@@ -10,6 +10,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: ButtonSize
   active?: boolean
   ref?: React.Ref<HTMLButtonElement>
+  asChild?: boolean
 }
 
 function Button({
@@ -19,10 +20,15 @@ function Button({
   size = 'default',
   active = false,
   ref,
+  asChild = false,
   ...props
 }: ButtonProps) {
   return (
-    <button ref={ref} className={buttonVariants({ variant, size, active, className })} {...props}>
+    <button
+      ref={ref}
+      className={buttonVariants({ variant, size, active, asChild, className })}
+      {...props}
+    >
       {children}
     </button>
   )

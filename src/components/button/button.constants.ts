@@ -45,18 +45,20 @@ export function buttonVariants({
   variant = 'default',
   size = 'default',
   active = false,
+  asChild = false,
   className,
 }: {
   variant?: ButtonVariant
   size?: ButtonSize
   active?: boolean
+  asChild?: boolean
   className?: string
 }) {
   return cn(
     BASE_CLASSES,
     VARIANT_CLASSES[variant],
     SIZE_CLASSES[size],
-    active && 'ring-2 ring-ring ring-offset-2',
+    active && !asChild && 'ring-2 ring-ring ring-offset-2',
     className
   )
 }
