@@ -1,6 +1,5 @@
 'use client'
 
-// modal-context.tsx
 import { createContext, useContext } from 'react'
 
 export interface ModalContextValue {
