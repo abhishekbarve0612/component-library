@@ -97,7 +97,7 @@ function Navbar({
                 onClick={toggleMobileMenu}
                 className={cn(
                   'inline-flex items-center justify-center rounded-lg p-2',
-                  'text-muted-foreground hover:hover:bg-accent hover:hover:text-accent-foreground',
+                  'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
                   'focus:ring-ring focus:ring-2 focus:ring-offset-2 focus:outline-none',
                   'transition-colors duration-200',
                   `${bp}:hidden`

@@ -21,7 +21,7 @@ function Field({ className, type = 'text', ...props }: InputFieldProps) {
         className={cn(
           'border-input bg-background text-foreground flex h-10 w-full rounded-md border px-3 py-2 text-sm transition-colors',
           'file:text-foreground placeholder:text-muted-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium',
-          'hover:hover:border-border/80 hover:hover:bg-muted/20',
+          'hover:border-border/80 hover:bg-muted/20',
           'focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           'disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
           'user-invalid:border-destructive user-invalid:text-destructive user-invalid:focus-visible:ring-destructive',

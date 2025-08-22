@@ -310,11 +310,11 @@ export function Tooltip({
             <button
               ref={closeButtonInteractions.ref as React.RefObject<HTMLButtonElement>}
               type="button"
-              className="absolute -top-1 -right-1 z-20 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-border bg-background p-0 shadow-md hover:hover:bg-hover focus:ring-2 focus:ring-ring focus:outline-none"
+              className="border-border bg-background hover:bg-hover focus:ring-ring absolute -top-1 -right-1 z-20 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border p-0 shadow-md focus:ring-2 focus:outline-none"
               aria-label="Close tooltip"
               tabIndex={0}
             >
-              <IoClose className="h-3 w-3 text-muted-foreground" />
+              <IoClose className="text-muted-foreground h-3 w-3" />
             </button>
           )}
           {children}

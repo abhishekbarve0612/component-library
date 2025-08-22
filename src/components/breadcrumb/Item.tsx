@@ -28,7 +28,7 @@ function Item({
 
   const contentClasses = cn({
     'text-muted-foreground': !isCurrentPage && !href && !onClick,
-    'text-foreground/80 hover:hover:text-foreground transition-colors cursor-pointer hover:hover:underline focus:outline-none focus:underline':
+    'text-foreground/80 hover:text-foreground transition-colors cursor-pointer hover:underline focus:outline-none focus:underline':
       (href || onClick) && !disabled && !isCurrentPage,
     'text-foreground font-medium': isCurrentPage,
     'cursor-default': disabled || isCurrentPage,

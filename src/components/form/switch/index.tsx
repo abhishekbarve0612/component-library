@@ -52,10 +52,8 @@ function Switch({
       id={id}
       disabled={disabled}
       onClick={handleToggle}
-      className={`focus-visible:ring-ring focus-visible:ring-offset-background relative inline-flex items-center rounded-full transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none hover:hover:enabled:scale-[1.02] hover:hover:enabled:shadow-md hover:hover:enabled:shadow-sm disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none ${variant.container} ${
-        isChecked
-          ? 'bg-primary hover:hover:enabled:bg-primary/90'
-          : 'bg-input hover:hover:enabled:bg-surface-2'
+      className={`focus-visible:ring-ring focus-visible:ring-offset-background relative inline-flex items-center rounded-full transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none hover:enabled:scale-[1.02] hover:enabled:shadow-md hover:enabled:shadow-sm disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none ${variant.container} ${
+        isChecked ? 'bg-primary hover:enabled:bg-primary/90' : 'bg-input hover:enabled:bg-surface-2'
       } ${className} `
         .trim()
         .replace(/\s+/g, ' ')}

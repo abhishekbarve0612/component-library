@@ -50,7 +50,7 @@ function Item({ id, label, icon, disabled = false, index = 0, onSelect, ref }: T
         tabIndex={focusedIndex === index ? 0 : -1}
         className={cn(
           'flex items-center justify-center rounded-md transition-colors',
-          'hover:hover:bg-hover hover:hover:text-foreground',
+          'hover:bg-hover hover:text-foreground',
           'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           'disabled:pointer-events-none disabled:opacity-50',
           isItemActive && 'bg-surface-2 text-foreground shadow-sm',

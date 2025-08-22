@@ -93,7 +93,7 @@ export function ModalCloseButton({
         aria-label="Close modal"
         className={cn(
           'text-muted-foreground rounded-lg p-2 transition-colors',
-          'hover:hover:bg-hover hover:hover:text-foreground',
+          'hover:bg-hover hover:text-foreground',
           'focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2 focus:outline-none',
           className
         )}

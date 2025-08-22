@@ -23,14 +23,14 @@ const BASE_CLASSES =
   'inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none disabled:opacity-50'
 
 const VARIANT_CLASSES = {
-  default: 'bg-primary text-primary-foreground shadow hover:hover:bg-primary/90',
-  primary: 'bg-primary text-primary-foreground shadow hover:hover:bg-primary/90',
-  secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:hover:bg-secondary/80',
+  default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+  primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+  secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
   outline:
-    'border border-border bg-background shadow-sm hover:hover:bg-accent hover:hover:text-accent-foreground',
-  ghost: 'hover:hover:bg-accent hover:hover:text-accent-foreground',
-  link: 'text-primary underline-offset-4 hover:hover:underline',
-  destructive: 'bg-destructive text-destructive-foreground shadow hover:hover:bg-destructive/90',
+    'border border-border bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+  ghost: 'hover:bg-accent hover:text-accent-foreground',
+  link: 'text-primary underline-offset-4 hover:underline',
+  destructive: 'bg-destructive text-destructive-foreground shadow hover:bg-destructive/90',
 }
 
 const SIZE_CLASSES = {

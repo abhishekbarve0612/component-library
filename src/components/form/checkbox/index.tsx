@@ -20,12 +20,12 @@ function Checkbox({ checked, onCheckedChange, className = '', ...props }: Checkb
     <button
       className={cn(
         'border-input bg-background text-foreground relative inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded-md border transition-all duration-200 outline-none',
-        'hover:hover:border-border/80 hover:hover:bg-hover/20',
+        'hover:border-border/80 hover:bg-hover/20',
         'focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2 focus:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-50',
         {
           'bg-primary border-primary text-primary-foreground': checked,
-          'hover:hover:bg-primary/90': checked,
+          'hover:bg-primary/90': checked,
         },
         className
       )}

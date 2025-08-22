@@ -21,7 +21,7 @@ function Item({ children, active, disabled, onClick, ...props }: ItemProps) {
         'relative flex w-full items-center rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors duration-200',
         'focus:ring-ring focus:ring-2 focus:ring-offset-2 focus:outline-none',
 
-        'text-foreground hover:hover:bg-hover hover:hover:text-foreground',
+        'text-foreground hover:bg-hover hover:text-foreground',
 
         active && [
           'bg-surface-2 text-foreground font-semibold shadow-sm',
