@@ -20,7 +20,7 @@ export const VARIANTS = {
 }
 
 const BASE_CLASSES =
-  'inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none disabled:opacity-50'
+  'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none disabled:opacity-50'
 
 const VARIANT_CLASSES = {
   default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
