@@ -25,6 +25,7 @@ interface ModalProps {
   size?: ModalSize
   scrollable?: boolean
   className?: string
+  isOpenState?: boolean
   'aria-labelledby'?: string
   'aria-describedby'?: string
 }
@@ -49,9 +50,10 @@ function Modal({
   className,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
+  isOpenState,
 }: ModalProps) {
   const { openModals, stack, closeModal } = useModalManager()
-  const isOpen = !!openModals[id]
+  const isOpen = isOpenState ?? !!openModals[id]
   const zIndex = 1000 + stack.indexOf(id)
   const modalRef = useRef<HTMLDivElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
@@ -155,7 +157,7 @@ function Modal({
   return ReactDOM.createPortal(
     <div
       ref={backdropRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-md p-4"
       style={{ zIndex }}
       onClick={(e) => {
         if (closeOnOutsideClick && e.target === e.currentTarget) {
@@ -173,8 +175,8 @@ function Modal({
         onKeyDown={trapFocus}
         className={cn(
           // Base styles
-          'relative flex max-h-[90vh] w-full flex-col rounded-xl border border-border',
-          'bg-background shadow-2xl focus:outline-none text-foreground',
+          'border-border relative flex max-h-[90vh] w-full flex-col rounded-xl border',
+          'bg-background text-foreground shadow-2xl focus:outline-none',
 
           // Size variants
           sizeConfig[size],
