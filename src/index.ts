@@ -33,6 +33,7 @@ export * from './components/loader/types'
 export { default as Modal } from './components/modal'
 export { useModalManager } from './components/modal/context'
 export { default as ModalProvider } from './components/modal/ModalProvider'
+export { default as ControlledModal } from './components/modal/ControlledModal'
 
 export { default as Navbar } from './components/navbar'
 export * from './components/navbar/types'

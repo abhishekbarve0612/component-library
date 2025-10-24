@@ -52,4 +52,10 @@ function ControlledModal({ open, onClose, onOpen, onToggle, ...modalProps }: Con
   )
 }
 
+ControlledModal.displayName = 'ControlledModal'
+ControlledModal.Header = Modal.Header
+ControlledModal.Body = Modal.Body
+ControlledModal.Footer = Modal.Footer
+ControlledModal.CloseButton = Modal.CloseButton
+
 export default ControlledModal
