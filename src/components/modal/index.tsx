@@ -14,9 +14,9 @@ import {
 } from './ModalComponents'
 import { cn } from '@/helpers/utils'
 
-type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
+export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
-interface ModalProps {
+export interface ModalProps {
   id: string
   children: React.ReactNode
   closeOnOutsideClick?: boolean
