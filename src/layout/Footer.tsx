@@ -6,9 +6,11 @@ interface FooterProps extends HTMLAttributes<HTMLElement> {
   className?: string
   variant?: 'default' | 'minimal' | 'accent'
   size?: 'sm' | 'md' | 'lg'
+  stickToBottom?: boolean
+  alwaysVisible?: boolean
 }
 
-function Footer({ children, className, variant = 'default', size = 'md', ...props }: FooterProps) {
+function Footer({ children, className, variant = 'default', size = 'md', stickToBottom = false, alwaysVisible = false, ...props }: FooterProps) {
   const variants = {
     default: 'bg-muted border-t border-border',
     minimal: 'bg-transparent border-t border-border/20',
@@ -22,7 +24,7 @@ function Footer({ children, className, variant = 'default', size = 'md', ...prop
   }
 
   return (
-    <footer className={cn(variants[variant])} {...props}>
+    <footer className={cn(variants[variant], { 'sticky bottom-0': stickToBottom, 'fixed bottom-0': alwaysVisible })} {...props}>
       <div className={cn('container mx-auto px-4', sizes[size], className)}>
         {children}
       </div>
