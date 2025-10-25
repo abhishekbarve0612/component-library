@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef } from "react"
 import type { LayoutProps } from "./types"
 import Message from "./Message"
 import Composer from "./Composer"
+import ChatHeader from "./Header"
 
 function ChatLayout(props: LayoutProps) {
     const {
@@ -97,6 +98,8 @@ function ChatLayout(props: LayoutProps) {
         </div>
     )
 }
+
+ChatLayout.Header = ChatHeader
 
 ChatLayout.Message = Message
 
