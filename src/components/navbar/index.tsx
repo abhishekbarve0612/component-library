@@ -133,7 +133,7 @@ function Navbar({
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center py-4 md:flex-row">{children}</div>
+          <div className="flex flex-row items-center py-4 md:flex-row">{children}</div>
         )}
       </nav>
     </NavbarContext.Provider>
