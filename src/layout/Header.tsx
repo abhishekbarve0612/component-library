@@ -16,9 +16,9 @@ function Header({ children, className, variant = 'default', ...props }: HeaderPr
 
   return (
     <header className={cn(variants[variant])} {...props}>
-      <a 
-        href="#main-content" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 border-b bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
       >
         Skip to main content
       </a>

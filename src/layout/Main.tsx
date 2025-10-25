@@ -9,7 +9,7 @@ interface MainProps extends HTMLAttributes<HTMLElement> {
 function Main({ children, className, ...props }: MainProps) {
   return (
     <main
-      className={cn('mx-auto w-full max-w-full lg:container lg:px-4 lg:py-8', className)}
+      className={cn('mx-auto flex-1 w-full max-w-full lg:container lg:px-4 lg:py-8', className)}
       {...props}
     >
       {children}
