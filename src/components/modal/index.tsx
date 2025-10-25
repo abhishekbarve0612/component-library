@@ -28,6 +28,7 @@ export interface ModalProps {
   isOpenState?: boolean
   'aria-labelledby'?: string
   'aria-describedby'?: string
+  blurBackground?: boolean
 }
 
 // Size configurations
@@ -51,6 +52,7 @@ function Modal({
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
   isOpenState,
+  blurBackground = true,
 }: ModalProps) {
   const { openModals, stack, closeModal } = useModalManager()
   const isOpen = isOpenState ?? !!openModals[id]
@@ -157,7 +159,10 @@ function Modal({
   return ReactDOM.createPortal(
     <div
       ref={backdropRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-md p-4"
+      className={cn(
+        'fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4',
+        blurBackground && 'backdrop-blur-md'
+      )}
       style={{ zIndex }}
       onClick={(e) => {
         if (closeOnOutsideClick && e.target === e.currentTarget) {

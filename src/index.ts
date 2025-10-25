@@ -73,6 +73,15 @@ export * from './auth/actions/signUpAction'
 export * from './auth/actions/forgotPasswordAction'
 export * from './auth/actions/resetPasswordAction'
 
+// Chat Components
+export { default as ChatLayout } from './components/chat/Layout'
+export { default as ChatMessage } from './components/chat/Message'
+export { default as ChatMessageContent } from './components/chat/Content'
+export { default as ChatComposer } from './components/chat/Composer'
+export { default as ChatSendButton } from './components/chat/SendButton'
+export { default as ChatDivider } from './components/chat/Divider'
+export * from './components/chat/types'
+
 // Design System
 export * from './design-system/tokens'
 
