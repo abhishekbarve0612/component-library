@@ -15,7 +15,7 @@ import TooltipArrow from './Arrow'
 
 interface TooltipProps {
   id?: string
-  targetRef?: React.RefObject<HTMLElement>
+  targetRef?: React.RefObject<HTMLElement | null>
   placement?: Placement
   offset?: number
   delay?: number

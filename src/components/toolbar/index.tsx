@@ -107,6 +107,7 @@ function Toolbar({
         aria-orientation={orientation}
         onKeyDown={handleKeyDown}
         className={cn(
+          'h-auto',
           'inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white p-1 shadow-sm',
           'focus-within:ring-2 focus-within:ring-slate-500 focus-within:ring-offset-2',
           'dark:border-slate-700 dark:bg-slate-900',
