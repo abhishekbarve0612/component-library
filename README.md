@@ -2,6 +2,10 @@
 
 A modern React component library built with TypeScript, Tailwind CSS, and GSAP animations.
 
+## Live Demo:
+
+Explore the component showcase at [components.barve.dev](https://components.barve.dev/).
+
 ## Installation
 
 ```bash
