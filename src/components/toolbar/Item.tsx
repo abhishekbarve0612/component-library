@@ -39,6 +39,7 @@ function Item({ id, label, icon, disabled = false, index = 0, onSelect, ref }: T
   return (
     <>
       <Button
+        type="button"
         ref={mergedRef}
         id={id}
         variant="ghost"

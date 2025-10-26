@@ -69,7 +69,7 @@ function Navbar({
         aria-label="Main navigation"
         onKeyDown={handleKeyDown}
         className={cn(
-          'bg-background relative w-full shadow-sm',
+          'bg-background relative min-w-full w-fit shadow-sm',
 
           bordered && 'border-border border-b',
 
@@ -83,7 +83,7 @@ function Navbar({
           <>
             {/* Mobile header */}
             <div className="flex items-center justify-between px-6 py-4">
-              <div className="flex-1">
+              <div className="flex-1 md:hidden">
                 {React.Children.toArray(children).find(
                   (child) => React.isValidElement(child) && child.type === NavbarBrand
                 )}
@@ -116,7 +116,7 @@ function Navbar({
               id="mobile-navigation"
               data-mobile-menu
               className={cn(
-                'border-border flex-col border-t py-2',
+                'border-border flex-col border-t py-2 flex-wrap gap-2',
                 `${bp}:hidden`,
                 isOpen ? 'flex' : 'hidden'
               )}

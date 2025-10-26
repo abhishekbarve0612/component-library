@@ -14,9 +14,10 @@ interface SidebarProps {
   side?: 'left' | 'right'
   children: ReactNode
   overlayClassName?: string
+  shouldBlurOverlay?: boolean
 }
 
-function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: SidebarProps) {
+function Sidebar({ open, onClose, side = 'left', children, overlayClassName, shouldBlurOverlay = false }: SidebarProps) {
   const sidebarRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const previousActiveElement = useRef<HTMLElement | null>(null)
@@ -112,6 +113,7 @@ function Sidebar({ open, onClose, side = 'left', children, overlayClassName }: S
   return createPortal(
     <>
       <SidebarOverlay
+        shouldBlurOverlay={shouldBlurOverlay}
         overlayRef={overlayRef}
         className={overlayClassName}
         onClose={onClose}
