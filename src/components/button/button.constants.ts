@@ -25,9 +25,9 @@ const BASE_CLASSES =
 const VARIANT_CLASSES = {
   default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
   primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-  secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+  secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 dark:hover:bg-secondary/20',
   outline:
-    'border border-border bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+    'border border-border bg-background shadow-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/20 dark:border-border/50',
   ghost: 'hover:bg-accent hover:text-accent-foreground',
   link: 'text-primary underline-offset-4 hover:underline',
   destructive: 'bg-destructive text-destructive-foreground shadow hover:bg-destructive/90',
