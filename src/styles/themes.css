@@ -64,7 +64,7 @@
 /* Dark theme colors - using CSS custom properties */
 .dark {
   --color-background: oklch(0.09 0.005 258);
-  --color-foreground: oklch(0.98 0.013 258);
+  --color-foreground: oklch(1 0 0);
 
   --color-card: oklch(0.09 0.005 258);
   --color-card-foreground: oklch(0.98 0.013 258);
